@@ -78,10 +78,14 @@ main{position:relative;z-index:1;overflow-x:clip}
 .hero-copy{max-width:37rem;min-width:0}
 
 /* portrait: a cartoon forest witch standing in the trees */
-.portrait{position:relative;isolation:isolate;margin:0;justify-self:end;width:100%;max-width:400px;align-self:center;pointer-events:none;animation:rise .9s .35s cubic-bezier(.2,.7,.2,1) backwards}
+.portrait{position:relative;isolation:isolate;display:grid;margin:0;justify-self:end;width:100%;max-width:400px;align-self:center;pointer-events:none;animation:rise .9s .35s cubic-bezier(.2,.7,.2,1) backwards}
 .portrait::before{content:"";position:absolute;z-index:-1;left:-10%;right:-10%;top:0;bottom:12%;background:radial-gradient(closest-side,var(--frame-glow),transparent)}
-.portrait img{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 20px rgba(0,0,0,.35))}
-.portrait figcaption{margin-top:6px;font:500 .74rem/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-align:center;text-shadow:0 1px 10px var(--halo)}
+.portrait img{display:block;grid-area:1/1;align-self:end;width:100%;height:auto;filter:drop-shadow(0 8px 20px rgba(0,0,0,.35))}
+.portrait .p-night{transition:opacity .7s ease,visibility 0s}
+.portrait .p-day{opacity:0;visibility:hidden;transition:opacity .7s ease,visibility 0s .7s}
+:root[data-sky="day"] .portrait .p-day{opacity:1;visibility:visible;transition:opacity .7s ease,visibility 0s}
+:root[data-sky="day"] .portrait .p-night{opacity:0;visibility:hidden;transition:opacity .7s ease,visibility 0s .7s}
+.portrait figcaption{grid-area:2/1;margin-top:6px;font:500 .74rem/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-align:center;text-shadow:0 1px 10px var(--halo)}
 @media(max-width:860px){
   .hero{grid-template-columns:minmax(0,1fr);align-items:start}
   .portrait{order:-1;justify-self:start;width:210px}
@@ -173,7 +177,56 @@ h2{font:italic 400 clamp(2rem,5vw,3rem)/1.1 var(--display);margin:0 0 12px;color
   border:1px solid var(--line);border-radius:4px;box-shadow:0 30px 60px rgba(0,0,0,.35);
   background:linear-gradient(90deg,var(--page) 0,var(--page) 47%,var(--gutter) 50%,var(--page) 53%,var(--page) 100%);
 }
+.openbook{position:relative;perspective:3600px}
 .openbook.swap .page{animation:turn .45s ease}
+/* page turn (two-page spread) */
+.openbook.hgt{transition:height .5s cubic-bezier(.4,0,.2,1)}
+.openbook.fix{grid-template-rows:minmax(0,1fr)}
+.openbook.fix .page{overflow:hidden}
+.leaf{position:absolute;top:0;bottom:0;width:50%;z-index:3;transform-style:preserve-3d;pointer-events:none;will-change:transform}
+.leaf.fwd{left:50%;transform-origin:0 50%}
+.leaf.bwd{left:0;transform-origin:100% 50%}
+.leaf .face{position:absolute;inset:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--page)}
+.leaf .face.bk{transform:rotateY(180deg)}
+.leaf .face.sp-l{background:linear-gradient(90deg,var(--gutter) 0,var(--page) 9%)}
+.leaf .face.sp-r{background:linear-gradient(270deg,var(--gutter) 0,var(--page) 9%)}
+.sh{position:absolute;inset:0;opacity:0;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,.04),rgba(0,0,0,.5))}
+.sp-r>.sh{background:linear-gradient(270deg,rgba(0,0,0,.04),rgba(0,0,0,.5))}
+.cast{position:absolute;top:0;bottom:0;width:50%;z-index:2;opacity:0;pointer-events:none}
+.cast.cr{left:50%;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,0) 72%)}
+.cast.cl{left:0;background:linear-gradient(270deg,rgba(0,0,0,.55),rgba(0,0,0,0) 72%)}
+/* clickable page edges */
+.obwrap{position:relative}
+.edge{position:absolute;top:0;bottom:0;z-index:5;width:clamp(30px,3.6vw,46px);padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.edge[hidden]{display:none}
+.edge-r{right:0}
+.edge-l{left:0}
+.edge::after{content:"";position:absolute;top:14%;bottom:14%;width:2px;border-radius:2px;background:var(--ember);opacity:0;transform:scaleY(.4);transition:opacity .3s ease,transform .4s cubic-bezier(.2,.8,.2,1)}
+.edge-r::after{right:7px}
+.edge-l::after{left:7px}
+.edge:hover::after,.edge:focus-visible::after{opacity:.55;transform:none}
+@media(max-width:760px){.edge{display:none}}
+/* page turn (single column) */
+.openbook.m-out-f{transform-origin:0 50%;animation:mOutF .34s ease-in forwards}
+.openbook.m-out-b{transform-origin:100% 50%;animation:mOutB .34s ease-in forwards}
+.openbook.m-in-f{transform-origin:100% 50%;animation:mInF .4s ease-out backwards}
+.openbook.m-in-b{transform-origin:0 50%;animation:mInB .4s ease-out backwards}
+@keyframes mOutF{to{transform:perspective(1200px) rotateY(-75deg);opacity:.15}}
+@keyframes mOutB{to{transform:perspective(1200px) rotateY(75deg);opacity:.15}}
+@keyframes mInF{from{transform:perspective(1200px) rotateY(60deg);opacity:.15}}
+@keyframes mInB{from{transform:perspective(1200px) rotateY(-60deg);opacity:.15}}
+/* page controls */
+.pager{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;margin-top:16px}
+.pager[hidden]{display:none}
+.pg-btn{appearance:none;width:40px;height:40px;border:1px solid var(--ember);background:transparent;color:var(--ember);font:400 1.4rem/1 var(--display);border-radius:50%;cursor:pointer;transition:background .2s ease}
+.pg-btn:hover:not(:disabled){background:rgba(242,181,86,.16)}
+.pg-btn:disabled{opacity:.35;cursor:default}
+.pg-tabs{display:flex;flex-wrap:wrap;gap:8px;flex:0 1 auto;min-width:0}
+.pg-tab{appearance:none;padding:7px 12px;border:1px solid var(--line);background:transparent;color:var(--dim);font:500 .74rem/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:color .2s ease,border-color .2s ease,background .2s ease}
+.pg-tab:hover{color:var(--moon);border-color:var(--mist)}
+.pg-tab.on{color:#1a1409;background:var(--ember-fill);border-color:var(--ember-fill)}
+.pg-count{flex:0 0 100%;font:500 .72rem/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mist);text-shadow:0 1px 10px var(--halo)}
+@media(max-width:560px){.pg-tabs{order:3;flex:0 0 100%}}
 @keyframes turn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
 .page{padding:clamp(22px,4vw,44px);min-width:0}
 .kicker{margin:0 0 14px;font:500 .72rem/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ember)}
@@ -200,6 +253,9 @@ h2{font:italic 400 clamp(2rem,5vw,3rem)/1.1 var(--display);margin:0 0 12px;color
 .group+.course{border-top:0;padding-top:0}
 .group:not(:first-child){margin-top:26px}
 .course.wide{grid-template-columns:6.6rem 1fr}
+.pts{margin:8px 0 0;padding-left:1.1em;color:var(--dim)}
+.pts li{margin:5px 0}
+.entry .where{margin:0}
 .course small{display:block;color:var(--dim);font-size:.88rem}
 @media(max-width:560px){.course.wide{grid-template-columns:minmax(0,1fr);gap:0}}
 
@@ -220,7 +276,11 @@ h2{font:italic 400 clamp(2rem,5vw,3rem)/1.1 var(--display);margin:0 0 12px;color
 /* contact */
 .contact{position:relative;padding:clamp(28px,5vw,52px);background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(6px);max-width:44rem}
 .contact p{margin:0 0 14px}
-.email-slot{display:inline-block;margin:6px 0 16px;padding:10px 14px;border:1px dashed var(--mist);font:500 .9rem/1.4 var(--mono);color:var(--mist);overflow-wrap:anywhere}
+.mail-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;margin:6px 0 16px}
+.email-slot{display:inline-block;padding:10px 14px;border:1px solid var(--line);background:rgba(0,0,0,.14);font:500 .95rem/1.4 var(--mono);color:var(--moon);overflow-wrap:anywhere;user-select:all;-webkit-user-select:all}
+a.email-slot{text-decoration:none}
+a.email-slot:hover{border-color:var(--ember)}
+.copy-note{min-height:1.4em;margin:-6px 0 12px!important;font:500 .8rem/1.4 var(--mono);letter-spacing:.06em;color:var(--ember)}
 .small{font-size:.9rem;color:var(--dim)}
 
 .foot{position:relative;margin-top:clamp(56px,10vh,110px);padding-block:22px clamp(90px,14vh,120px);border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;font:400 .78rem/1.5 var(--mono);color:var(--dim);letter-spacing:.04em;text-shadow:0 1px 10px var(--halo)}
@@ -302,7 +362,8 @@ h2{font:italic 400 clamp(2rem,5vw,3rem)/1.1 var(--display);margin:0 0 12px;color
         </div>
       </div>
       <figure class="portrait">
-        <img src="portrait-art.webp" width="900" height="1122" alt="Illustration of Waruni in a black sweater with sunglasses on her head, a black cat on her shoulder, surrounded by leaves, red toadstools, little flowers, stars and a crescent moon">
+        <img class="p-night" src="portrait-art.webp" width="900" height="1122" alt="Illustration of Waruni in a black sweater with sunglasses on her head, a black cat on her shoulder, surrounded by leaves, red toadstools, little flowers, stars and a crescent moon">
+        <img class="p-day" src="portrait-day.webp" width="900" height="1077" alt="Illustration of Waruni in a black sweater with sunglasses on her head, framed by leafy sprigs, little white flowers and red toadstools">
         <figcaption>Hello, I'm Waruni</figcaption>
       </figure>
     </header>
@@ -363,7 +424,12 @@ h2{font:italic 400 clamp(2rem,5vw,3rem)/1.1 var(--display);margin:0 0 12px;color
             <path d="M24 42L9 40M24 44L9 47M48 42L63 40M48 44L63 47" stroke="#eef2f7" stroke-width="1" stroke-linecap="round" opacity=".8" fill="none"/>
           </svg>
         </button>
-        <div class="openbook" id="openbook"></div>
+        <div class="obwrap">
+          <div class="openbook" id="openbook"></div>
+          <button class="edge edge-l" type="button" tabindex="-1" aria-hidden="true" hidden></button>
+          <button class="edge edge-r" type="button" tabindex="-1" aria-hidden="true" hidden></button>
+        </div>
+        <nav class="pager" id="pager" aria-label="Book pages" hidden></nav>
       </div>
     </section>
 
@@ -385,7 +451,11 @@ h2{font:italic 400 clamp(2rem,5vw,3rem)/1.1 var(--display);margin:0 0 12px;color
         </button>
         <h2 id="contactTitle">Where the path ends</h2>
         <p>If you work on explainable AI, fair language models or teaching programming, or you just have a good puzzle, write to me.</p>
-        <div class="email-slot">Add your email address here</div>
+        <div class="mail-row">
+          <a class="email-slot" id="mailLink" href="#contact">Loading address…</a>
+          <button class="btn ghost sm" id="copyMail" type="button">Copy address</button>
+        </div>
+        <p class="copy-note" id="copyNote" role="status"></p>
         <p><a class="btn ghost sm" href="cv.pdf" target="_blank" rel="noopener" data-cv>Open my CV (PDF)</a></p>
         <p class="small">Faculty of Science, University of Peradeniya, Sri Lanka.</p>
       </div>
@@ -700,6 +770,31 @@ document.addEventListener('click',function(e){
 });
 var cvLink='<p class="page-link"><a class="btn sm" href="cv.pdf" target="_blank" rel="noopener" data-cv>Open my CV (PDF)</a></p>';
 
+/* ---------- email ---------- */
+var addr=['warunilkekulandara20','gmail.com'].join('@');
+var mailLink=$('#mailLink'),copyNote=$('#copyNote'),copyTimer=0;
+mailLink.textContent=addr;mailLink.href='mailto:'+addr+'?subject='+encodeURIComponent('Hello from the forest');
+function copyDone(msg){copyNote.textContent=msg;clearTimeout(copyTimer);copyTimer=setTimeout(function(){copyNote.textContent=''},4000)}
+function copyLegacy(){
+  var t=document.createElement('textarea'),good=false;
+  t.value=addr;t.setAttribute('readonly','');t.style.cssText='position:fixed;left:-9999px;top:0';
+  document.body.appendChild(t);t.select();
+  try{good=document.execCommand('copy')}catch(e){}
+  document.body.removeChild(t);
+  if(good){copyDone('Copied '+addr);say('Address copied. Write soon.')}
+  else{
+    var r=document.createRange();r.selectNodeContents(mailLink);var sel=window.getSelection();sel.removeAllRanges();sel.addRange(r);
+    copyDone('Address selected. Press Ctrl+C (or Cmd+C) to copy it.');
+  }
+}
+$('#copyMail').addEventListener('click',function(){
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(addr).then(function(){copyDone('Copied '+addr);say('Address copied. Write soon.')},copyLegacy);
+    }else copyLegacy();
+  }catch(e){copyLegacy()}
+});
+
 /* ---------- hidden cats ---------- */
 var CATS={
   1:{name:'Marmalade',kind:'ginger tabby'},
@@ -757,11 +852,39 @@ function lockHTML(){
   return h;
 }
 var pages={
-  research:function(){return {kicker:'Ongoing',title:'Research',
-    lede:'I study how language models and prediction models behave, and how to make that behaviour understandable and fair.',
-    right:'<div class="entry"><h4>Bias and fairness in language models</h4><p>How demographic, emotional and occupational bias shows up in the stories LLMs write.</p></div>'+
-      '<div class="entry"><h4>Explainable AI</h4><p>Comparing white, grey and black box models on real price data, combining explanation techniques for regression, and studying counterfactual explanations for tree ensembles.</p></div>'+
-      '<div class="entry"><h4>Governance against online harassment</h4><p>Ethical and technical safeguards against coordinated harassment of public figures.</p></div>'}},
+  research:function(){
+    function proj(title,tag,when,pts,desc){
+      return '<div class="entry"><h4>'+title+(tag?' <span class="tag">'+tag+'</span>':'')+'</h4>'+
+        (when?'<p class="where">'+when+'</p>':'')+(desc?'<p>'+desc+'</p>':'')+
+        (pts?'<ul class="pts">'+pts.map(function(t){return '<li>'+t+'</li>'}).join('')+'</ul>':'')+'</div>';
+    }
+    var sup='Supervisor: Dr. Erunika Dayaratna';
+    return [
+      {tab:'HCI',kicker:'Interest 1 of 4',title:'Human-Computer Interaction',
+       lede:'The part of AI where a person sits on the other side of the screen: what they see, what they believe and how they react.',
+       right:
+         proj('EEG, creativity, personality and vocational interest','Ongoing','University of Peradeniya',['Running an EEG experiment with university students to build a new EEG dataset.','Co-authoring a scoping review as part of the same project.'])+
+         proj('An interactive interface for counterfactual explanations','Final-year project','2024 &ndash; 2025',['A Python interface that uses Llama to show counterfactual results to a reader.'])},
+      {tab:'XAI',kicker:'Interest 2 of 4',title:'Explainable and Interpretable AI',
+       lede:'Making model decisions understandable, and checking whether the explanations deserve to be believed.',
+       right:
+         proj('Counterfactual explanations for tree ensembles','Final-year project','2024 &ndash; 2025',['Built a framework to evaluate five counterfactual methods: Foil Trees, SHAP-C, LIME-C, LORE and CLEAR.','Found a design-level trade-off: correctness and feasibility have to be considered while counterfactuals are generated, not enforced afterwards.','The basis of three papers: ETECOM 2025, SLJCR 2025 and ICICT 2026.'])+
+         proj('A multi-dimensional study of combined XAI techniques for regression','Under review','Jun &ndash; Sep 2026 &middot; '+sup,['Evaluated single and combined methods (SHAP, DiCE, Anchors, ProtoDash) on faithfulness, actionability, stability and consistency.','Found that well-chosen combinations improve several criteria, depending on the model and the aggregation strategy.'])+
+         proj('White, grey and black box models','','',null,'Comparing regression models of each kind on real listing prices from ikman.lk.')},
+      {tab:'Trust',kicker:'Interest 3 of 4',title:'Trust in Intelligent Systems',
+       lede:'Whether a system treats people fairly, and whether the people it affects have reason to trust it.',
+       right:
+         proj('Emotional fairness across ethnic identities in LLMs','Accepted','Feb &ndash; Jun 2026 &middot; '+sup,['Audited seven LLMs on emotion-conditioned character profiles, using fairness metrics such as Demographic Parity Difference.','Found a skew toward Male and Global North personas, and emotional and occupational stereotyping in every model.','Showed that repeated prompting amplified bias by pushing models toward near-deterministic outputs.'])+
+         proj('An LLM agent for emotional fairness','Ongoing','University of Peradeniya',['Extending the study with an autonomous agent framework that evaluates and mitigates emotional unfairness across ethnic identities.'])+
+         proj('Governance against coordinated online harassment','Ongoing','University of Peradeniya',['Looking at platform moderation and policy approaches to harassment aimed at K-pop idols and other online public figures.'])},
+      {tab:'Human-centred AI',kicker:'Interest 4 of 4',title:'Human-Centred AI',
+       lede:'Explanations and systems shaped around the person using them, not only the model behind them.',
+       right:
+         proj('Guidance written for different audiences','Prototype','Part of the combined XAI study',['A prototype that turns combined explanations into natural-language guidance tailored to its audience.'])+
+         proj('Fluent is not the same as faithful','Finding','Counterfactual interface',['The LLM explained infeasible counterfactuals just as fluently as feasible ones, so a smooth explanation is not proof of a sound one.'])+
+         proj('Teaching explainability','Workshop','Postgraduate Institute of Science',['Delivered a workshop on SHAP, LIME and counterfactual explanations for Master&rsquo;s students.'])}
+    ];
+  },
   teaching:function(){return {kicker:'Since January 2026',title:'Teaching',
     lede:'Graduate teaching assistant in the Faculty of Science. I design labs, write assignments, grade, and help people get unstuck.',
     right:'<div class="course"><span class="code">CSC1051</span><div><strong>Programming Laboratory II</strong><span class="tag">Java</span></div></div>'+
@@ -773,38 +896,56 @@ var pages={
     lede:'B.Sc. (Hons) in Computer Science at the University of Peradeniya, with a minor in Chemistry and Biology.',
     right:'<dl class="facts"><div><dt>First Class Honours</dt><dd>Top of the batch in Computer Science.</dd></div><div><dt>Minor in Chemistry and Biology</dt><dd>Studied alongside the degree.</dd></div></dl>'+cvLink}},
   pubs:function(){
-    function pub(title,authors,venue,status,link){
+    function pub(title,authors,venue,status,link,extra){
       return '<div class="entry"><h4>'+title+'</h4>'+(authors?'<p class="by">'+authors+'</p>':'')+
-        '<p class="where">'+venue+' <span class="tag">'+status+'</span>'+(link?' <a href="'+link+'" target="_blank" rel="noopener">DOI</a>':'')+'</p></div>';
+        '<p class="where">'+venue+' <span class="tag">'+status+'</span>'+(link?' <a href="'+link+'" target="_blank" rel="noopener">DOI</a>':'')+'</p>'+(extra?'<p class="where">'+extra+'</p>':'')+'</div>';
     }
+    function row(years,what,note){return '<div class="course wide"><span class="code">'+years+'</span><div><strong>'+what+'</strong>'+(note?'<small>'+note+'</small>':'')+'</div></div>'}
     var me='<strong>Kekulandara, W.</strong>';
-    return {kicker:'5 papers',title:'Publications',
-      lede:'Counterfactual explanations, combined explanation techniques and emotional fairness in language models. The tag on each shows where it stands.',
-      right:
-        pub('Is More Explanation Better? A Multi-Dimensional Study of Combined XAI Techniques for Regression','De Silva, C., '+me+', &amp; Dayaratna, E.','8th IEEE International Conference on Advancements in Computing 2026, Colombo, Sri Lanka','In review')+
-        pub('Shades of Sentiment: Evaluating Emotional Fairness Across Ethnic Identities in LLMs',me+', De Silva, C., &amp; Dayaratna, E.','World Conference on Information Systems for Business Management (ISBM 2026), Bangkok, Thailand','Accepted')+
-        pub('Framework for Existing Counterfactual Methods with Feasibility and LLM Explanation Support','','ICICT 2026, Springer Nature, London, UK','In press')+
-        pub('Towards Counterfactual Verification for Tree Ensembles',me+', Amarasinghe, K., &amp; Dayaratna, E.','IEEE ETECOM 2025','Published','https://doi.org/10.1109/ETECOM66111.2025.11318990')+
-        pub('A Unified Framework for Evaluating Existing Counterfactual Methods with Feasibility Constraints and LLM-Based Explanations','','Sri Lanka–Japan Collaborative Research (SLJCR) 2025, extended abstract','Presented')
-    };
+    return [
+      {tab:'Published',kicker:'2 papers',title:'Published',
+       lede:'Peer-reviewed conference papers, both on counterfactual explanations for tree ensembles.',
+       right:
+         pub('Framework for Existing Counterfactual Methods with Feasibility and LLM Explanation Support',me+', Amarasinghe, K., &amp; Dayaratna, E.','11th International Congress on Information and Communication Technology (ICICT 2026), Springer Nature','Published','https://doi.org/10.1007/978-3-032-35982-7_20')+
+         pub('Towards Counterfactual Verification for Tree Ensembles',me+', Amarasinghe, K., &amp; Dayaratna, E.','IEEE International Conference on Emerging Trends in Engineering and Computing (ETECOM 2025)','Published','https://doi.org/10.1109/ETECOM66111.2025.11318990')},
+      {tab:'Accepted',kicker:'1 paper',title:'Accepted',
+       lede:'Reviewed and accepted, on its way to the conference.',
+       right:
+         pub('Shades of Sentiment: Evaluating Emotional Fairness Across Ethnic Identities in LLMs',me+', De Silva, C., &amp; Dayaratna, E.','World Conference on Information Systems for Business Management (ISBM 2026), Bangkok, Thailand','Accepted',null,'Also shown as a poster at Research Cafe, University of Peradeniya, 2026.')},
+      {tab:'Under review',kicker:'1 paper',title:'Under review',
+       lede:'Submitted and waiting on the reviewers.',
+       right:
+         pub('Is More Explanation Better? A Multi-Dimensional Study of Combined XAI Techniques for Regression','De Silva, C., '+me+', &amp; Dayaratna, E.','8th IEEE International Conference on Advancements in Computing (ICAC 2026), Colombo, Sri Lanka','Under review')},
+      {tab:'Abstracts &amp; talks',kicker:'1 abstract, 4 talks',title:'Abstracts and talks',
+       lede:'A conference abstract, and where the work has been presented.',
+       right:
+         '<p class="group">Conference abstract</p>'+
+         pub('A Unified Framework for Evaluating Existing Counterfactual Methods with Feasibility Constraints and LLM-Based Explanations',me+', Amarasinghe, K., &amp; Dayaratna, E.','Sri Lanka Japan Collaborative Research (SLJCR 2025)','Presented')+
+         '<p class="group">Presentations</p>'+
+         row('2026','Shades of Sentiment','Research Cafe poster, University of Peradeniya, and ISBM 2026 (virtual)')+
+         row('2026','Framework for Existing Counterfactual Methods','ICICT 2026 (virtual)')+
+         row('2025','Towards Counterfactual Verification for Tree Ensembles','IEEE ETECOM 2025 (virtual)')+
+         row('2025','A Unified Framework for Evaluating Existing Counterfactual Methods','SLJCR 2025 (virtual)')}
+    ];
   },
   beyond:function(){
     function row(years,what,note){return '<div class="course wide"><span class="code">'+years+'</span><div><strong>'+what+'</strong>'+(note?'<small>'+note+'</small>':'')+'</div></div>'}
-    return {kicker:'Extracurricular &amp; volunteering',title:'Beyond the lab',
-      lede:'Societies I help run, and the places I have volunteered.',
-      right:
-        '<p class="group">Leadership</p>'+
-        row('2025–now','Editor','Astronomical Society, University of Peradeniya')+
-        row('2024–now','Program Team Member','IEEE Computer Society, University of Peradeniya')+
-        row('2023–24','Junior Treasurer','Drama Society, University of Peradeniya')+
-        row('2013–19','President Guide','Sri Lanka Girl Guides Association')+
-        '<p class="group">Volunteering</p>'+
-        row('2022–26','Huddle Workshop','University of Peradeniya (2022, 2023, 2024, 2026)')+
-        row('2023','Teaching Science &amp; Mathematics to O/L students','Uduwela Buddhist College')+
-        row('2023','Blue Rose Project','Blue Rose Special School')+
-        row('2022','Save the Next Generation – Knuckles','University of Peradeniya')+
-        row('2018','Introducing Guiding','Siddhartha Maha Vidyalaya, Ampitiya')
-    };
+    return [
+      {tab:'Leadership',kicker:'Societies &amp; associations',title:'Leadership',
+       lede:'Societies and associations where I have taken on a role.',
+       right:
+         row('2025&ndash;26','Editor','Astronomical Society, University of Peradeniya')+
+         row('2024&ndash;25','Program Team Member','IEEE Computer Society, University of Peradeniya')+
+         row('2023&ndash;24','Junior Treasurer','Drama Society, University of Peradeniya')+
+         row('2013&ndash;19','President Guide','Sri Lanka Girl Guides Association')},
+      {tab:'Volunteering',kicker:'Giving time',title:'Volunteering',
+       lede:'Workshops, school projects and community work.',
+       right:
+         row('2026','RESCON','Postgraduate Institute of Science, University of Peradeniya')+
+         row('2022&ndash;26','Huddle Workshop','University of Peradeniya (2022, 2023, 2024, 2026)')+
+         row('2023','Project for Special Needs Children','Blue Rose School')+
+         row('2022','Save the Next Generation &ndash; Knuckles','University of Peradeniya')}
+    ];
   },
   after:function(){
     if(!unlocked)return {kicker:'Locked',title:'After hours',lede:'This book does not open for just anyone. Light every lantern and it will.',right:lockHTML()};
@@ -815,17 +956,146 @@ var pages={
       '<div><dt>Books</dt><dd>Always a few open at once. Tell me what to read next.</dd></div></dl>'};
   }
 };
-var bookMsgs={pubs:'Publications. Five papers, each with its status.',beyond:'Beyond the lab. Drama, stars and school visits.',research:'Research. The part I think about on long walks.',teaching:'Teaching. Five courses, a lot of lab sheets.',education:'Education. First Class Honours, top of the batch.',after:null};
+var bookMsgs={pubs:'Publications. Turn the pages to sort them by status.',beyond:'Beyond the lab. Two pages: leadership and volunteering.',research:'Research. Four interests, one page each.',teaching:'Teaching. Five courses, a lot of lab sheets.',education:'Education. First Class Honours, top of the batch.',after:null};
+var pageIdx=0,turning=false;
+var reduceMq=window.matchMedia('(prefers-reduced-motion: reduce)'),wideMq=window.matchMedia('(min-width:761px)');
+function spreads(id){return [].concat(pages[id]())}
+function leftHTML(p){return '<p class="kicker">'+p.kicker+'</p><h3>'+p.title+'</h3><p class="lede2">'+p.lede+'</p>'}
+function spreadHTML(l,r){return '<section class="page page-left">'+l+'</section><section class="page page-right">'+r+'</section>'}
+function paintSpread(p){ob.innerHTML=spreadHTML(leftHTML(p),p.right)}
+var pager=$('#pager');
+function renderPager(){
+  var list=spreads(current);
+  edgeL.hidden=list.length<2||pageIdx===0;edgeR.hidden=list.length<2||pageIdx===list.length-1;
+  if(list.length<2){pager.hidden=true;pager.innerHTML='';return}
+  var h='<button class="pg-btn" type="button" data-go="prev" aria-label="Previous page"'+(pageIdx===0?' disabled':'')+'>&lsaquo;</button><div class="pg-tabs" role="group" aria-label="Pages">';
+  list.forEach(function(s,i){h+='<button class="pg-tab'+(i===pageIdx?' on':'')+'" type="button" data-go="'+i+'"'+(i===pageIdx?' aria-current="page"':'')+'>'+s.tab+'</button>'});
+  h+='</div><button class="pg-btn" type="button" data-go="next" aria-label="Next page"'+(pageIdx===list.length-1?' disabled':'')+'>&rsaquo;</button><span class="pg-count" aria-live="polite">Page '+(pageIdx+1)+' of '+list.length+' &middot; '+list[pageIdx].title+'</span>';
+  pager.innerHTML=h;pager.hidden=false;
+}
+var peek=null,hgtTimer=0;
+var edgeL=$('.edge-l'),edgeR=$('.edge-r');
+function clearH(){clearTimeout(hgtTimer);ob.classList.remove('hgt','fix');ob.style.height=''}
+function curAngle(el){var m=new DOMMatrix(getComputedStyle(el).transform);return Math.atan2(-m.m13,m.m11)*180/Math.PI}
+function shade(el,frames,dur,ease){return el.animate(frames,{duration:dur,easing:ease||'linear',fill:'forwards'})}
+function makeLeaf(dir,p){
+  var l0=ob.querySelector('.page-left').innerHTML,r0=ob.querySelector('.page-right').innerHTML;
+  ob.classList.remove('swap');clearH();
+  var h0=ob.offsetHeight,newL=leftHTML(p),newR=p.right;
+  paintSpread(p);var h1=ob.offsetHeight;
+  ob.classList.add('fix');ob.style.height=h0+'px';
+  ob.innerHTML=dir>0?spreadHTML(l0,newR):spreadHTML(newL,r0);
+  var leaf=document.createElement('div');
+  leaf.className='leaf '+(dir>0?'fwd':'bwd');leaf.setAttribute('aria-hidden','true');
+  leaf.innerHTML=dir>0
+    ?'<div class="face page sp-l">'+r0+'<i class="sh"></i></div><div class="face page bk sp-r">'+newL+'<i class="sh"></i></div>'
+    :'<div class="face page sp-r">'+l0+'<i class="sh"></i></div><div class="face page bk sp-l">'+newR+'<i class="sh"></i></div>';
+  var cr=document.createElement('i'),cl=document.createElement('i');
+  cr.className='cast cr';cl.className='cast cl';
+  ob.appendChild(cr);ob.appendChild(cl);ob.appendChild(leaf);
+  return {leaf:leaf,cr:cr,cl:cl,dir:dir,p:p,h0:h0,h1:h1,
+    front:leaf.querySelector('.face:not(.bk) .sh'),back:leaf.querySelector('.face.bk .sh')};
+}
+function abortPeek(){
+  if(!peek)return;
+  peek=null;clearH();
+  var list=spreads(current);paintSpread(list[pageIdx]);
+}
+function peekStart(dir){
+  if(turning||reduceMq.matches||!wideMq.matches)return;
+  var list=spreads(current),n=pageIdx+dir;
+  if(n<0||n>=list.length)return;
+  var ang=dir>0?-13:13;
+  if(peek){
+    if(peek.dir!==dir||!peek.leaving)return;
+    peek.leaving=false;if(peek.retract)peek.retract.cancel();
+    var cur=curAngle(peek.leaf);
+    peek.anim=peek.leaf.animate([{transform:'rotateY('+cur+'deg)'},{transform:'rotateY('+ang+'deg)'}],{duration:320,easing:'cubic-bezier(.2,.8,.2,1)',fill:'forwards'});
+    return;
+  }
+  peek=makeLeaf(dir,list[n]);peek.leaving=false;
+  peek.anim=peek.leaf.animate([{transform:'rotateY(0deg)'},{transform:'rotateY('+ang+'deg)'}],{duration:420,easing:'cubic-bezier(.2,.8,.2,1)',fill:'forwards'});
+  shade(peek.front,[{opacity:0},{opacity:.3}],420,'ease-out');
+  shade(dir>0?peek.cr:peek.cl,[{opacity:0},{opacity:.35}],420,'ease-out');
+}
+function peekEnd(){
+  var pk=peek;
+  if(!pk||turning||pk.leaving)return;
+  pk.leaving=true;
+  var cur=curAngle(pk.leaf);
+  pk.retract=pk.leaf.animate([{transform:'rotateY('+cur+'deg)'},{transform:'rotateY(0deg)'}],{duration:300,easing:'cubic-bezier(.3,0,.2,1)',fill:'forwards'});
+  shade(pk.front,[{opacity:.3},{opacity:0}],300);
+  shade(pk.dir>0?pk.cr:pk.cl,[{opacity:.35},{opacity:0}],300);
+  pk.retract.onfinish=function(){if(peek===pk&&pk.leaving)abortPeek()};
+}
+function flipLeaf(pk,n){
+  turning=true;pageIdx=n;peek=null;renderPager();
+  var dir=pk.dir,from=curAngle(pk.leaf),end=dir>0?-180:180,dur=1150;
+  var H=Math.max(pk.h0,pk.h1);
+  if(H!==pk.h0){ob.classList.add('hgt');ob.style.height=H+'px'}
+  var ease=Math.abs(from)>1?'cubic-bezier(.4,0,.2,1)':'cubic-bezier(.45,.02,.25,1)';
+  var anim=pk.leaf.animate([{transform:'rotateY('+from+'deg)'},{transform:'rotateY('+end+'deg)'}],{duration:dur,easing:ease,fill:'forwards'});
+  var f0=getComputedStyle(pk.front).opacity;
+  shade(pk.front,[{opacity:f0,offset:0},{opacity:.7,offset:.5},{opacity:.7,offset:1}],dur);
+  shade(pk.back,[{opacity:.7,offset:0},{opacity:.7,offset:.5},{opacity:0,offset:1}],dur);
+  var first=dir>0?pk.cr:pk.cl,second=dir>0?pk.cl:pk.cr;
+  shade(first,[{opacity:getComputedStyle(first).opacity,offset:0},{opacity:.55,offset:.28},{opacity:0,offset:.62},{opacity:0,offset:1}],dur);
+  shade(second,[{opacity:0,offset:0},{opacity:0,offset:.45},{opacity:.5,offset:.75},{opacity:0,offset:1}],dur);
+  var done=false;
+  function finish(){
+    if(done)return;done=true;
+    paintSpread(pk.p);
+    ob.classList.add('hgt');ob.style.height=pk.h1+'px';
+    hgtTimer=setTimeout(function(){clearH();turning=false},560);
+  }
+  anim.onfinish=finish;
+  setTimeout(finish,dur+250);
+}
+function goPage(n){
+  var list=spreads(current);
+  if(turning||n<0||n>=list.length||n===pageIdx)return;
+  if(peek){if(peek.dir===(n>pageIdx?1:-1)){var pk0=peek;flipLeaf(pk0,n);return}abortPeek()}
+  var dir=n>pageIdx?1:-1,p=list[n];
+  if(reduceMq.matches){pageIdx=n;renderPager();paintSpread(p);return}
+  if(wideMq.matches){flipLeaf(makeLeaf(dir,p),n);return}
+  pageIdx=n;renderPager();turning=true;
+  var out=dir>0?'m-out-f':'m-out-b',inn=dir>0?'m-in-f':'m-in-b';
+  ob.classList.remove('swap');ob.classList.add(out);
+  setTimeout(function(){
+    paintSpread(p);ob.classList.remove(out);ob.classList.add(inn);
+    setTimeout(function(){ob.classList.remove(inn);turning=false},420);
+  },340);
+}
+function bindEdge(el,dir){
+  el.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')peekStart(dir)});
+  el.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse')peekEnd()});
+  el.addEventListener('click',function(){goPage(pageIdx+dir)});
+}
+bindEdge(edgeL,-1);bindEdge(edgeR,1);
 function showBook(id,quiet){
-  current=id;
+  peek=null;clearH();current=id;pageIdx=0;turning=false;
   $$('.book').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.book===id))});
-  var p=pages[id]();
-  ob.innerHTML='<section class="page page-left"><p class="kicker">'+p.kicker+'</p><h3>'+p.title+'</h3><p class="lede2">'+p.lede+'</p></section><section class="page page-right">'+p.right+'</section>';
-  ob.classList.remove('swap');void ob.offsetWidth;ob.classList.add('swap');
+  ob.className='openbook';
+  paintSpread(spreads(id)[0]);renderPager();
+  void ob.offsetWidth;ob.classList.add('swap');
   if(quiet)return;
   if(id==='after')say(unlocked?'You opened it. Good.':'Light every lantern. Stuck? Ask for a hint.');
   else if(bookMsgs[id])say(bookMsgs[id]);
 }
+pager.addEventListener('click',function(e){
+  var b=e.target.closest('[data-go]');if(!b||b.disabled)return;
+  var g=b.dataset.go;goPage(g==='next'?pageIdx+1:g==='prev'?pageIdx-1:+g);
+});
+$('.bookwrap').addEventListener('keydown',function(e){
+  if(e.altKey||e.ctrlKey||e.metaKey)return;
+  if(e.key==='ArrowRight')goPage(pageIdx+1);else if(e.key==='ArrowLeft')goPage(pageIdx-1);
+});
+var tx=0,ty=0;
+ob.addEventListener('touchstart',function(e){var t=e.touches[0];tx=t.clientX;ty=t.clientY},{passive:true});
+ob.addEventListener('touchend',function(e){
+  var t=e.changedTouches[0],dx=t.clientX-tx,dy=t.clientY-ty;
+  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.6)goPage(dx<0?pageIdx+1:pageIdx-1);
+},{passive:true});
 function paintSpine(){$('.b-after').classList.toggle('open',unlocked)}
 function refreshLock(){
   $$('.lantern',ob).forEach(function(b){
