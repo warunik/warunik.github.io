@@ -1,6 +1,17 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Waruni Kekulandara</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Waruni Kekulandara: demonstrator at the University of Peradeniya. Explainable AI, human-computer interaction, trust and human-centred AI, with puzzles and cats on the side.">
+<meta name="theme-color" content="#08131a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Waruni Kekulandara">
+<meta property="og:description" content="Explainable AI, human-computer interaction, puzzles and cats. A small twilight forest of work.">
+<meta property="og:url" content="https://warunik.github.io/">
+<meta property="og:image" content="https://warunik.github.io/portrait-day.webp">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=IM+Fell+English:ital@0;1&family=Karla:wght@400;500;700&display=swap">
@@ -156,7 +167,7 @@ h2{font:italic 400 clamp(2rem,5vw,3rem)/1.1 var(--display);margin:0 0 12px;color
 .walker .w-in,.walker .w-flip{display:block;width:100%;height:100%}
 .walker .w-in{transform-origin:50% 100%}
 .walker svg{pointer-events:none}
-.walker svg *{pointer-events:auto;cursor:var(--cur-p)}
+.walker svg *{pointer-events:auto}
 .walker .w-say{position:absolute;left:50%;bottom:100%;margin-bottom:4px;transform:translateX(-50%);padding:4px 10px;background:#f6edd0;color:#10201f;border-radius:10px;font:600 .8rem/1.2 var(--body);white-space:nowrap;opacity:0;transition:opacity .25s ease;pointer-events:none}
 .walker .w-say.show{opacity:1}
 .cat-art{display:block;width:100%;height:auto;overflow:visible;color:#9fb7c4;--ear-a:#1c1f26;--ear-b:#1c1f26;--cap:#1c1f26;--p1:#1c1f26;--p2:transparent;--tail:#1c1f26}
@@ -305,29 +316,22 @@ h2{font:italic 400 clamp(2rem,5vw,3rem)/1.1 var(--display);margin:0 0 12px;color
 .wall-lbl{font:500 8.5px var(--mono);letter-spacing:.08em;fill:var(--text);pointer-events:none;text-anchor:middle}
 .patrol{transform-box:view-box;transform-origin:120px 120px;animation:spin 14s linear infinite}
 .wall-cap{min-height:3.2em;margin:8px 0 0;color:var(--dim)}
-.cand{animation:floatc 4.2s ease-in-out infinite alternate}
-@keyframes floatc{from{transform:translateY(-5px)}to{transform:translateY(5px)}}
-.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flick .22s ease-in-out infinite alternate}
-@keyframes flick{from{transform:scale(1,1)}to{transform:scale(.88,1.12)}}
-.owl{animation:owlfly 12s linear infinite}
-@keyframes owlfly{from{transform:translateX(-70px)}to{transform:translateX(380px)}}
-.owl-b{animation:owlbob 1.6s ease-in-out infinite alternate}
-@keyframes owlbob{from{transform:translateY(-8px)}to{transform:translateY(8px)}}
-.wing{transform-box:fill-box;transform-origin:50% 100%;animation:flap .3s ease-in-out infinite alternate}
-@keyframes flap{from{transform:scaleY(1)}to{transform:scaleY(-.5)}}
 .hp-books{display:flex;align-items:flex-end;gap:5px;margin:16px 0 6px;min-height:120px}
-.hp-b{appearance:none;border:0;padding:0;width:30px;height:var(--h);background:var(--c);border-radius:2px 2px 1px 1px;box-shadow:inset 3px 0 0 rgba(255,255,255,.1),inset -3px 0 0 rgba(0,0,0,.25);cursor:var(--cur-p);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.hp-b{appearance:none;border:0;padding:0;width:30px;height:var(--h);background:var(--c);border-radius:2px 2px 1px 1px;box-shadow:inset 3px 0 0 rgba(255,255,255,.1),inset -3px 0 0 rgba(0,0,0,.25);cursor:var(--cur-p)}
 .hp-b:hover,.hp-b:focus-visible{transform:translateY(-10px)}
 .hp-cap{min-height:1.6em;margin:0 0 14px;font:500 .78rem/1.4 var(--mono);letter-spacing:.06em;color:var(--ember)}
-.env{position:relative;display:block;width:210px;height:128px;margin:100px 0 8px;padding:0;border:0;background:none;cursor:var(--cur-p);perspective:700px}
-.env>span{position:absolute;display:block}
-.env-back{inset:0;background:#cdbb8a;border-radius:4px}
-.env-letter{left:14px;right:14px;top:10px;height:108px;padding:12px 14px;background:#f6edd0;color:#2c2210;font:400 .88rem/1.4 var(--body);text-align:left;box-shadow:0 1px 4px rgba(0,0,0,.25);transition:transform .9s cubic-bezier(.2,.8,.2,1) .35s;z-index:2}
-.env-front{left:0;right:0;bottom:0;height:70%;background:#e2d2a0;clip-path:polygon(0 0,50% 48%,100% 0,100% 100%,0 100%);border-radius:0 0 4px 4px;z-index:3}
-.env-flap{left:0;right:0;top:0;height:56%;background:#d8c690;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:50% 0;transition:transform .5s ease;z-index:4}
-.env.open .env-flap{transform:rotateX(180deg);z-index:1}
-.env.open .env-letter{transform:translateY(-84px);z-index:2}
-.env:focus-visible{outline:2px solid var(--moon);outline-offset:4px}
+
+.fav{margin:12px 0 10px;font:400 1.5rem/1.2 var(--display);color:var(--moon)}
+.fav .tag{margin-left:8px;vertical-align:middle}
+.taglist{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.taglist .tag{margin:0}
+.duo{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center;margin:14px 0 4px}
+.duo .wall-art svg{display:block;width:150px;height:150px}
+.duo .wall-cap{margin:0;min-height:0}
+
+.lumos{position:relative;touch-action:pan-y;cursor:var(--cur)}
+.lumos svg{display:block}
+.lumos-shade{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle 66px at var(--mx,76%) var(--my,66%),rgba(6,9,18,0) 0,rgba(6,9,18,.18) 50%,rgba(6,9,18,.9) 100%)}
 
 /* open book */
 .openbook{
@@ -548,11 +552,21 @@ a.email-slot:hover{border-color:var(--ember)}
   .openbook{grid-template-columns:1fr;background:var(--page)}
   .page-right{border-top:1px solid var(--line)}
 }
+html[data-quiet]{scroll-behavior:auto}
+html[data-quiet] *,html[data-quiet] *::before,html[data-quiet] *::after{animation:none!important;transition:none!important}
+.walker svg,.walker svg *{touch-action:none}
+.walker svg *{cursor:grab}
+.walker{-webkit-user-select:none;user-select:none}
+.walker.held{z-index:9}
+.walker.held svg *{cursor:grabbing}
+.walker.held .w-in{filter:drop-shadow(0 12px 8px rgba(0,0,0,.4))}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
 </style>
+</head>
+<body>
 
 <div id="sky" aria-hidden="true"><canvas id="scene"></canvas></div>
 <div class="trail" aria-hidden="true"><i id="trailDot"></i></div>
@@ -574,7 +588,7 @@ a.email-slot:hover{border-color:var(--ember)}
       <div class="hero-copy">
         <p class="eyebrow">Demonstrator · Faculty of Science · University of Peradeniya</p>
         <h1>Waruni Kekulandara</h1>
-        <p class="lede">I teach programming, graphics and image processing, and I research how AI explains itself and whom it treats fairly. This is the quiet corner of the forest where I keep my work, a few puzzles and some cats.</p>
+        <p class="lede">I research how people and AI come to understand each other. This is the quiet corner of the forest where I keep my work, a few puzzles and some cats.</p>
         <div class="hero-actions">
           <a class="btn" href="#library">Walk in</a>
           <a class="btn ghost" href="cv.pdf" target="_blank" rel="noopener" data-cv>My CV</a>
@@ -662,19 +676,18 @@ a.email-slot:hover{border-color:var(--ember)}
     <section class="sec" id="contact" aria-labelledby="contactTitle">
       <div class="contact">
         <h2 id="contactTitle">Where the path ends</h2>
-        <p>Explainable AI, human-computer interaction, a puzzle that refuses to crack, a cat who deserves a cameo, or a thriller I should binge next: whichever it is, write to me.</p>
+        <p>Curious about explainable AI, or how people and machines make sense of each other? Holding a puzzle that refuses to crack, a cat who deserves a cameo, or a thriller I should binge next? Leave me a note and I will write back.</p>
         <div class="mail-row">
           <a class="email-slot" id="mailLink" href="#contact">Loading address…</a>
           <button class="btn ghost sm" id="copyMail" type="button">Copy address</button>
         </div>
         <p class="copy-note" id="copyNote" role="status"></p>
-        <p class="small">Faculty of Science, University of Peradeniya, Sri Lanka.</p>
       </div>
     </section>
 
     <footer class="foot">
       <span>© 2026 Waruni Kekulandara</span>
-      <span>Built in a forest, by lantern light.</span>
+      <span>Built in a forest, with two cats keeping watch.</span>
       <button class="term-btn" id="termOpen" type="button" aria-haspopup="dialog">&gt;_ terminal</button>
     </footer>
 
@@ -683,7 +696,7 @@ a.email-slot:hover{border-color:var(--ember)}
 
 <div class="tally">
   <button class="sky-btn" id="skyBtn" type="button">Day mode</button>
-  <button class="sky-btn" id="whyBtn" type="button" aria-pressed="false">Show me why</button>
+  <button class="sky-btn" id="quietBtn" type="button" aria-pressed="false">Quiet mode</button>
 </div>
 
 <div id="whyLayer" hidden></div>
@@ -696,7 +709,7 @@ a.email-slot:hover{border-color:var(--ember)}
 
 <div class="guide">
   <div class="bubble" id="bubble" role="status" aria-live="polite"><span id="bubbleText"></span></div>
-  <button class="cat-btn" id="catBtn" aria-label="Talk to the guide cat">
+  <button class="cat-btn" id="catBtn" aria-label="Talk to Pesto, the guide cat">
     <svg id="catSvg" viewBox="0 0 100 120" aria-hidden="true">
       <path class="tail" d="M70 108C98 108 98 70 84 66"/>
       <path class="cat-fill" d="M28 112C22 80 34 62 50 62C66 62 78 80 72 112Z"/>
@@ -718,7 +731,10 @@ a.email-slot:hover{border-color:var(--ember)}
 var $=function(s,r){return (r||document).querySelector(s)};
 var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
 var root=document.documentElement;
-var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var OSREDUCE=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var QUIET=false;try{QUIET=localStorage.getItem('wk-quiet')==='1'}catch(e){}
+var reduce=OSREDUCE||QUIET;
+if(QUIET)document.documentElement.setAttribute('data-quiet','')
 var store={
   get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},
   set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}
@@ -899,16 +915,20 @@ function loop(t){
     if(Math.abs(mode-dayT)<.004)dayT=mode;
     syncAttr();
   }
+  if(reduce){draw(0);looping=false;return}
   draw(t);requestAnimationFrame(loop);
 }
+var looping=false;
+function startLoop(){if(!looping){looping=true;requestAnimationFrame(loop)}}
 window.addEventListener('scroll',onScroll,{passive:true});
 window.addEventListener('resize',onResize);
 build();syncAttr();onScroll();
-if(reduce)draw(0);else requestAnimationFrame(loop);
+if(reduce)draw(0);else startLoop();
 
 /* ---------- guide cat ---------- */
 var bubble=$('#bubble'),bubbleText=$('#bubbleText'),bTimer=0;
-function say(msg,ms){
+function say(msg,ms,force){
+  if(QUIET&&!force)return;
   bubbleText.textContent=msg;bubble.classList.add('show');
   clearTimeout(bTimer);bTimer=setTimeout(function(){bubble.classList.remove('show')},ms||6000);
 }
@@ -955,10 +975,10 @@ window.addEventListener('pointermove',function(e){
     root.classList.toggle('on-orb',overOrb(lastE));
   });
 },{passive:true});
-var quips=['Mrrp.','I am on duty. Please do not pet the lantern.','One book on that shelf is locked. I have opinions.','Two of the cats on this page are not me. Look for the white one.','Click the moon, or the sun if it is out. I will not stop you.','Purr.'],qi=0;
-$('#catBtn').addEventListener('click',function(){say(quips[qi++%quips.length])});
+var quips=['Mrrp. I am Pesto, the guide.','One book on the shelf is locked. Light all nine lanterns to open it.','Two cats wander this page: Kimchi, the tuxedo, and Cheese, the calico. You can pick them up.','Click the moon, or the sun if it is out. It changes the sky.','There is a terminal at the bottom of the page. Type help.','Quiet mode, bottom left, calms the page down.','Purr.'],qi=0;
+$('#catBtn').addEventListener('click',function(){say(quips[qi++%quips.length],6000,true)});
 
-var hints={top:'Hello. I am the guide. Mind the ferns.',library:'Pull a book off the shelf. One of them is locked.',clearing:'A small model, explained. Move the sliders.',contact:'End of the trail. Say hello to her.'},said={};
+var hints={top:'Hello. I am Pesto, the guide. Mind the ferns.',library:'Pull a book off the shelf. One of them is locked.',clearing:'A small model, explained. Move the sliders.',contact:'End of the trail. Waruni\'s inbox is open.'},said={};
 var io=new IntersectionObserver(function(es){
   es.forEach(function(e){
     if(e.isIntersecting&&!said[e.target.id]){said[e.target.id]=1;say(hints[e.target.id])}
@@ -971,7 +991,7 @@ var cvOk=null;
 try{fetch('cv.pdf',{method:'HEAD'}).then(function(r){cvOk=r.status!==404}).catch(function(){})}catch(e){}
 document.addEventListener('click',function(e){
   var a=e.target.closest&&e.target.closest('[data-cv]');
-  if(a&&cvOk===false){e.preventDefault();say('The CV is not on the shelf yet. Check back soon.')}
+  if(a&&cvOk===false){e.preventDefault();say('The CV is not on the shelf yet. Check back soon.',6000,true)}
 });
 
 /* ---------- email ---------- */
@@ -985,7 +1005,7 @@ function copyLegacy(){
   document.body.appendChild(t);t.select();
   try{good=document.execCommand('copy')}catch(e){}
   document.body.removeChild(t);
-  if(good){copyDone('Copied '+addr);say('Address copied. Write soon.')}
+  if(good){copyDone('Copied '+addr);say('Address copied. Write soon.',6000,true)}
   else{
     var r=document.createRange();r.selectNodeContents(mailLink);var sel=window.getSelection();sel.removeAllRanges();sel.addRange(r);
     copyDone('Address selected. Press Ctrl+C (or Cmd+C) to copy it.');
@@ -994,7 +1014,7 @@ function copyLegacy(){
 $('#copyMail').addEventListener('click',function(){
   try{
     if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(addr).then(function(){copyDone('Copied '+addr);say('Address copied. Write soon.')},copyLegacy);
+      navigator.clipboard.writeText(addr).then(function(){copyDone('Copied '+addr);say('Address copied. Write soon.',6000,true)},copyLegacy);
     }else copyLegacy();
   }catch(e){copyLegacy()}
 });
@@ -1033,7 +1053,7 @@ function Walker(name,kind,speed,sleepy,startDelay){
   el.innerHTML='<span class="w-in"><span class="w-flip">'+catSVG(kind,'stand')+'</span></span><span class="w-say" aria-hidden="true"></span>';
   document.body.appendChild(el);
   var inEl=$('.w-in',el),flipEl=$('.w-flip',el),svg=$('svg',el),bubble=$('.w-say',el);
-  var LINES=kind==='cheese'?['Mew.','Prrp.','Mrow.','*slow blink*']:['Mrrp!','Prrr.','Meow.','*headbutt*'];
+  var LINES=kind==='cheese'?['Mew.','Play with me?','Mrow.','*slow blink*']:['Mrrp!','Upsies?','Prrr.','*headbutt*'];
   function B(){var w=document.documentElement.clientWidth,h=Math.max(document.documentElement.scrollHeight,window.innerHeight);return {x0:8,x1:Math.max(80,w-104),y0:130,y1:Math.max(220,h-150)}}
   function depth(yy){return .9}
   function place(nx,ny,sec,instant){
@@ -1067,7 +1087,7 @@ function Walker(name,kind,speed,sleepy,startDelay){
   }
   function hold(p,ms){setPose(p);after(ms,function(){setPose('stand');after(500+Math.random()*900,step)})}
   function step(){
-    if(document.hidden){after(2500,step);return}
+    if(document.hidden||QUIET||(drag&&drag.on)){after(2500,step);return}
     var r=Math.random(),ps=sleepy?.3:.16;
     if(r<ps)hold('loaf',6000+Math.random()*7000);
     else if(r<ps+.12)hold('wash',3200+Math.random()*2000);
@@ -1078,7 +1098,44 @@ function Walker(name,kind,speed,sleepy,startDelay){
     bubble.textContent=t;bubble.classList.add('show');clearTimeout(sayT);
     sayT=setTimeout(function(){bubble.classList.remove('show')},1600);
   }
+  var drag=null,justDragged=false;
+  function dragFrame(){
+    if(!drag||!drag.on)return;
+    var py=drag.py;
+    if(py<70)window.scrollBy(0,-16);else if(py>window.innerHeight-70)window.scrollBy(0,16);
+    var W=document.documentElement.clientWidth,H=Math.max(document.documentElement.scrollHeight,window.innerHeight);
+    var nx=Math.min(W-96,Math.max(0,drag.px+window.pageXOffset-drag.ox)),ny=Math.min(H-64,Math.max(0,py+window.pageYOffset-drag.oy));
+    place(nx,ny,0,true);
+    drag.raf=requestAnimationFrame(dragFrame);
+  }
+  function dragMove(e){
+    if(!drag||e.pointerId!==drag.id)return;
+    drag.px=e.clientX;drag.py=e.clientY;
+    if(!drag.on&&Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)>5){
+      drag.on=true;clearTimeout(timer);setPose('stand');el.classList.add('held');say('');bubble.classList.remove('show');
+      drag.raf=requestAnimationFrame(dragFrame);
+    }
+    if(drag.on){var dx=e.clientX-drag.lx;if(Math.abs(dx)>2){face(dx<0?-1:1);drag.lx=e.clientX}}
+    if(drag.on)e.preventDefault();
+  }
+  function dragEnd(e){
+    if(!drag||e.pointerId!==drag.id)return;
+    window.removeEventListener('pointermove',dragMove);window.removeEventListener('pointerup',dragEnd);window.removeEventListener('pointercancel',dragEnd);
+    var d=drag;drag=null;
+    if(!d.on)return;
+    cancelAnimationFrame(d.raf);el.classList.remove('held');
+    justDragged=true;setTimeout(function(){justDragged=false},0);
+    setPose('loaf');say(kind==='cheese'?'Mew. Fine. Here.':'Mrrp. This spot will do.');
+    after(26000+Math.random()*10000,function(){setPose('stand');after(500,step)});
+  }
+  el.addEventListener('pointerdown',function(e){
+    if(e.button>0)return;
+    var r=el.getBoundingClientRect();
+    drag={id:e.pointerId,ox:e.clientX-r.left,oy:e.clientY-r.top,sx:e.clientX,sy:e.clientY,px:e.clientX,py:e.clientY,lx:e.clientX,on:false,raf:0};
+    window.addEventListener('pointermove',dragMove,{passive:false});window.addEventListener('pointerup',dragEnd);window.addEventListener('pointercancel',dragEnd);
+  });
   el.addEventListener('click',function(){
+    if(justDragged)return;
     var r=el.getBoundingClientRect();
     clearTimeout(timer);place(r.left+window.pageXOffset,r.top+window.pageYOffset,0,true);setPose('stand');
     say(LINES[Math.floor(Math.random()*LINES.length)]);
@@ -1102,9 +1159,29 @@ function Walker(name,kind,speed,sleepy,startDelay){
     after(startDelay||1500,function(){walkTo(target())});
   }
   window.addEventListener('resize',function(){var b=B();place(Math.min(b.x1,Math.max(b.x0,x)),Math.min(b.y1,Math.max(b.y0,y)),0,true)});
-  return {el:el,come:come};
+  function calm(on){
+    if(on){
+      clearTimeout(timer);var r=el.getBoundingClientRect();
+      place(r.left+window.pageXOffset,r.top+window.pageYOffset,0,true);setPose('loaf');
+    }else{setPose('stand');after(700,step)}
+  }
+  return {el:el,come:come,calm:calm};
 }
 window.__walkers={kimchi:Walker('Kimchi','kimchi',92,false,300),cheese:Walker('Cheese','cheese',64,true,1400)};
+
+/* ---------- quiet mode ---------- */
+var quietBtn=$('#quietBtn');
+function paintQuiet(){quietBtn.setAttribute('aria-pressed',String(QUIET));quietBtn.textContent=QUIET?'Quiet mode: on':'Quiet mode'}
+function setQuiet(on){
+  QUIET=on;store.set('wk-quiet',on?'1':'0');reduce=OSREDUCE||QUIET;
+  if(on)document.documentElement.setAttribute('data-quiet','');else document.documentElement.removeAttribute('data-quiet');
+  paintQuiet();bubble.classList.remove('show');
+  Object.keys(window.__walkers).forEach(function(k){window.__walkers[k].calm(on)});
+  $$('svg').forEach(function(sv){try{on?sv.pauseAnimations():sv.unpauseAnimations()}catch(e){}});
+  if(reduce){dayT=mode;syncAttr();draw(0)}else startLoop();
+}
+paintQuiet();
+quietBtn.addEventListener('click',function(){setQuiet(!QUIET)});
 
 /* ---------- library ---------- */
 var ob=$('#openbook'),current='research';
@@ -1298,7 +1375,7 @@ function ridHTML(){
 
 /* cats */
 function catCard(name,kind,pose,blurb){
-  return '<div class="catcard"><div class="cc-art" data-kind="'+kind+'" data-pose0="'+pose+'">'+catSVG(kind,pose)+'</div><div><h4>'+name+'</h4><p>'+blurb+'</p><p class="cc-row"><button type="button" class="btn ghost sm" data-pet="'+kind+'">Pet '+name+'</button><span class="purr-note" aria-live="polite"></span></p></div></div>';
+  return '<div class="catcard"><div class="cc-art" data-kind="'+kind+'" data-pose0="'+pose+'">'+catSVG(kind,pose)+'</div><div><h4>'+name+'</h4><p>'+blurb+'</p></div></div>';
 }
 
 /* tv */
@@ -1318,8 +1395,6 @@ var WATCH='<svg viewBox="0 0 64 90" aria-hidden="true"><g class="pend"><path d="
 
 /* anime */
 function wallScene(){
-  var fig=reduce?'<g transform="translate(176 92) rotate(-18)"><path d="M-6 0L6 -3L6 3Z" fill="#14161c"/></g>':
-    '<g><path d="M-6 0L6 -3L6 3Z" fill="#14161c"/><animateMotion dur="6s" repeatCount="indefinite" rotate="auto" path="M104 36Q150 150 214 70T330 44"/></g>';
   var brick='',i;
   for(i=1;i<10;i++)brick+='<path d="M0 '+(i*20)+'H100" stroke="#4d5058" stroke-width="1.5"/>';
   for(i=0;i<10;i++)for(var k=0;k<3;k++)brick+='<path d="M'+(k*34+(i%2?17:0))+' '+(i*20)+'v20" stroke="#4d5058" stroke-width="1.5"/>';
@@ -1329,8 +1404,7 @@ function wallScene(){
     '<g class="drift b"><ellipse cx="10" cy="86" rx="40" ry="9" fill="rgba(255,255,255,.28)"/></g>'+
     '<path d="M0 150L50 112L96 140L150 100L210 142L262 108L320 138V200H0Z" fill="#3a3550" opacity=".85"/>'+
     '<rect x="0" y="0" width="100" height="200" fill="#6b6f78"/>'+brick+'<rect x="0" y="0" width="100" height="10" fill="#51545c"/><rect x="92" y="0" width="8" height="200" fill="rgba(0,0,0,.28)"/>'+
-    '<path d="M100 40Q150 150 214 74T330 48" fill="none" stroke="rgba(20,22,28,.35)" stroke-width="1.2" stroke-dasharray="3 4"/>'+
-    '<rect x="0" y="176" width="320" height="24" fill="#1b1d26"/>'+fig+'</svg>';
+    '<rect x="0" y="176" width="320" height="24" fill="#1b1d26"/></svg>';
 }
 var WALLS={maria:'Wall Maria, the outermost wall.',rose:'Wall Rose, the middle wall.',sina:'Wall Sina, the innermost wall.'};
 var WALLSVG='<svg viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Three nested rings: Wall Maria outermost, Wall Rose in the middle, Wall Sina innermost"><circle class="ring" data-wall="maria" cx="120" cy="120" r="108"/><circle class="ring" data-wall="rose" cx="120" cy="120" r="74"/><circle class="ring" data-wall="sina" cx="120" cy="120" r="40"/>'+
@@ -1338,14 +1412,6 @@ var WALLSVG='<svg viewBox="0 0 240 240" width="240" height="240" role="img" aria
   (reduce?'':'<g class="patrol"><circle cx="120" cy="12" r="4" fill="#f5c46a"/></g>')+'</svg>';
 
 /* books */
-function candles(){
-  var out='',xs=[34,92,150,214,276],hs=[34,52,26,44,30],i;
-  for(i=0;i<5;i++)out+='<g class="cand" style="animation-delay:-'+(i*.9)+'s;animation-duration:'+(3.6+i*.5)+'s"><rect x="'+(xs[i]-6)+'" y="'+hs[i]+'" width="12" height="34" rx="2" fill="#f1e7cc"/><path d="M'+(xs[i]-6)+' '+(hs[i]+4)+'q3 8 6 2q3 10 6 -2" fill="#f7f0dc"/><path class="flame" d="M'+xs[i]+' '+(hs[i]-14)+'q-6 8 0 13q6 -5 0 -13z" fill="#f7b24a"/><path class="flame" d="M'+xs[i]+' '+(hs[i]-9)+'q-3 5 0 8q3 -3 0 -8z" fill="#ffe08a"/></g>';
-  return out;
-}
-function owl(){
-  return '<g transform="translate(0 70)"><g class="owl"><g class="owl-b"><path class="wing" d="M14 -2q-8 -18 -2 -26q12 8 14 22z" fill="#6f523a"/><ellipse cx="20" cy="4" rx="17" ry="11" fill="#8b6b4a"/><ellipse cx="22" cy="8" rx="10" ry="6" fill="#d8c3a0"/><circle cx="34" cy="-4" r="10" fill="#8b6b4a"/><circle cx="31" cy="-6" r="4" fill="#f6edd0"/><circle cx="38" cy="-6" r="4" fill="#f6edd0"/><circle cx="31.6" cy="-6" r="1.8" fill="#18120a"/><circle cx="38.6" cy="-6" r="1.8" fill="#18120a"/><path d="M34 -2l3 3 -3 1.6z" fill="#e0902e"/><path d="M26 -12l-2 -7 6 4zM40 -12l2 -7 -6 4z" fill="#8b6b4a"/><rect x="40" y="3" width="11" height="8" rx="1" fill="#f6edd0" stroke="#bda77a" transform="rotate(10 45 7)"/><path d="M-4 4l-14 -2 12 6z" fill="#6f523a"/></g></g></g>';
-}
 var HPBOOKS=[['Philosopher’s Stone','#7a2a2a',112],['Chamber of Secrets','#2f5d50',98],['Prisoner of Azkaban','#3a3f6b',118],['Goblet of Fire','#8a5a1e',124],['Order of the Phoenix','#5a2d6b',130],['Half-Blood Prince','#3d4a55',108],['Deathly Hallows','#2a2a2e',116]];
 
 function afterSpreads(){
@@ -1356,7 +1422,7 @@ function afterSpreads(){
      right:sudHTML()},
     {tab:'Escape room',kicker:'Puzzle two',title:'Escape room',
      lede:'I love the click of a lock giving way. Here is a trunk, three clues and three wheels.',
-     left:'<ol class="clues"><li><strong>First wheel.</strong> How many lanterns hang on the lock of this very book?<details><summary>Hint</summary>Three rows of three.</details></li><li><strong>Second wheel.</strong> How many cats wander this page?<details><summary>Hint</summary>One tuxedo, one calico.</details></li><li><strong>Third wheel.</strong> How many research interests get a page of their own?<details><summary>Hint</summary>HCI, XAI, trust and human-centred AI.</details></li></ol>',
+     left:'<ol class="clues"><li><strong>First wheel.</strong> How many lives does a cat famously have?<details><summary>Hint</summary>Ask anyone with a cat. They will tell you it is a very old saying.</details></li><li><strong>Second wheel.</strong> How many cats wander this page?<details><summary>Hint</summary>One tuxedo, one calico.</details></li><li><strong>Third wheel.</strong> How many research interests get a page of their own?<details><summary>Hint</summary>HCI, XAI, trust and human-centred AI.</details></li></ol>',
      right:escHTML()},
     {tab:'Mind ticklers',kicker:'Puzzle three',title:'Mind ticklers',
      lede:'Riddles, logic and lateral puzzles. Think first, then flip the card.',
@@ -1364,22 +1430,22 @@ function afterSpreads(){
      right:ridHTML()},
     {tab:'Cats',kicker:'The housemates',title:'Cats',
      lede:'Two of them: Kimchi, a tuxedo cat, and Cheese, a calico. Both are wandering this page right now.',
-     left:'<p class="cc-row"><button type="button" class="btn ghost sm" data-call="kimchi">Call Kimchi</button><button type="button" class="btn ghost sm" data-call="cheese">Call Cheese</button></p>',
-     right:catCard('Kimchi','kimchi','stand','Tuxedo cat, mostly white with a little black.')+catCard('Cheese','cheese','loaf','Calico cat, with patches of orange, black and white.')},
+     left:'<p class="cc-row"><button type="button" class="btn ghost sm" data-call="kimchi">Call Kimchi</button><button type="button" class="btn ghost sm" data-call="cheese">Call Cheese</button></p><p class="small tips">The two walking around the page can be picked up. Drag one and drop it anywhere you like. Click one to say hello.</p>',
+     right:catCard('Kimchi','kimchi','stand','Loves being carried around, and asks to be held with "upsies".')+catCard('Cheese','cheese','loaf','Always ready to play, and not a fan of any other animal except Kimchi.')},
     {tab:'TV',kicker:'On the screen',title:'Mystery and thrillers',
      lede:'A case that does not solve itself, and a plot that stays two moves ahead.',
      left:'<div class="art">'+BOARD+'</div>',
      right:'<p class="group">Now watching</p><div class="show"><div class="show-art">'+TEA+WATCH+'</div><div><h4>The Mentalist</h4><p>A crime drama about a consultant who solves cases by reading people.</p><p><span class="tag">Mystery</span><span class="tag">Crime</span><span class="tag">Thriller</span></p></div></div>'+
        '<p class="group">Always on the list</p><p class="lede2">Mysteries and thrillers with an answer worth waiting for. Got one I should watch next? <a href="#contact" style="color:var(--ember)">Write to me.</a></p>'},
-    {tab:'Anime',kicker:'Anime',title:'Attack on Titan',
-     lede:'My favourite anime.',
-     left:'<div class="art">'+wallScene()+'</div>',
-     right:'<p class="group">The three walls</p><div class="wall-art" style="display:grid;justify-items:center">'+WALLSVG+'</div><p class="wall-cap" id="wallCap" role="status">Hover or tap a ring.</p>'},
-    {tab:'Books',kicker:'Books',title:'Harry Potter',
-     lede:'My favourite book series.',
-     left:'<div class="art"><svg viewBox="0 0 320 170" aria-hidden="true"><rect width="320" height="170" fill="#0e1424"/><circle cx="268" cy="34" r="15" fill="#f1e7cc" opacity=".9"/><path d="M200 150V120h8V108l5-8 5 8v12h10V96l6-10 6 10v24h8v-16l5-8 5 8v46Z" fill="#0a0f1d"/><path d="M0 170V150Q40 120 80 150T160 148T240 150T320 140V170Z" fill="#151c33"/>'+candles()+owl()+'</svg></div>',
-     right:'<p class="group">Seven books</p><div class="hp-books" role="group" aria-label="The seven books">'+HPBOOKS.map(function(b,i){return '<button type="button" class="hp-b" data-title="'+(i+1)+'. '+b[0]+'" style="--c:'+b[1]+';--h:'+b[2]+'px" aria-label="Book '+(i+1)+', '+b[0]+'"></button>'}).join('')+'</div><p class="hp-cap" id="hpCap">Hover a spine.</p>'+
-       '<p class="group">A letter for you</p><button type="button" class="env" data-env aria-expanded="false" aria-label="Open the letter"><span class="env-back"></span><span class="env-letter"><b>Dear reader,</b> the next book on my shelf is yours to pick. Write to me.</span><span class="env-front"></span><span class="env-flap"></span></button>'}
+    {tab:'Anime & books',kicker:'Worlds I return to',title:'Anime and books',
+     lede:'A favourite anime, a favourite series, and the shelves around them.',
+     left:'<p class="group">Anime</p><h4 class="fav">Attack on Titan <span class="tag">favourite</span></h4><div class="art">'+wallScene()+'</div>'+
+       '<div class="duo"><div class="wall-art">'+WALLSVG+'</div><p class="wall-cap" id="wallCap" role="status">Hover or tap a ring to meet a wall.</p></div>'+
+       '<p class="group">Also watched</p><p class="taglist">'+['Death Note','My Hero Academia','Jujutsu Kaisen','Demon Slayer','Your Name','Howl’s Moving Castle','Spirited Away','Suzume','Maquia: When the Flower Blooms','Ponyo','Wolf Children','Grave of the Fireflies'].map(function(t){return '<span class="tag">'+t+'</span>'}).join('')+'</p>',
+     right:'<p class="group">Books</p><h4 class="fav">Harry Potter <span class="tag">favourite series</span></h4>'+
+       '<div class="art lumos" id="lumos" style="--mx:76%;--my:66%" role="img" aria-label="A castle on a hill at night. Move the pointer over it to light it with a wand."><svg viewBox="0 0 320 170" aria-hidden="true"><rect width="320" height="170" fill="#16203a"/><circle cx="60" cy="38" r="15" fill="#f1e7cc"/><path d="M0 170V138Q60 108 120 136T240 130T320 122V170Z" fill="#202c4d"/><path d="M196 140V112h8V98l6-10 6 10v14h10V84l7-12 7 12v28h8V98l6-8 6 8v42Z" fill="#33426d"/><g fill="#f7c76a"><rect x="208" y="104" width="4" height="7" rx="1"/><rect x="225" y="92" width="4" height="8" rx="1"/><rect x="236" y="92" width="4" height="8" rx="1"/><rect x="230" y="116" width="5" height="9" rx="1"/><rect x="250" y="106" width="4" height="7" rx="1"/><rect x="214" y="122" width="4" height="8" rx="1"/></g></svg><div class="lumos-shade"></div></div><p class="small tips">Hover over the castle to say Lumos.</p>'+
+       '<div class="hp-books" role="group" aria-label="The seven Harry Potter books">'+HPBOOKS.map(function(b,i){return '<button type="button" class="hp-b" data-title="'+(i+1)+'. '+b[0]+'" style="--c:'+b[1]+';--h:'+b[2]+'px" aria-label="Book '+(i+1)+', '+b[0]+'"></button>'}).join('')+'</div><p class="hp-cap" id="hpCap">Hover a spine.</p>'+
+       '<p class="group">Also read</p><p class="taglist">'+['Divergent','The Hunger Games','Skulduggery Pleasant','Alex Rider','Faery Rebels','The Last Dragon Chronicles'].map(function(t){return '<span class="tag">'+t+'</span>'}).join('')+'</p>'}
   ];
 }
 
@@ -1402,7 +1468,7 @@ var pages={
        right:
          proj('Counterfactual explanations for tree ensembles','Final-year project','2024 &ndash; 2025',['Built a framework to evaluate five counterfactual methods: Foil Trees, SHAP-C, LIME-C, LORE and CLEAR.','Found a design-level trade-off: correctness and feasibility have to be considered while counterfactuals are generated, not enforced afterwards.','The basis of three papers: ETECOM 2025, SLJCR 2025 and ICICT 2026.'])+
          proj('A multi-dimensional study of combined XAI techniques for regression','Under review','Jun &ndash; Sep 2026 &middot; '+sup,['Evaluated single and combined methods (SHAP, DiCE, Anchors, ProtoDash) on faithfulness, actionability, stability and consistency.','Found that well-chosen combinations improve several criteria, depending on the model and the aggregation strategy.'])+
-         proj('White, grey and black box models','','',null,'Comparing regression models of each kind on real listing prices from ikman.lk.')},
+         proj('White, grey and black box models','Project','Ongoing',['White box: linear regression. Grey box: random forest. Black box: a neural network.','Prediction accuracy (R², RMSE, MAE, MAPE) is judged separately from the quality of the explanations.'],'Comparing regression models of each kind on real listing prices from ikman.lk.')},
       {tab:'Trust',kicker:'Interest 3 of 4',title:'Trust in Intelligent Systems',
        lede:'Whether a system treats people fairly, and whether the people it affects have reason to trust it.',
        right:
@@ -1419,14 +1485,16 @@ var pages={
   },
   teaching:function(){return {kicker:'Since January 2026',title:'Teaching',
     lede:'Graduate teaching assistant in the Faculty of Science. I design labs, write assignments, grade, and help people get unstuck.',
-    right:'<div class="course"><span class="code">CSC1051</span><div><strong>Programming Laboratory II</strong><span class="tag">Java</span></div></div>'+
+    right:'<div class="course"><span class="code">CSC1023</span><div><strong>Object Oriented Programming</strong></div></div>'+
+      '<div class="course"><span class="code">CSC1051</span><div><strong>Programming Laboratory II</strong><span class="tag">Java</span></div></div>'+
+      '<div class="course"><span class="code">CSC2032</span><div><strong>Introduction to Computer Networks</strong></div></div>'+
       '<div class="course"><span class="code">CSC2052</span><div><strong>Computer Architecture</strong></div></div>'+
       '<div class="course"><span class="code">CSC2321</span><div><strong>Computing for Science</strong><span class="tag">Python</span></div></div>'+
       '<div class="course"><span class="code">CSC3081</span><div><strong>Computer Graphics Programming</strong><span class="tag">C++ / OpenGL</span></div></div>'+
       '<div class="course"><span class="code">CSC3132</span><div><strong>Digital Image Processing</strong></div></div>'}},
   education:function(){return {kicker:'2021 to 2025',title:'Education',
     lede:'B.Sc. (Hons) in Computer Science at the University of Peradeniya, with a minor in Chemistry and Biology.',
-    right:'<dl class="facts"><div><dt>First Class Honours</dt><dd>Top of the batch in Computer Science.</dd></div><div><dt>Minor in Chemistry and Biology</dt><dd>Studied alongside the degree.</dd></div></dl>'}},
+    right:'<dl class="facts"><div><dt>GPA 3.80 / 4.00</dt><dd>First Class Honours.</dd></div><div><dt>First Class Honours</dt><dd>Top of the batch in Computer Science.</dd></div><div><dt>Minor in Chemistry and Biology</dt><dd>Studied alongside the degree.</dd></div></dl>'}},
   pubs:function(){
     function pub(title,authors,venue,status,link,extra){
       return '<div class="entry"><h4>'+title+'</h4>'+(authors?'<p class="by">'+authors+'</p>':'')+
@@ -1484,7 +1552,7 @@ var pages={
     return afterSpreads();
   }
 };
-var bookMsgs={pubs:'Publications. Turn the pages to sort them by status.',beyond:'Beyond the lab. Two pages: leadership and volunteering.',research:'Research. Four interests, one page each.',teaching:'Teaching. Five courses, a lot of lab sheets.',education:'Education. First Class Honours, top of the batch.',after:null};
+var bookMsgs={pubs:'Publications. Turn the pages to sort them by status.',beyond:'Beyond the lab. Two pages: leadership and volunteering.',research:'Research. Four interests, one page each.',teaching:'Teaching. Seven courses, a lot of lab sheets.',education:'Education. First Class Honours, GPA 3.80 out of 4.',after:null};
 var pageIdx=0,turning=false;
 var reduceMq=window.matchMedia('(prefers-reduced-motion: reduce)'),wideMq=window.matchMedia('(min-width:761px)');
 function spreads(id){return [].concat(pages[id]())}
@@ -1530,7 +1598,7 @@ function abortPeek(){
   var list=spreads(current);paintSpread(list[pageIdx]);
 }
 function peekStart(dir){
-  if(turning||reduceMq.matches||!wideMq.matches)return;
+  if(turning||reduceMq.matches||QUIET||!wideMq.matches)return;
   var list=spreads(current),n=pageIdx+dir;
   if(n<0||n>=list.length)return;
   var ang=dir>0?-13:13;
@@ -1584,7 +1652,7 @@ function goPage(n){
   if(turning||n<0||n>=list.length||n===pageIdx)return;
   if(peek){if(peek.dir===(n>pageIdx?1:-1)){var pk0=peek;flipLeaf(pk0,n);return}abortPeek()}
   var dir=n>pageIdx?1:-1,p=list[n];
-  if(reduceMq.matches){pageIdx=n;renderPager();paintSpread(p);return}
+  if(reduceMq.matches||QUIET){pageIdx=n;renderPager();paintSpread(p);return}
   if(wideMq.matches){flipLeaf(makeLeaf(dir,p),n);return}
   pageIdx=n;renderPager();turning=true;
   var out=dir>0?'m-out-f':'m-out-b',inn=dir>0?'m-in-f':'m-in-b';
@@ -1656,12 +1724,19 @@ function renderWhy(){
   box.innerHTML=h;
 }
 /* ---------- after hours: interaction ---------- */
+function lumosAt(e){
+  var l=e.target.closest&&e.target.closest('.lumos');if(!l||current!=='after'||!unlocked)return;
+  var r=l.getBoundingClientRect();
+  l.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+  l.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+}
+ob.addEventListener('pointermove',lumosAt);ob.addEventListener('pointerdown',lumosAt);
 ob.addEventListener('click',function(e){
   if(current!=='after'||!unlocked)return;
   var t=e.target;if(!t.closest)return;
   var cell=t.closest('.sc');
   if(cell){SUD.sel=+cell.dataset.i;SUD.pop=-1;sudRedraw();return}
-  var a=t.closest('[data-sud],[data-esc],[data-rid],[data-call],[data-pet],[data-env],[data-wall]');
+  var a=t.closest('[data-sud],[data-esc],[data-rid],[data-call],[data-wall]');
   if(!a)return;
   if(a.dataset.sud!==undefined){
     var k=a.dataset.sud;
@@ -1700,14 +1775,6 @@ ob.addEventListener('click',function(e){
   }else if(a.dataset.call!==undefined){
     var wk=window.__walkers&&window.__walkers[a.dataset.call];
     if(wk){wk.come();say(a.dataset.call==='kimchi'?'Kimchi is on his way. He may stop to wash.':'Cheese will arrive when she feels like it.')}
-  }else if(a.dataset.pet!==undefined){
-    var card=a.closest('.catcard'),art=$('.cc-art',card),sv=$('svg',art),note=$('.purr-note',card);
-    sv.classList.add('purr');sv.setAttribute('data-pose','stand');note.textContent='prrrrr';
-    var hh=document.createElement('span');hh.className='heart';hh.textContent='♥';art.appendChild(hh);
-    clearTimeout(card._t);
-    card._t=setTimeout(function(){sv.classList.remove('purr');sv.setAttribute('data-pose',art.dataset.pose0);note.textContent='';if(hh.parentNode)hh.parentNode.removeChild(hh)},2600);
-  }else if(a.dataset.env!==undefined){
-    var open=!a.classList.contains('open');a.classList.toggle('open',open);a.setAttribute('aria-expanded',String(open));
   }else if(a.dataset.wall!==undefined){
     var cap=$('#wallCap',ob);if(cap)cap.textContent=WALLS[a.dataset.wall];
     $$('.ring',ob).forEach(function(r){r.classList.toggle('on',r===a)});
@@ -1856,13 +1923,13 @@ var WHY=[
   {at:function(){var o=orb();return {left:o.x-o.r,top:o.y-o.r,width:o.r*2,height:o.r*2}},t:'Two routes to one action',pr:'Flexibility',x:'The moon and sun are a real control. You can click them, or use the link at the bottom left. Your choice is remembered, so you do not repeat it.'},
   {sel:'.shelf',t:'Books, not a menu',pr:'Recognition over recall',x:'A shelf is a navigation pattern people already know. One book is locked, so there is a puzzle to find as well as information.'},
   {sel:'.obwrap',t:'Many ways to turn a page',pr:'Flexibility and efficiency',x:'Click the page edge, use the arrows or tabs, press the arrow keys, or swipe. If your system asks for reduced motion, the page turns instantly.'},
-  {sel:'.walker',t:'Company, not clutter',pr:'Aesthetic and minimalist design',x:'Kimchi and Cheese wander on their own and never block the page for long. Click one to say hello. With reduced motion switched on, they sit still.'},
-  {sel:'.guide',t:'Never silent',pr:'Visibility of system status',x:'The guide cat says what just happened after a click or a scroll, so you are never left wondering whether something worked.'},
+  {sel:'.walker',t:'Company, not clutter',pr:'Aesthetic and minimalist design',x:'Kimchi and Cheese wander on their own and never block the page for long. Click one to say hello, or drag one somewhere else. With Quiet mode or reduced motion on, they sit still.'},
+  {sel:'.guide',t:'Never silent',pr:'Visibility of system status',x:'Pesto, the guide cat, says what just happened after a click or a scroll, so you are never left wondering whether something worked.'},
   {sel:'#lab',t:'Showing the working',pr:'Explainability',x:'The model gives its answer, what pushed it there, and the smallest change that would flip it. It separates changes you could make from changes you could not.'},
   {sel:'.mail-row',t:'Two ways to say hello',pr:'Error prevention',x:'Open your mail app, or copy the address. Not everyone has a mail app set up, and a dead mailto link is a dead end.'},
-  {sel:'.tally',oy:-34,t:'What this page remembers',pr:'Privacy and transparency',x:'Two things, kept in your browser: day or night, and whether the lock is open. No accounts, and no analytics code of its own.'}
+  {sel:'.tally',oy:-34,t:'What this page remembers',pr:'Privacy and transparency',x:'Three things, kept in your browser: day or night, Quiet mode, and whether the lock is open. No accounts, and no analytics code of its own.'}
 ];
-var whyLayer=$('#whyLayer'),whyBtn=$('#whyBtn'),whyDots=[],whyCard=document.createElement('div');
+var whyLayer=$('#whyLayer'),whyBtn=document.createElement('button'),whyDots=[],whyCard=document.createElement('div');
 whyCard.className='why-card';whyCard.hidden=true;whyCard.setAttribute('role','dialog');whyLayer.appendChild(whyCard);
 WHY.forEach(function(a,i){
   var b=document.createElement('button');
@@ -1904,7 +1971,7 @@ function setWhy(on,quiet){
   whyOn=!!on;whyOpenIdx=-1;whyPaint();
   whyLayer.hidden=!whyOn;
   whyBtn.setAttribute('aria-pressed',String(whyOn));whyBtn.textContent=whyOn?'Hide the why':'Show me why';
-  if(whyOn){whyLayout();requestAnimationFrame(whyTick);if(!quiet)say('Numbered dots explain why this page works the way it does. Tap one.',7000)}
+  if(whyOn){whyLayout();requestAnimationFrame(whyTick);if(!quiet)say('Numbered dots explain why this page works the way it does. Tap one. Press Escape to hide them.',7000)}
 }
 whyBtn.addEventListener('click',function(){setWhy(!whyOn)});
 document.addEventListener('click',function(e){
@@ -1912,7 +1979,7 @@ document.addEventListener('click',function(e){
   if(e.target.closest&&e.target.closest('.why-card,.why-dot'))return;
   whyOpenIdx=-1;whyPaint();
 });
-document.addEventListener('keydown',function(e){if(e.key==='Escape'&&whyOn&&whyOpenIdx>=0){whyOpenIdx=-1;whyPaint()}});
+document.addEventListener('keydown',function(e){if(e.key!=='Escape'||!whyOn)return;if(whyOpenIdx>=0){whyOpenIdx=-1;whyPaint()}else setWhy(false)});
 
 /* ---------- terminal ---------- */
 var term=$('#term'),termOut=$('#termOut'),termIn=$('#termIn'),termOpener=null,hist=[],hi=0;
@@ -1922,7 +1989,7 @@ var TREE={
   teaching:{id:'teaching',kids:{}},
   education:{id:'education',kids:{}},
   beyond:{id:'beyond',kids:{leadership:0,volunteering:1}},
-  'after-hours':{id:'after',kids:{sudoku:0,'escape-room':1,'mind-ticklers':2,cats:3,tv:4,anime:5,books:6}}
+  'after-hours':{id:'after',kids:{sudoku:0,'escape-room':1,'mind-ticklers':2,cats:3,tv:4,'anime-and-books':5}}
 };
 var LEAVES={
   'research/hci':['EEG, creativity, personality and vocational interest   (ongoing)','An interactive interface for counterfactual explanations   (final-year project)'],
@@ -1933,15 +2000,14 @@ var LEAVES={
   'publications/accepted':['ISBM 2026   Shades of Sentiment: Evaluating Emotional Fairness Across Ethnic Identities in LLMs'],
   'publications/under-review':['ICAC 2026   Is More Explanation Better? A Multi-Dimensional Study of Combined XAI Techniques for Regression'],
   'publications/abstracts-and-talks':['SLJCR 2025   A Unified Framework for Evaluating Existing Counterfactual Methods (abstract)','Four talks, all virtual, one poster at Research Cafe'],
-  'teaching':['CSC1051   Programming Laboratory II (Java)','CSC2052   Computer Architecture','CSC2321   Computing for Science (Python)','CSC3081   Computer Graphics Programming (C++ / OpenGL)','CSC3132   Digital Image Processing'],
+  'teaching':['CSC1023   Object Oriented Programming','CSC1051   Programming Laboratory II (Java)','CSC2032   Introduction to Computer Networks','CSC2052   Computer Architecture','CSC2321   Computing for Science (Python)','CSC3081   Computer Graphics Programming (C++ / OpenGL)','CSC3132   Digital Image Processing'],
   'education':['B.Sc. (Hons) Computer Science, University of Peradeniya, 2021-2025','Minor in Chemistry and Biology','GPA 3.80 / 4.00, First-Class Honours, top of the batch'],
   'after-hours/sudoku':['Mini 4x4 and classic 9x9, one answer each'],
   'after-hours/escape-room':['A trunk, three clues, three wheels'],
   'after-hours/mind-ticklers':['Six riddles, shuffled'],
-  'after-hours/cats':['Kimchi (tuxedo)','Cheese (calico)'],
+  'after-hours/cats':['Kimchi (tuxedo, loves to be carried)','Cheese (calico, always ready to play)'],
   'after-hours/tv':['The Mentalist (now watching)','Mystery and thrillers'],
-  'after-hours/anime':['Attack on Titan'],
-  'after-hours/books':['Harry Potter'],
+  'after-hours/anime-and-books':['Attack on Titan (favourite anime), and many more','Harry Potter (favourite series), and many more'],
   'beyond/leadership':['Editor, Astronomical Society','Program Team Member, IEEE Computer Society','Junior Treasurer, Drama Society','President Guide, Sri Lanka Girl Guides Association'],
   'beyond/volunteering':['RESCON','Huddle Workshop','Project for Special Needs Children, Blue Rose School','Save the Next Generation - Knuckles']
 };
@@ -2064,4 +2130,5 @@ document.addEventListener('keydown',function(e){
 })();
 </script>
 
-</body></html>
+</body>
+</html>
