@@ -52,8 +52,13 @@
   color-scheme:light;
 }
 *,*::before,*::after{box-sizing:border-box}
+:root{--cur:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M4 3v19l5-4.6 3.6 8 3.4-1.6-3.6-7.8H20z' fill='%23f6edd0' stroke='%231a1409' stroke-width='1.6' stroke-linejoin='round'/%3E%3Ccircle cx='21.5' cy='5.5' r='2.4' fill='%23f2b556' stroke='%231a1409' stroke-width='1.2'/%3E%3C/svg%3E") 4 3,auto;--cur-p:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cg fill='%23f2b556' stroke='%231a1409' stroke-width='1.5'%3E%3Cellipse cx='15' cy='20' rx='6.6' ry='5.4'/%3E%3Cellipse cx='6.5' cy='13' rx='2.6' ry='3.3' transform='rotate%28-20 6.5 13%29'/%3E%3Cellipse cx='11.5' cy='7.5' rx='2.7' ry='3.5' transform='rotate%28-6 11.5 7.5%29'/%3E%3Cellipse cx='18.5' cy='7.5' rx='2.7' ry='3.5' transform='rotate%286 18.5 7.5%29'/%3E%3Cellipse cx='23.5' cy='13' rx='2.6' ry='3.3' transform='rotate%2820 23.5 13%29'/%3E%3C/g%3E%3C/svg%3E") 15 13,pointer}
+html{cursor:var(--cur)}
+a[href],button,summary,label,select,[role=button],input[type=range],input[type=checkbox]{cursor:var(--cur-p)}
+button:disabled{cursor:default}
+@media(pointer:coarse){:root{--cur:auto;--cur-p:pointer}}
 html{scroll-behavior:smooth}
-html.on-orb{cursor:pointer}
+html.on-orb{cursor:var(--cur-p)}
 body{
   margin:0;background:var(--night);color:var(--text);
   font:400 1.0625rem/1.65 var(--body);
@@ -81,10 +86,6 @@ main{position:relative;z-index:1;overflow-x:clip}
 .portrait{position:relative;isolation:isolate;display:grid;margin:0;justify-self:end;width:100%;max-width:400px;align-self:center;pointer-events:none;animation:rise .9s .35s cubic-bezier(.2,.7,.2,1) backwards}
 .portrait::before{content:"";position:absolute;z-index:-1;left:-10%;right:-10%;top:0;bottom:12%;background:radial-gradient(closest-side,var(--frame-glow),transparent)}
 .portrait img{display:block;grid-area:1/1;align-self:end;width:100%;height:auto;filter:drop-shadow(0 8px 20px rgba(0,0,0,.35))}
-.portrait .p-night{transition:opacity .7s ease,visibility 0s}
-.portrait .p-day{opacity:0;visibility:hidden;transition:opacity .7s ease,visibility 0s .7s}
-:root[data-sky="day"] .portrait .p-day{opacity:1;visibility:visible;transition:opacity .7s ease,visibility 0s}
-:root[data-sky="day"] .portrait .p-night{opacity:0;visibility:hidden;transition:opacity .7s ease,visibility 0s .7s}
 .portrait figcaption{grid-area:2/1;margin-top:6px;font:500 .74rem/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-align:center;text-shadow:0 1px 10px var(--halo)}
 @media(max-width:860px){
   .hero{grid-template-columns:minmax(0,1fr);align-items:start}
@@ -100,7 +101,7 @@ h1{font:italic 400 clamp(2.7rem,9vw,5.8rem)/1 var(--display);margin:0 0 26px;col
 .lede{font-size:1.2rem;max-width:34rem;margin:0 0 34px;text-shadow:0 1px 14px var(--halo)}
 .hero-actions{position:relative;display:flex;flex-wrap:wrap;gap:12px;padding-top:26px;border-top:1px solid var(--line)}
 
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border:1px solid var(--ember-fill);background:var(--ember-fill);color:#1a1409;font:700 .95rem/1 var(--body);text-decoration:none;border-radius:3px;cursor:pointer;transition:transform .15s ease,background .15s ease}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border:1px solid var(--ember-fill);background:var(--ember-fill);color:#1a1409;font:700 .95rem/1 var(--body);text-decoration:none;border-radius:3px;cursor:var(--cur-p);transition:transform .15s ease,background .15s ease}
 .btn:hover{transform:translateY(-2px);background:#f7c876}
 .btn.ghost{background:transparent;color:var(--ember)}
 .btn.ghost:hover{background:rgba(242,181,86,.14)}
@@ -116,7 +117,7 @@ h2{font:italic 400 clamp(2rem,5vw,3rem)/1.1 var(--display);margin:0 0 12px;color
 .shelf{position:relative;display:flex;align-items:flex-end;gap:6px;padding:0 20px 14px;min-height:240px}
 .shelf::after{content:"";position:absolute;left:0;right:0;bottom:0;height:14px;background:linear-gradient(#5a432c,#32230f 70%,#1f1509);border-top:1px solid rgba(241,232,200,.28);box-shadow:0 10px 26px rgba(0,0,0,.45)}
 .book{
-  position:relative;z-index:1;appearance:none;border:0;cursor:pointer;
+  position:relative;z-index:1;appearance:none;border:0;cursor:var(--cur-p);
   width:var(--w);height:var(--h);background:var(--c);color:#f1e8c8;
   font:400 1.1rem/1 var(--display);letter-spacing:.08em;
   writing-mode:vertical-rl;display:flex;align-items:center;justify-content:flex-start;padding:26px 0 0;
@@ -146,30 +147,187 @@ h2{font:italic 400 clamp(2rem,5vw,3rem)/1.1 var(--display);margin:0 0 12px;color
 .shelf-note{margin:14px 0 0;font:500 .78rem/1.4 var(--mono);letter-spacing:.08em;color:var(--mist);text-shadow:0 1px 10px var(--halo)}
 .bookwrap{position:relative;margin-top:46px}
 
-/* hidden cats: five different cats, muted until found */
-.peek-btn{position:absolute;z-index:2;width:var(--cw,62px);height:var(--ch,42px);padding:0;border:0;background:none;cursor:pointer}
-.peek-btn svg{display:block;width:100%;height:100%;filter:brightness(.5) saturate(.45);transition:filter .3s ease,transform .3s ease}
-.peek-btn:hover svg,.peek-btn:focus-visible svg{filter:brightness(.82) saturate(.85);transform:translateY(-2px)}
-.peek-btn.found svg{filter:none}
-.peek-btn.found:hover svg{transform:translateY(-3px)}
-.peek-hero{--cw:66px;--ch:46px;left:62%;bottom:100%}
-.peek-shelf{--cw:60px;--ch:48px;right:0;bottom:14px}
-.peek-book{--cw:72px;--ch:48px;right:12%;bottom:100%}
-.peek-contact{--cw:92px;--ch:42px;right:10%;bottom:100%}
-.peek-foot{--cw:62px;--ch:56px;right:10%;bottom:100%}
-@media(max-width:520px){.peek-hero{left:48%}}
 .blink{transform-box:fill-box;transform-origin:center}
-.peek-btn.found .blink{animation:blink 5.5s infinite}
-.peek-book.found .blink{animation-delay:1.2s}
-.zz{opacity:0}
-.peek-btn.found .zz{animation:zz 3.2s ease-in-out infinite}
-.peek-btn.found .zz2{animation-delay:1.1s}
-@keyframes zz{0%{opacity:0;transform:translate(0,4px)}30%{opacity:.95}100%{opacity:0;transform:translate(4px,-8px)}}
-.wave{transform-box:fill-box;transform-origin:50% 100%}
-.peek-btn.found .wave{animation:wave 1.8s ease-in-out infinite}
-@keyframes wave{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(10deg)}}
 .heart{position:absolute;left:50%;top:-6px;color:#ff8fa3;font:700 1.2rem/1 var(--body);opacity:0;pointer-events:none;animation:heart 1.1s ease-out forwards}
 @keyframes heart{0%{opacity:0;transform:translate(-50%,6px) scale(.6)}25%{opacity:1}100%{opacity:0;transform:translate(-50%,-28px) scale(1.1)}}
+
+/* walking cats */
+.walker{position:absolute;left:0;top:0;z-index:4;width:96px;height:64px;pointer-events:none;will-change:transform}
+.walker .w-in,.walker .w-flip{display:block;width:100%;height:100%}
+.walker .w-in{transform-origin:50% 100%}
+.walker svg{pointer-events:none}
+.walker svg *{pointer-events:auto;cursor:var(--cur-p)}
+.walker .w-say{position:absolute;left:50%;bottom:100%;margin-bottom:4px;transform:translateX(-50%);padding:4px 10px;background:#f6edd0;color:#10201f;border-radius:10px;font:600 .8rem/1.2 var(--body);white-space:nowrap;opacity:0;transition:opacity .25s ease;pointer-events:none}
+.walker .w-say.show{opacity:1}
+.cat-art{display:block;width:100%;height:auto;overflow:visible;color:#9fb7c4;--ear-a:#1c1f26;--ear-b:#1c1f26;--cap:#1c1f26;--p1:#1c1f26;--p2:transparent;--tail:#1c1f26}
+.cat-art.cheese{--ear-a:#e8943a;--ear-b:#20232b;--cap:#e8943a;--p1:#e8943a;--p2:#20232b;--tail:#e8943a}
+:root[data-sky="day"] .cat-art{color:#5a7380}
+.cat-art .wh{fill:#f7f5ef}
+.cat-art .ol{stroke:#3a4048;stroke-width:.9;stroke-linejoin:round}
+.cat-art .leg,.cat-art .head,.cat-art .all,.cat-art .bodyg{transform-box:view-box}
+.cat-art .leg{transform-box:fill-box;transform-origin:50% 6%}
+[data-pose="walk"] .l1,[data-pose="walk"] .l4{animation:stepA .46s ease-in-out infinite alternate}
+[data-pose="walk"] .l2,[data-pose="walk"] .l3{animation:stepA .46s ease-in-out infinite alternate-reverse}
+@keyframes stepA{from{transform:rotate(24deg)}to{transform:rotate(-24deg)}}
+.cat-art .tail{transform-origin:23px 40px;animation:tailw 3.2s ease-in-out infinite}
+[data-pose="walk"] .tail{animation-duration:1.1s}
+@keyframes tailw{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(10deg)}}
+.cat-art .eyes{transform-box:fill-box;transform-origin:center;animation:blink 5s infinite}
+[data-pose="walk"] .bodyg,[data-pose="walk"] .head{animation:bob .46s ease-in-out infinite alternate}
+@keyframes bob{from{transform:translateY(0)}to{transform:translateY(-1.6px)}}
+.cat-art .head{transform-origin:70px 36px}
+[data-pose="stand"] .head{animation:look 7s ease-in-out infinite}
+@keyframes look{0%,100%{transform:rotate(0)}30%{transform:rotate(-6deg)}65%{transform:rotate(5deg)}}
+[data-pose="wash"] .head{animation:wash 1.1s ease-in-out infinite}
+@keyframes wash{0%,100%{transform:rotate(0)}50%{transform:rotate(26deg)}}
+[data-pose="wash"] .l3{animation:paw 1.1s ease-in-out infinite}
+@keyframes paw{0%,100%{transform:rotate(0)}50%{transform:rotate(-58deg)}}
+[data-pose="loaf"] .legs{opacity:0}
+[data-pose="loaf"] .all{transform:translateY(9px) scaleY(.86);transform-origin:50px 60px}
+[data-pose="loaf"] .head{transform:rotate(15deg);animation:none}
+[data-pose="loaf"] .eyes{animation:none;transform:scaleY(.1)}
+[data-pose="loaf"] .tail{animation-duration:6s}
+.cat-art .zzz{opacity:0}
+[data-pose="loaf"] .zzz{animation:zz 3.2s ease-in-out infinite}
+@keyframes zz{0%{opacity:0;transform:translate(0,4px)}30%{opacity:.95}100%{opacity:0;transform:translate(4px,-8px)}}
+.cat-art.purr{animation:purr .12s linear infinite}
+@keyframes purr{0%,100%{transform:translateX(0)}50%{transform:translateX(.8px)}}
+
+/* after hours */
+.art{display:block;width:100%;max-width:340px;margin:20px 0 0;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:rgba(0,0,0,.14)}
+.art svg{display:block;width:100%;height:auto}
+.tips{margin:14px 0 0}
+.seg{display:inline-flex;border:1px solid var(--line)}
+.seg button{appearance:none;border:0;background:transparent;color:var(--dim);padding:8px 12px;font:500 .74rem/1.2 var(--mono);letter-spacing:.06em;cursor:var(--cur-p)}
+.seg button[aria-pressed="true"]{background:var(--ember-fill);color:#1a1409}
+.sud-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 12px}
+.sud-bar.end{margin:12px 0 0}
+.sud-msg{font:500 .78rem/1.4 var(--mono);letter-spacing:.04em;color:var(--ember)}
+.sudoku{display:grid;grid-template-columns:repeat(var(--n,9),minmax(0,1fr));width:min(100%,372px);aspect-ratio:1;border:2px solid var(--mist);background:rgba(0,0,0,.14)}
+.sc{appearance:none;position:relative;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;padding:0;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:transparent;color:var(--ember);font:500 clamp(.95rem,3.8vw,1.3rem)/1 var(--body);cursor:var(--cur-p)}
+.sudoku[data-n="4"] .sc{font-size:clamp(1.4rem,6vw,2rem)}
+.sc.rb{border-right:2px solid var(--mist)}
+.sc.bb{border-bottom:2px solid var(--mist)}
+.sc.lr{border-right:0}
+.sc.lb{border-bottom:0}
+.sc.given{color:var(--moon);font-weight:700}
+.sc.hl{background:rgba(242,181,86,.09)}
+.sc.same{background:rgba(242,181,86,.2)}
+.sc.sel{background:rgba(242,181,86,.34)}
+.sc.pop{animation:pop .32s cubic-bezier(.2,.9,.3,1.4)}
+.sc.clash,.sc.bad{color:#ff8f7f;animation:shake .38s}
+@keyframes pop{0%{transform:scale(.3);opacity:.2}100%{transform:scale(1);opacity:1}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+.sudoku.win .sc{animation:wave2 .9s ease both;animation-delay:calc(var(--d)*45ms)}
+@keyframes wave2{0%{background:transparent;transform:scale(1)}40%{background:rgba(155,224,111,.55);transform:scale(1.12)}100%{background:rgba(155,224,111,.14);transform:scale(1)}}
+.sud-pad{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;width:min(100%,372px);margin:12px 0 0}
+.pad-b{appearance:none;padding:9px 0;border:1px solid var(--line);background:transparent;color:var(--moon);font:500 1rem/1 var(--body);cursor:var(--cur-p);transition:background .15s ease,transform .1s ease}
+.pad-b:hover{background:rgba(242,181,86,.16)}
+.pad-b:active{transform:scale(.94)}
+/* escape room */
+.clues{margin:16px 0 0;padding-left:1.2em;color:var(--dim)}
+.clues li{margin:0 0 12px}
+.clues strong{color:var(--text)}
+.clues details{margin-top:4px;font-size:.9rem}
+.clues summary{cursor:var(--cur-p);color:var(--ember);font:500 .74rem/1.6 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.esc-wrap{position:relative;display:grid;gap:12px;justify-items:start}
+.trunk{width:min(100%,300px);padding-top:40px}
+.trunk svg{display:block;width:100%;height:auto;overflow:visible}
+.trunk .lid{transform-box:view-box;transform-origin:30px 72px;transition:transform .95s cubic-bezier(.3,.7,.2,1)}
+.trunk.open .lid{transform:rotate(-54deg)}
+.trunk .glow{opacity:0;transition:opacity .6s .35s}
+.trunk.open .glow{opacity:1;animation:glowp 2.6s ease-in-out infinite}
+@keyframes glowp{0%,100%{opacity:.75}50%{opacity:1}}
+.trunk .note{opacity:0;transition:opacity .5s .55s,transform .9s .55s cubic-bezier(.2,.8,.2,1)}
+.trunk.open .note{opacity:1;transform:translateY(-34px)}
+.trunk .lockg{transition:transform .7s ease-in,opacity .5s .2s}
+.trunk.open .lockg{opacity:0;transform:translateY(34px) rotate(24deg)}
+.trunk.shake{animation:shake .45s}
+.wheels{display:flex;gap:12px}
+.wheel{display:flex;flex-direction:column;align-items:center;gap:4px}
+.wheel button{appearance:none;width:46px;height:26px;border:1px solid var(--line);background:transparent;color:var(--ember);font-size:.8rem;cursor:var(--cur-p)}
+.wheel button:hover{background:rgba(242,181,86,.16)}
+.dig{display:flex;align-items:center;justify-content:center;width:46px;height:50px;overflow:hidden;background:#17120a;border:1px solid var(--ember);color:#f5c46a;font:500 1.8rem/1 var(--mono)}
+.dig.up span{animation:rollUp .26s ease}
+.dig.down span{animation:rollDown .26s ease}
+@keyframes rollUp{from{transform:translateY(100%);opacity:0}to{transform:none;opacity:1}}
+@keyframes rollDown{from{transform:translateY(-100%);opacity:0}to{transform:none;opacity:1}}
+.cft{position:absolute;top:26%;left:50%;width:7px;height:11px;background:var(--c);pointer-events:none;animation:cfall 1.5s cubic-bezier(.2,.7,.4,1) forwards}
+@keyframes cfall{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+/* riddles */
+.rid{position:relative;height:236px;perspective:1100px;margin:0}
+.rid.enter{animation:slidein .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes slidein{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+.rid-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .75s cubic-bezier(.4,0,.2,1)}
+.rid.flip .rid-in{transform:rotateY(180deg)}
+.rid-face{position:absolute;inset:0;padding:20px 22px;display:flex;flex-direction:column;border:1px solid var(--line);border-top:3px solid var(--ember);background:var(--panel);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.rid-back{transform:rotateY(180deg);border-top-color:var(--moon)}
+.rid-n{margin:0 0 10px;font:500 .72rem/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ember)}
+.rid-q{margin:0;font:400 1.3rem/1.35 var(--display);color:var(--moon)}
+.rid-a{margin:0 0 8px;font:italic 400 1.7rem/1.2 var(--display);color:var(--moon)}
+.rid-w{margin:0;color:var(--dim)}
+.think{margin-top:auto;height:4px;background:var(--line)}
+.think i{display:block;height:100%;background:var(--ember-fill);animation:think 22s linear forwards}
+@keyframes think{from{width:100%}to{width:0}}
+/* cats */
+.catcard{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}
+.catcard:first-of-type{border-top:0;padding-top:0}
+.catcard h4{margin:0 0 4px;font:400 1.5rem/1.2 var(--display);color:var(--moon)}
+.catcard p{margin:0 0 10px;color:var(--dim)}
+.cc-art{position:relative}
+.cc-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:14px 0 0}
+.catcard .cc-row{margin:0}
+.purr-note{font:500 .78rem/1.4 var(--mono);letter-spacing:.1em;color:var(--ember)}
+@media(max-width:520px){.catcard{grid-template-columns:110px minmax(0,1fr);gap:12px}}
+/* tv, anime, books */
+.show{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:center;padding:6px 0 18px}
+.show h4{margin:0 0 4px;font:400 1.6rem/1.2 var(--display);color:var(--moon)}
+.show p{margin:0 0 8px;color:var(--dim)}
+.show-art{display:flex;align-items:flex-end;gap:6px}
+.show-art svg{display:block;height:92px;width:auto;overflow:visible}
+.strg{fill:none;stroke:#c0392b;stroke-width:2;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:100;animation:draw 8s ease-in-out infinite}
+@keyframes draw{0%{stroke-dashoffset:100}35%,82%{stroke-dashoffset:0}100%{stroke-dashoffset:100}}
+.mag{animation:scan 10s ease-in-out infinite}
+@keyframes scan{0%,100%{transform:translate(60px,70px)}30%{transform:translate(160px,120px)}62%{transform:translate(255px,80px)}}
+.steam{fill:none;stroke:#cfe3ee;stroke-width:2;stroke-linecap:round;stroke-dasharray:30;stroke-dashoffset:30;opacity:0;animation:steam 3.2s ease-in-out infinite}
+.steam.s2{animation-delay:.9s}.steam.s3{animation-delay:1.8s}
+@keyframes steam{0%{stroke-dashoffset:30;opacity:0;transform:translateY(3px)}30%{opacity:.85}100%{stroke-dashoffset:-30;opacity:0;transform:translateY(-6px)}}
+.pend{transform-box:view-box;transform-origin:32px 2px;animation:swing 2.4s ease-in-out infinite alternate}
+@keyframes swing{from{transform:rotate(-24deg)}to{transform:rotate(24deg)}}
+.hand{transform-box:view-box;transform-origin:32px 58px;animation:spin 14s linear infinite}
+.hand.m{animation-duration:3s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.drift{animation:drift 46s linear infinite}
+.drift.b{animation-duration:70s;animation-delay:-20s}
+@keyframes drift{from{transform:translateX(-80px)}to{transform:translateX(360px)}}
+.ring{fill:none;stroke:var(--mist);stroke-width:14;opacity:.85;cursor:var(--cur-p);transition:stroke .2s ease,stroke-width .2s ease,opacity .2s ease}
+.ring:hover,.ring.on{stroke:var(--ember-fill);stroke-width:17;opacity:1}
+.wall-lbl{font:500 8.5px var(--mono);letter-spacing:.08em;fill:var(--text);pointer-events:none;text-anchor:middle}
+.patrol{transform-box:view-box;transform-origin:120px 120px;animation:spin 14s linear infinite}
+.wall-cap{min-height:3.2em;margin:8px 0 0;color:var(--dim)}
+.cand{animation:floatc 4.2s ease-in-out infinite alternate}
+@keyframes floatc{from{transform:translateY(-5px)}to{transform:translateY(5px)}}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flick .22s ease-in-out infinite alternate}
+@keyframes flick{from{transform:scale(1,1)}to{transform:scale(.88,1.12)}}
+.owl{animation:owlfly 12s linear infinite}
+@keyframes owlfly{from{transform:translateX(-70px)}to{transform:translateX(380px)}}
+.owl-b{animation:owlbob 1.6s ease-in-out infinite alternate}
+@keyframes owlbob{from{transform:translateY(-8px)}to{transform:translateY(8px)}}
+.wing{transform-box:fill-box;transform-origin:50% 100%;animation:flap .3s ease-in-out infinite alternate}
+@keyframes flap{from{transform:scaleY(1)}to{transform:scaleY(-.5)}}
+.hp-books{display:flex;align-items:flex-end;gap:5px;margin:16px 0 6px;min-height:120px}
+.hp-b{appearance:none;border:0;padding:0;width:30px;height:var(--h);background:var(--c);border-radius:2px 2px 1px 1px;box-shadow:inset 3px 0 0 rgba(255,255,255,.1),inset -3px 0 0 rgba(0,0,0,.25);cursor:var(--cur-p);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.hp-b:hover,.hp-b:focus-visible{transform:translateY(-10px)}
+.hp-cap{min-height:1.6em;margin:0 0 14px;font:500 .78rem/1.4 var(--mono);letter-spacing:.06em;color:var(--ember)}
+.env{position:relative;display:block;width:210px;height:128px;margin:100px 0 8px;padding:0;border:0;background:none;cursor:var(--cur-p);perspective:700px}
+.env>span{position:absolute;display:block}
+.env-back{inset:0;background:#cdbb8a;border-radius:4px}
+.env-letter{left:14px;right:14px;top:10px;height:108px;padding:12px 14px;background:#f6edd0;color:#2c2210;font:400 .88rem/1.4 var(--body);text-align:left;box-shadow:0 1px 4px rgba(0,0,0,.25);transition:transform .9s cubic-bezier(.2,.8,.2,1) .35s;z-index:2}
+.env-front{left:0;right:0;bottom:0;height:70%;background:#e2d2a0;clip-path:polygon(0 0,50% 48%,100% 0,100% 100%,0 100%);border-radius:0 0 4px 4px;z-index:3}
+.env-flap{left:0;right:0;top:0;height:56%;background:#d8c690;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:50% 0;transition:transform .5s ease;z-index:4}
+.env.open .env-flap{transform:rotateX(180deg);z-index:1}
+.env.open .env-letter{transform:translateY(-84px);z-index:2}
+.env:focus-visible{outline:2px solid var(--moon);outline-offset:4px}
 
 /* open book */
 .openbook{
@@ -197,7 +355,7 @@ h2{font:italic 400 clamp(2rem,5vw,3rem)/1.1 var(--display);margin:0 0 12px;color
 .cast.cl{left:0;background:linear-gradient(270deg,rgba(0,0,0,.55),rgba(0,0,0,0) 72%)}
 /* clickable page edges */
 .obwrap{position:relative}
-.edge{position:absolute;top:0;bottom:0;z-index:5;width:clamp(30px,3.6vw,46px);padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.edge{position:absolute;top:0;bottom:0;z-index:5;width:clamp(30px,3.6vw,46px);padding:0;border:0;background:none;cursor:var(--cur-p);-webkit-tap-highlight-color:transparent}
 .edge[hidden]{display:none}
 .edge-r{right:0}
 .edge-l{left:0}
@@ -218,11 +376,11 @@ h2{font:italic 400 clamp(2rem,5vw,3rem)/1.1 var(--display);margin:0 0 12px;color
 /* page controls */
 .pager{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;margin-top:16px}
 .pager[hidden]{display:none}
-.pg-btn{appearance:none;width:40px;height:40px;border:1px solid var(--ember);background:transparent;color:var(--ember);font:400 1.4rem/1 var(--display);border-radius:50%;cursor:pointer;transition:background .2s ease}
+.pg-btn{appearance:none;width:40px;height:40px;border:1px solid var(--ember);background:transparent;color:var(--ember);font:400 1.4rem/1 var(--display);border-radius:50%;cursor:var(--cur-p);transition:background .2s ease}
 .pg-btn:hover:not(:disabled){background:rgba(242,181,86,.16)}
 .pg-btn:disabled{opacity:.35;cursor:default}
 .pg-tabs{display:flex;flex-wrap:wrap;gap:8px;flex:0 1 auto;min-width:0}
-.pg-tab{appearance:none;padding:7px 12px;border:1px solid var(--line);background:transparent;color:var(--dim);font:500 .74rem/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:color .2s ease,border-color .2s ease,background .2s ease}
+.pg-tab{appearance:none;padding:7px 12px;border:1px solid var(--line);background:transparent;color:var(--dim);font:500 .74rem/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;cursor:var(--cur-p);border-radius:2px;transition:color .2s ease,border-color .2s ease,background .2s ease}
 .pg-tab:hover{color:var(--moon);border-color:var(--mist)}
 .pg-tab.on{color:#1a1409;background:var(--ember-fill);border-color:var(--ember-fill)}
 .pg-count{flex:0 0 100%;font:500 .72rem/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mist);text-shadow:0 1px 10px var(--halo)}
@@ -261,7 +419,7 @@ h2{font:italic 400 clamp(2rem,5vw,3rem)/1.1 var(--display);margin:0 0 12px;color
 
 /* lantern lock */
 .lanterns{display:grid;grid-template-columns:repeat(3,auto);gap:8px;justify-content:start}
-.lantern{--lamp:#17272b;--frame:#4b4332;appearance:none;border:0;background:none;padding:2px;width:clamp(62px,18vw,84px);cursor:pointer;border-radius:6px;transition:transform .15s ease}
+.lantern{--lamp:#17272b;--frame:#4b4332;appearance:none;border:0;background:none;padding:2px;width:clamp(62px,18vw,84px);cursor:var(--cur-p);border-radius:6px;transition:transform .15s ease}
 .lantern svg{display:block;width:100%;aspect-ratio:40/52;transition:filter .25s ease}
 .lantern.on{--lamp:#f5c46a;--frame:#a77b32}
 .lantern.on svg{filter:drop-shadow(0 0 10px rgba(242,181,86,.8))}
@@ -272,6 +430,85 @@ h2{font:italic 400 clamp(2rem,5vw,3rem)/1.1 var(--display);margin:0 0 12px;color
 .moves{font:500 .8rem/1 var(--mono);letter-spacing:.08em;color:var(--mist)}
 .lock-msg{min-height:1.6em;margin:12px 0 0;color:var(--dim)}
 .rules{margin:18px 0 0;padding:14px 0 0;border-top:1px solid var(--line);color:var(--dim);font-size:.95rem}
+
+/* lock: why */
+.why-box{margin:16px 0 0;padding:14px 16px;border:1px solid var(--line);border-left:3px solid var(--ember);background:rgba(0,0,0,.1);color:var(--dim);font-size:.95rem}
+.why-box p{margin:0 0 8px}
+.why-box p:last-child{margin-bottom:0}
+.why-box .why-h{font:500 .72rem/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ember)}
+.mini{display:grid;grid-template-columns:repeat(3,30px);gap:6px;margin:10px 0 12px}
+.mc{width:30px;height:30px;border-radius:5px;background:#17272b;border:1px solid rgba(255,255,255,.18)}
+.mc.on{background:#f5c46a;border-color:#a77b32}
+.mc.press{outline:2px solid var(--ember);outline-offset:2px;position:relative}
+.mc.press::after{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#1a1409;box-shadow:0 0 0 1.5px var(--ember)}
+
+/* the clearing */
+.lab{display:grid;grid-template-columns:minmax(0,21rem) minmax(0,1fr);gap:clamp(22px,4vw,52px);padding:clamp(22px,4vw,40px);background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(6px)}
+@media(max-width:860px){.lab{grid-template-columns:minmax(0,1fr)}}
+.lab h3{margin:0 0 14px;font:500 .72rem/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ember)}
+.ctl{margin:0 0 20px}
+.ctl label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px;font:500 .78rem/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mist)}
+.ctl output{color:var(--moon);letter-spacing:.04em}
+.ctl label.switch{justify-content:flex-start}
+.ctl input[type=range]{display:block;width:100%;margin:0;accent-color:var(--ember-fill);height:28px;cursor:var(--cur-p)}
+.ctl .who{display:block;margin-top:2px;font:400 .72rem/1.4 var(--mono);letter-spacing:.06em;color:var(--dim)}
+.switch{display:flex;align-items:center;gap:10px;cursor:var(--cur-p);font:500 .78rem/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mist)}
+.switch input{width:20px;height:20px;accent-color:var(--ember-fill);cursor:var(--cur-p)}
+.verdict{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin:0 0 10px}
+.vbig{font:italic 400 clamp(2.4rem,6vw,3.4rem)/1 var(--display);color:var(--moon)}
+.vtxt{font:400 1.25rem/1.3 var(--display);color:var(--text)}
+.meter{position:relative;height:14px;border:1px solid var(--line);margin:0 0 6px}
+.meter i{position:absolute;left:0;top:0;bottom:0;background:var(--ember-fill);transition:width .35s cubic-bezier(.2,.8,.2,1)}
+.meter b{position:absolute;left:50%;top:-4px;bottom:-4px;width:2px;background:var(--text);opacity:.7}
+.meter-note{display:flex;justify-content:space-between;margin:0 0 20px;font:400 .72rem/1.4 var(--mono);letter-spacing:.06em;color:var(--dim)}
+.attr{display:grid;grid-template-columns:minmax(0,9.5rem) minmax(0,1fr) 4.2rem;gap:10px;align-items:center;margin:9px 0}
+.attr .nm{font-size:.92rem;color:var(--text)}
+.attr .nm small{display:block;font:400 .72rem/1.3 var(--mono);color:var(--dim)}
+.track{position:relative;height:14px;background:var(--line)}
+.track::before{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:var(--mist)}
+.fill{position:absolute;top:0;bottom:0;transition:width .35s cubic-bezier(.2,.8,.2,1)}
+.fill.pos{left:50%;background:var(--ember-fill)}
+.fill.neg{right:50%;background:var(--mist)}
+.attr .val{font:500 .82rem/1 var(--mono);text-align:right;color:var(--moon)}
+.attr-note{margin:10px 0 0;color:var(--dim);font-size:.92rem}
+.cf{margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.cf p{margin:0 0 10px;color:var(--text)}
+.cf strong{color:var(--moon);font-weight:700}
+.cf .small{color:var(--dim)}
+.cf .tag{margin-left:6px}
+.lab-foot{margin:22px 0 0;padding-top:14px;border-top:1px solid var(--line);font:400 .74rem/1.6 var(--mono);letter-spacing:.04em;color:var(--dim)}
+
+/* show me why */
+#whyLayer{position:fixed;inset:0;z-index:25;pointer-events:none}
+#whyLayer[hidden]{display:none}
+.why-dot{position:absolute;pointer-events:auto;width:28px;height:28px;margin:0;padding:0;border:2px solid #1a1409;border-radius:50%;background:var(--ember-fill);color:#1a1409;font:700 .8rem/1 var(--mono);cursor:var(--cur-p);box-shadow:0 2px 10px rgba(0,0,0,.4);animation:whypulse 2.4s ease-out infinite}
+.why-dot[aria-expanded="true"]{background:var(--moon);animation:none}
+@keyframes whypulse{0%{box-shadow:0 0 0 0 rgba(242,181,86,.6),0 2px 10px rgba(0,0,0,.4)}70%,100%{box-shadow:0 0 0 12px rgba(242,181,86,0),0 2px 10px rgba(0,0,0,.4)}}
+.why-card{position:absolute;pointer-events:auto;width:min(300px,calc(100vw - 24px));padding:14px 16px;background:var(--page);color:var(--text);border:1px solid var(--ember);border-radius:4px;box-shadow:0 14px 34px rgba(0,0,0,.45);font-size:.94rem;line-height:1.5}
+.why-card[hidden]{display:none}
+.why-card h4{margin:0 0 2px;font:400 1.2rem/1.25 var(--display);color:var(--moon)}
+.why-card .pr{display:block;margin:0 0 8px;font:500 .68rem/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ember)}
+.why-card p{margin:0;color:var(--dim)}
+.tally .sky-btn[aria-pressed="true"]{color:var(--moon);text-decoration:underline}
+
+/* terminal */
+.term-btn{appearance:none;border:1px solid var(--line);background:transparent;padding:3px 9px;color:var(--ember);font:500 .78rem/1.5 var(--mono);letter-spacing:.06em;cursor:var(--cur-p)}
+.term-btn:hover{border-color:var(--ember)}
+.term{position:fixed;z-index:30;left:50%;bottom:calc(12px + env(safe-area-inset-bottom,0px));width:min(760px,calc(100vw - 24px));height:min(50vh,380px);display:flex;flex-direction:column;transform:translateX(-50%);background:#071013;color:#cfe3dc;border:1px solid rgba(241,232,200,.28);border-radius:6px;box-shadow:0 24px 60px rgba(0,0,0,.6);font:400 .88rem/1.55 var(--mono);animation:termup .28s cubic-bezier(.2,.8,.2,1)}
+.term[hidden]{display:none}
+@keyframes termup{from{opacity:0;transform:translate(-50%,18px)}to{opacity:1;transform:translateX(-50%)}}
+.term-bar{display:flex;justify-content:space-between;align-items:center;padding:6px 10px 6px 14px;border-bottom:1px solid rgba(241,232,200,.16);color:#8fb3aa;font-size:.76rem;letter-spacing:.06em}
+.term-x{appearance:none;border:0;background:none;color:#cfe3dc;font:400 1.4rem/1 var(--body);padding:0 6px;cursor:var(--cur-p)}
+.term-out{flex:1;overflow-y:auto;padding:10px 14px;white-space:pre-wrap;overflow-wrap:anywhere}
+.term-out .tl{margin:0}
+.term-out .cmd{color:#f2b556}
+.term-out .dim{color:#7f9c95}
+.term-out .err{color:#ff9f8f}
+.term-out .ok{color:#9be06f}
+.term-in{display:flex;align-items:center;gap:8px;padding:8px 14px 10px;border-top:1px solid rgba(241,232,200,.12)}
+.term-in .ps1{color:#f2b556;white-space:nowrap}
+.term-in input{flex:1;min-width:0;appearance:none;border:0;outline:0;background:none;color:#f4f1e6;font:inherit;caret-color:#f2b556}
+@media(max-width:560px){.term-in input{font-size:16px}.term{font-size:.82rem}}
 
 /* contact */
 .contact{position:relative;padding:clamp(28px,5vw,52px);background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(6px);max-width:44rem}
@@ -287,7 +524,7 @@ a.email-slot:hover{border-color:var(--ember)}
 
 /* guide cat */
 .guide{position:fixed;z-index:5;right:0;bottom:0;padding-right:max(10px,env(safe-area-inset-right,0px));padding-bottom:env(safe-area-inset-bottom,0px)}
-.cat-btn{display:block;appearance:none;background:none;border:0;padding:0;width:84px;cursor:pointer}
+.cat-btn{display:block;appearance:none;background:none;border:0;padding:0;width:84px;cursor:var(--cur-p)}
 .cat-btn svg{display:block;width:100%;height:auto;overflow:visible}
 .cat-fill{fill:#04100f;stroke:rgba(241,232,200,.28);stroke-width:1}
 .tail{fill:none;stroke:#04100f;stroke-width:9;stroke-linecap:round;transform-box:view-box;transform-origin:70px 108px;animation:tail 4.2s ease-in-out infinite}
@@ -299,8 +536,8 @@ a.email-slot:hover{border-color:var(--ember)}
 .bubble{position:absolute;right:calc(max(10px,env(safe-area-inset-right,0px)) + 14px);bottom:calc(100% - 6px);width:max-content;max-width:min(230px,calc(100vw - 48px));padding:10px 14px;background:#f6edd0;color:#10201f;border:1px solid rgba(16,32,31,.18);box-shadow:0 6px 18px rgba(0,0,0,.25);font:500 .9rem/1.4 var(--body);border-radius:10px 10px 2px 10px;opacity:0;transform:translateY(6px);transition:opacity .3s ease,transform .3s ease;pointer-events:none}
 .bubble.show{opacity:1;transform:none}
 .tally{position:fixed;z-index:5;left:0;bottom:0;margin-left:max(12px,env(safe-area-inset-left,0px));margin-bottom:calc(10px + env(safe-area-inset-bottom,0px));padding:7px 10px;display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);font:500 .72rem/1.3 var(--mono);letter-spacing:.06em;color:var(--mist)}
-.tally b{color:var(--ember);font-weight:500}
-.sky-btn{appearance:none;border:0;border-left:1px solid var(--line);background:none;padding:0 0 0 10px;color:var(--ember);font:inherit;letter-spacing:inherit;cursor:pointer}
+.tally .sky-btn:first-child{border-left:0;padding-left:0}
+.sky-btn{appearance:none;border:0;border-left:1px solid var(--line);background:none;padding:0 0 0 10px;color:var(--ember);font:inherit;letter-spacing:inherit;cursor:var(--cur-p)}
 .sky-btn:hover{text-decoration:underline}
 @media(max-width:430px){
   .tally{flex-direction:column;align-items:flex-start;gap:4px}
@@ -339,31 +576,13 @@ a.email-slot:hover{border-color:var(--ember)}
         <h1>Waruni Kekulandara</h1>
         <p class="lede">I teach programming, graphics and image processing, and I research how AI explains itself and whom it treats fairly. This is the quiet corner of the forest where I keep my work, a few puzzles and some cats.</p>
         <div class="hero-actions">
-          <button class="peek-btn peek-hero" data-cat="1" aria-label="Hidden cat, 1 of 5">
-            <svg viewBox="0 0 66 46" aria-hidden="true">
-              <path d="M6 46C6 28 16 18 33 18s27 10 27 28z" fill="#e28a3c"/>
-              <path d="M8 27L10 4L28 17z" fill="#e28a3c"/>
-              <path d="M58 27L56 4L38 17z" fill="#e28a3c"/>
-              <path d="M12 21L13 10L21 16z" fill="#f4b6a0"/>
-              <path d="M54 21L53 10L45 16z" fill="#f4b6a0"/>
-              <path d="M33 19v7M27 20l1.4 6M39 20l-1.4 6M8 36l7 2M9 41l6 0M58 36l-7 2M57 41l-6 0" stroke="#a65a1d" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-              <ellipse cx="33" cy="42" rx="9" ry="5" fill="#f7dcb4"/>
-              <g class="blink">
-                <ellipse cx="23" cy="32" rx="4" ry="4.6" fill="#9be06f"/><ellipse cx="23" cy="32" rx="1.3" ry="3.8" fill="#1c1209"/>
-                <ellipse cx="43" cy="32" rx="4" ry="4.6" fill="#9be06f"/><ellipse cx="43" cy="32" rx="1.3" ry="3.8" fill="#1c1209"/>
-              </g>
-              <path d="M30.5 37h5l-2.5 3z" fill="#e98c8c"/>
-              <path d="M25 41L12 44M25 43L14 47M41 41L54 44M41 43L52 47" stroke="#fff3dd" stroke-width="1" stroke-linecap="round" opacity=".7" fill="none"/>
-            </svg>
-          </button>
           <a class="btn" href="#library">Walk in</a>
           <a class="btn ghost" href="cv.pdf" target="_blank" rel="noopener" data-cv>My CV</a>
           <a class="btn ghost" href="#contact">Say hello</a>
         </div>
       </div>
       <figure class="portrait">
-        <img class="p-night" src="portrait-art.webp" width="900" height="1122" alt="Illustration of Waruni in a black sweater with sunglasses on her head, a black cat on her shoulder, surrounded by leaves, red toadstools, little flowers, stars and a crescent moon">
-        <img class="p-day" src="portrait-day.webp" width="900" height="1077" alt="Illustration of Waruni in a black sweater with sunglasses on her head, framed by leafy sprigs, little white flowers and red toadstools">
+        <img src="portrait-day.webp" width="900" height="1077" alt="Illustration of Waruni in a black sweater with sunglasses on her head, framed by leafy sprigs, little white flowers and red toadstools">
         <figcaption>Hello, I'm Waruni</figcaption>
       </figure>
     </header>
@@ -385,45 +604,10 @@ a.email-slot:hover{border-color:var(--ember)}
           <svg class="padlock is-open" viewBox="0 0 16 20" aria-label="Unlocked"><rect x="2" y="8" width="12" height="10" rx="2" fill="currentColor"/><path d="M5 8V5.5a3 3 0 0 1 5.8-1" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
           After hours
         </button>
-        <button class="peek-btn peek-shelf" data-cat="2" aria-label="Hidden cat, 2 of 5">
-          <svg viewBox="0 0 60 48" aria-hidden="true">
-            <path d="M5 48C5 30 14 20 30 20s25 10 25 28z" fill="#1d1f29" stroke="rgba(241,232,200,.32)" stroke-width="1"/>
-            <path d="M7 28L9 6Q10 4 13 5L26 19z" fill="#1d1f29" stroke="rgba(241,232,200,.32)" stroke-width="1"/>
-            <path d="M53 28L51 6Q50 4 47 5L34 19z" fill="#1d1f29" stroke="rgba(241,232,200,.32)" stroke-width="1"/>
-            <path d="M11 22L11.5 11L19 17z" fill="#3d4258"/>
-            <path d="M49 22L48.5 11L41 17z" fill="#3d4258"/>
-            <path d="M30 22C26 30 22 34 22 40C22 46 38 46 38 40C38 34 34 30 30 22z" fill="#f4f1ea"/>
-            <g class="blink">
-              <ellipse cx="19.5" cy="32" rx="3.8" ry="4.2" fill="#ffd23f"/><ellipse cx="19.5" cy="32" rx="2" ry="3" fill="#0c0d12"/>
-              <ellipse cx="40.5" cy="32" rx="3.8" ry="4.2" fill="#ffd23f"/><ellipse cx="40.5" cy="32" rx="2" ry="3" fill="#0c0d12"/>
-            </g>
-            <path d="M28 38h4l-2 2.6z" fill="#f2909f"/>
-            <path d="M24 41L9 39M24 43L9 46M36 41L51 39M36 43L51 46" stroke="#f4f1ea" stroke-width="1" stroke-linecap="round" opacity=".75" fill="none"/>
-            <ellipse cx="13" cy="46.5" rx="7" ry="3" fill="#f4f1ea"/><ellipse cx="47" cy="46.5" rx="7" ry="3" fill="#f4f1ea"/>
-          </svg>
-        </button>
       </div>
       <p class="shelf-note">SHELF 1 OF 1 · PULL A SPINE TO OPEN</p>
 
       <div class="bookwrap">
-        <button class="peek-btn peek-book" data-cat="3" aria-label="Hidden cat, 3 of 5">
-          <svg viewBox="0 0 72 48" aria-hidden="true">
-            <path d="M4 48C4 28 16 17 36 17s32 11 32 31z" fill="#9ca5b3"/>
-            <path d="M13 25C9 17 13 10 19 11C25 12 28 17 29 22z" fill="#8892a2"/>
-            <path d="M16 22C14 17 17 14 21 15C24 16 26 19 26 21z" fill="#6c7685"/>
-            <path d="M59 25C63 17 59 10 53 11C47 12 44 17 43 22z" fill="#8892a2"/>
-            <path d="M56 22C58 17 55 14 51 15C48 16 46 19 46 21z" fill="#6c7685"/>
-            <circle cx="36" cy="22" r="1.3" fill="#6c7685"/><circle cx="31.5" cy="23.5" r="1.1" fill="#6c7685"/><circle cx="40.5" cy="23.5" r="1.1" fill="#6c7685"/>
-            <ellipse cx="36" cy="43" rx="12" ry="6" fill="#c9cfd9"/>
-            <g class="blink">
-              <circle cx="25" cy="33" r="5.2" fill="#6fc3ff"/><circle cx="25" cy="33" r="3" fill="#0f1620"/><circle cx="26.6" cy="31.4" r="1.1" fill="#fff"/>
-              <circle cx="47" cy="33" r="5.2" fill="#6fc3ff"/><circle cx="47" cy="33" r="3" fill="#0f1620"/><circle cx="48.6" cy="31.4" r="1.1" fill="#fff"/>
-            </g>
-            <path d="M33.5 39.5h5l-2.5 3z" fill="#f0a0ac"/>
-            <path d="M36 42.5v1.5M36 44q-3 2.4-5 .6M36 44q3 2.4 5 .6" stroke="#5e6776" stroke-width="1" fill="none" stroke-linecap="round"/>
-            <path d="M24 42L9 40M24 44L9 47M48 42L63 40M48 44L63 47" stroke="#eef2f7" stroke-width="1" stroke-linecap="round" opacity=".8" fill="none"/>
-          </svg>
-        </button>
         <div class="obwrap">
           <div class="openbook" id="openbook"></div>
           <button class="edge edge-l" type="button" tabindex="-1" aria-hidden="true" hidden></button>
@@ -433,60 +617,81 @@ a.email-slot:hover{border-color:var(--ember)}
       </div>
     </section>
 
+    <section class="sec" id="clearing" aria-labelledby="clearTitle">
+      <div class="sec-head">
+        <h2 id="clearTitle">The Clearing</h2>
+        <p>A tiny model decides whether tonight is worth a walk. Move the sliders and it shows its working, the way I like my models to.</p>
+      </div>
+      <div class="lab" id="lab">
+        <div class="lab-in">
+          <h3>Tonight</h3>
+          <div class="ctl">
+            <label for="fRain">Rain chance <output id="oRain" for="fRain">40%</output></label>
+            <input type="range" id="fRain" min="0" max="100" step="5" value="40">
+            <span class="who">The weather. Not yours to change.</span>
+          </div>
+          <div class="ctl">
+            <label for="fDay">Daylight left <output id="oDay" for="fDay">2 h</output></label>
+            <input type="range" id="fDay" min="0" max="12" step="1" value="2">
+            <span class="who">Also the weather's call.</span>
+          </div>
+          <div class="ctl">
+            <label class="switch"><input type="checkbox" id="fLamp"> Carry a lantern</label>
+            <span class="who">Up to you.</span>
+          </div>
+          <div class="ctl">
+            <label for="fCats">Cats along <output id="oCats" for="fCats">none</output></label>
+            <input type="range" id="fCats" min="0" max="2" step="1" value="0">
+            <span class="who">Up to you, and up to them.</span>
+          </div>
+        </div>
+        <div class="lab-out">
+          <h3>The verdict</h3>
+          <div class="verdict" aria-live="polite"><span class="vbig" id="vPct">35%</span><span class="vtxt" id="vTxt">better stay in</span></div>
+          <div class="meter" aria-hidden="true"><i id="vMeter"></i><b></b></div>
+          <p class="meter-note"><span>stay in</span><span>50% is the line</span><span>go</span></p>
+          <h3>How it got there</h3>
+          <div id="attrs"></div>
+          <p class="attr-note" id="baseNote"></p>
+          <div class="cf" id="cf"></div>
+          <p class="lab-foot">Three small decision trees, averaged. The bars are exact Shapley values measured against 24 typical nights. All of it runs in your browser.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="sec" id="contact" aria-labelledby="contactTitle">
       <div class="contact">
-        <button class="peek-btn peek-contact" data-cat="4" aria-label="Hidden cat, 4 of 5">
-          <svg viewBox="0 0 92 42" aria-hidden="true">
-            <path d="M84 41C92 36 90 26 80 27" stroke="#f6f3ee" stroke-width="7" stroke-linecap="round" fill="none"/>
-            <path d="M20 42C20 22 34 12 54 12s34 12 34 30z" fill="#f6f3ee"/>
-            <ellipse cx="58" cy="24" rx="9" ry="6" fill="#e0a062"/>
-            <path d="M12 22L13 7L24 16z" fill="#f6f3ee"/><path d="M36 22L35 7L24 16z" fill="#f6f3ee"/>
-            <path d="M14.5 19L14.8 11L20 16z" fill="#f5b5bb"/><path d="M33.5 19L33.2 11L28 16z" fill="#f5b5bb"/>
-            <circle cx="24" cy="28" r="14" fill="#f6f3ee"/>
-            <path d="M16.5 29q3 3 6 0M25.5 29q3 3 6 0" stroke="#8a7d78" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-            <path d="M22.5 33h3l-1.5 2z" fill="#f5b5bb"/>
-            <text class="zz" x="44" y="12" font-size="9" font-weight="700" fill="#cfe3ee" font-family="Karla,sans-serif">z</text>
-            <text class="zz zz2" x="52" y="7" font-size="8" font-weight="700" fill="#cfe3ee" font-family="Karla,sans-serif">z</text>
-          </svg>
-        </button>
         <h2 id="contactTitle">Where the path ends</h2>
-        <p>If you work on explainable AI, fair language models or teaching programming, or you just have a good puzzle, write to me.</p>
+        <p>Explainable AI, human-computer interaction, a puzzle that refuses to crack, a cat who deserves a cameo, or a thriller I should binge next: whichever it is, write to me.</p>
         <div class="mail-row">
           <a class="email-slot" id="mailLink" href="#contact">Loading address…</a>
           <button class="btn ghost sm" id="copyMail" type="button">Copy address</button>
         </div>
         <p class="copy-note" id="copyNote" role="status"></p>
-        <p><a class="btn ghost sm" href="cv.pdf" target="_blank" rel="noopener" data-cv>Open my CV (PDF)</a></p>
         <p class="small">Faculty of Science, University of Peradeniya, Sri Lanka.</p>
       </div>
     </section>
 
     <footer class="foot">
-      <button class="peek-btn peek-foot" data-cat="5" aria-label="Hidden cat, 5 of 5">
-        <svg viewBox="0 0 62 56" aria-hidden="true">
-          <path d="M8 56C8 36 16 24 31 24s23 12 23 32z" fill="#efe0c8"/>
-          <path d="M9 33L6 4L27 22z" fill="#5b4032"/><path d="M53 33L56 4L35 22z" fill="#5b4032"/>
-          <path d="M11 27L9.5 11L21 22z" fill="#d79a94"/><path d="M51 27L52.5 11L41 22z" fill="#d79a94"/>
-          <path d="M31 29C23 29 19 37 21 46C23 52 39 52 41 46C43 37 39 29 31 29z" fill="#6b4b3c"/>
-          <g class="blink">
-            <ellipse cx="23" cy="37" rx="4.4" ry="3" transform="rotate(-18 23 37)" fill="#58b8ff"/><ellipse cx="23" cy="37" rx="1.2" ry="2.6" fill="#0c1620"/>
-            <ellipse cx="39" cy="37" rx="4.4" ry="3" transform="rotate(18 39 37)" fill="#58b8ff"/><ellipse cx="39" cy="37" rx="1.2" ry="2.6" fill="#0c1620"/>
-          </g>
-          <path d="M29 43.5h4l-2 2.6z" fill="#e39a9a"/>
-          <path d="M24 46L9 44M24 48L9 51M38 46L53 44M38 48L53 51" stroke="#fff6e6" stroke-width="1" stroke-linecap="round" opacity=".8" fill="none"/>
-          <path class="wave" d="M3 56V42Q3 37 6.500 37Q10 37 10 42V56z" fill="#5b4032"/>
-        </svg>
-      </button>
       <span>© 2026 Waruni Kekulandara</span>
       <span>Built in a forest, by lantern light.</span>
+      <button class="term-btn" id="termOpen" type="button" aria-haspopup="dialog">&gt;_ terminal</button>
     </footer>
 
   </div>
 </main>
 
 <div class="tally">
-  <span aria-live="polite">Cats found <b id="tallyN">0</b> / 5</span>
   <button class="sky-btn" id="skyBtn" type="button">Day mode</button>
+  <button class="sky-btn" id="whyBtn" type="button" aria-pressed="false">Show me why</button>
+</div>
+
+<div id="whyLayer" hidden></div>
+
+<div class="term" id="term" role="dialog" aria-label="Terminal" hidden>
+  <div class="term-bar"><span>waruni@forest: ~</span><button class="term-x" id="termX" type="button" aria-label="Close terminal">&times;</button></div>
+  <div class="term-out" id="termOut" role="log" aria-live="polite"></div>
+  <form class="term-in" id="termForm" autocomplete="off"><label for="termIn" class="ps1">~/forest $</label><input id="termIn" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></form>
 </div>
 
 <div class="guide">
@@ -724,7 +929,7 @@ function setMode(day){
 }
 paintSkyBtn();
 skyBtn.addEventListener('click',function(){setMode(mode===0)});
-var NOT_SKY='a,button,.openbook,.contact,.shelf,.guide,.tally,.peek-btn,.portrait';
+var NOT_SKY='a,button,input,label,.openbook,.contact,.shelf,.guide,.tally,.portrait,.lab,.term,.why-card,.walker';
 function overOrb(e){
   if(!e.target||!e.target.closest||e.target.closest(NOT_SKY))return false;
   var o=orb();return Math.hypot(e.clientX-o.x,e.clientY-o.y)<=o.r+14;
@@ -750,16 +955,16 @@ window.addEventListener('pointermove',function(e){
     root.classList.toggle('on-orb',overOrb(lastE));
   });
 },{passive:true});
-var quips=['Mrrp.','I am on duty. Please do not pet the lantern.','One book on that shelf is locked. I have opinions.','Five of us are hiding on this page. Look near edges.','Click the moon, or the sun if it is out. I will not stop you.','Purr.'],qi=0;
+var quips=['Mrrp.','I am on duty. Please do not pet the lantern.','One book on that shelf is locked. I have opinions.','Two of the cats on this page are not me. Look for the white one.','Click the moon, or the sun if it is out. I will not stop you.','Purr.'],qi=0;
 $('#catBtn').addEventListener('click',function(){say(quips[qi++%quips.length])});
 
-var hints={top:'Hello. I am the guide. Mind the ferns.',library:'Pull a book off the shelf. One of them is locked.',contact:'End of the trail. Say hello to her.'},said={};
+var hints={top:'Hello. I am the guide. Mind the ferns.',library:'Pull a book off the shelf. One of them is locked.',clearing:'A small model, explained. Move the sliders.',contact:'End of the trail. Say hello to her.'},said={};
 var io=new IntersectionObserver(function(es){
   es.forEach(function(e){
     if(e.isIntersecting&&!said[e.target.id]){said[e.target.id]=1;say(hints[e.target.id])}
   });
 },{rootMargin:'-35% 0px -35% 0px',threshold:0});
-['top','library','contact'].forEach(function(id){io.observe(document.getElementById(id))});
+['top','library','clearing','contact'].forEach(function(id){io.observe(document.getElementById(id))});
 
 /* ---------- CV link ---------- */
 var cvOk=null;
@@ -768,7 +973,6 @@ document.addEventListener('click',function(e){
   var a=e.target.closest&&e.target.closest('[data-cv]');
   if(a&&cvOk===false){e.preventDefault();say('The CV is not on the shelf yet. Check back soon.')}
 });
-var cvLink='<p class="page-link"><a class="btn sm" href="cv.pdf" target="_blank" rel="noopener" data-cv>Open my CV (PDF)</a></p>';
 
 /* ---------- email ---------- */
 var addr=['warunilkekulandara20','gmail.com'].join('@');
@@ -795,44 +999,119 @@ $('#copyMail').addEventListener('click',function(){
   }catch(e){copyLegacy()}
 });
 
-/* ---------- hidden cats ---------- */
-var CATS={
-  1:{name:'Marmalade',kind:'ginger tabby'},
-  2:{name:'Domino',kind:'tuxedo'},
-  3:{name:'Misty',kind:'grey fold'},
-  4:{name:'Pearl',kind:'sleepy white'},
-  5:{name:'Mocha',kind:'siamese'}
-};
-var found=new Set();
-try{JSON.parse(store.get('wk-cats')||'[]').forEach(function(n){found.add(n)})}catch(e){}
-var tallyN=$('#tallyN');
-function paintCats(){
-  $$('.peek-btn').forEach(function(b){
-    var n=+b.dataset.cat,isFound=found.has(n);
-    b.classList.toggle('found',isFound);
-    b.setAttribute('aria-label',isFound?CATS[n].name+', the '+CATS[n].kind+' cat, found':'Hidden cat, '+n+' of 5');
-  });
-  tallyN.textContent=found.size;
+/* ---------- walking cats ---------- */
+function catSVG(kind,pose){
+  var leg=function(c,x){return '<rect class="wh ol leg '+c+'" x="'+x+'" y="44" width="7" height="17" rx="3.4"/>'};
+  return '<svg class="cat-art'+(kind==='cheese'?' cheese':'')+'" data-pose="'+pose+'" viewBox="0 0 100 66" aria-hidden="true">'+
+    '<ellipse cx="48" cy="63" rx="30" ry="3" fill="rgba(0,0,0,.28)"/>'+
+    '<g class="all">'+
+      '<path class="tail" d="M23 40C8 38 5 20 15 13" fill="none" stroke="var(--tail)" stroke-width="7" stroke-linecap="round"/>'+
+      '<g class="legs">'+leg('l1',24)+leg('l2',32)+leg('l3',62)+leg('l4',69)+'</g>'+
+      '<g class="bodyg">'+
+        '<ellipse class="wh ol" cx="46" cy="39" rx="27" ry="14"/>'+
+        '<path d="M31 29Q46 24 61 29Q57 35 46 34Q35 35 31 29Z" fill="var(--p1)"/>'+
+        '<path d="M24 38Q27 30 36 32Q35 41 27 44Z" fill="var(--p2)"/>'+
+      '</g>'+
+      '<g class="head">'+
+        '<path class="ol" d="M67 21L66 6.5L78 15Z" fill="var(--ear-a)"/>'+
+        '<path class="ol" d="M80 15L89 7L88 22Z" fill="var(--ear-b)"/>'+
+        '<circle class="wh ol" cx="77" cy="28" r="12.5"/>'+
+        '<path d="M65 25Q66 14.5 77 15Q88 14.5 89 25Q83 20.5 77 21.5Q71 20.5 65 25Z" fill="var(--cap)"/>'+
+        '<path d="M77 15L74.4 21.6H79.6Z" fill="#f7f5ef"/>'+
+        '<g class="eyes"><ellipse cx="84" cy="27" rx="2.5" ry="3.1" fill="#c9d75a"/><ellipse cx="84.4" cy="27" rx=".9" ry="2.6" fill="#101216"/><ellipse cx="73" cy="27.5" rx="2.1" ry="2.7" fill="#c9d75a"/><ellipse cx="73.3" cy="27.5" rx=".8" ry="2.3" fill="#101216"/></g>'+
+        '<path d="M87.6 31.5l3.2.4-1.8 2.3z" fill="#f1a3ad"/>'+
+        '<path d="M85 36q2 1.4 4.4-.2" fill="none" stroke="#6b5f66" stroke-width=".8" stroke-linecap="round"/>'+
+        '<path d="M88 34L98 32M88 35.5L98 37.5" stroke="#8d949b" stroke-width=".7" opacity=".85"/>'+
+      '</g>'+
+      '<g class="zzz"><text x="88" y="12" font-size="8" font-weight="700" fill="currentColor" font-family="Karla,sans-serif">z</text><text x="94" y="5" font-size="6" font-weight="700" fill="currentColor" font-family="Karla,sans-serif">z</text></g>'+
+    '</g></svg>';
 }
-paintCats();
-$$('.peek-btn').forEach(function(b){
-  b.addEventListener('click',function(){
-    var n=+b.dataset.cat,c=CATS[n];
-    if(found.has(n)){say(c.name+' is already found. Mrrp.');return}
-    found.add(n);store.set('wk-cats',JSON.stringify(Array.from(found)));paintCats();
-    var h=document.createElement('span');h.className='heart';h.textContent='♥';b.appendChild(h);
+function Walker(name,kind,speed,sleepy,startDelay){
+  var el=document.createElement('div'),x=0,y=0,timer=0,dir=1,pose='stand',sayT=0;
+  el.className='walker';el.setAttribute('role','img');
+  el.setAttribute('aria-label',name+', a '+(kind==='cheese'?'calico':'tuxedo')+' cat, wandering the page');
+  el.innerHTML='<span class="w-in"><span class="w-flip">'+catSVG(kind,'stand')+'</span></span><span class="w-say" aria-hidden="true"></span>';
+  document.body.appendChild(el);
+  var inEl=$('.w-in',el),flipEl=$('.w-flip',el),svg=$('svg',el),bubble=$('.w-say',el);
+  var LINES=kind==='cheese'?['Mew.','Prrp.','Mrow.','*slow blink*']:['Mrrp!','Prrr.','Meow.','*headbutt*'];
+  function B(){var w=document.documentElement.clientWidth,h=Math.max(document.documentElement.scrollHeight,window.innerHeight);return {x0:8,x1:Math.max(80,w-104),y0:130,y1:Math.max(220,h-150)}}
+  function depth(yy){return .9}
+  function place(nx,ny,sec,instant){
+    x=nx;y=ny;
+    var tr=instant?'none':'transform '+sec.toFixed(2)+'s linear';
+    el.style.transition=tr;inEl.style.transition=tr;
+    el.style.transform='translate('+nx.toFixed(1)+'px,'+ny.toFixed(1)+'px)';
+    inEl.style.transform='scale('+depth(ny).toFixed(3)+')';
+  }
+  function setPose(p){pose=p;svg.setAttribute('data-pose',p)}
+  function face(d){dir=d;flipEl.style.transform=d<0?'scaleX(-1)':'none'}
+  function target(){
+    var b=B(),tx,ty,i=0;
+    var far=Math.random()<.07;
+    do{
+      if(far){tx=b.x0+Math.random()*(b.x1-b.x0);ty=Math.min(b.y1,Math.max(b.y0,y+(Math.random()*2-1)*900))}
+      else{
+        tx=x+(Math.random()<.5?-1:1)*(140+Math.random()*320);
+        ty=y+(Math.random()*2-1)*170;
+        tx=Math.min(b.x1,Math.max(b.x0,tx));ty=Math.min(b.y1,Math.max(b.y0,ty));
+      }
+      i++;
+    }while(Math.hypot(tx-x,ty-y)<110&&i<10);
+    return {x:tx,y:ty};
+  }
+  function after(ms,fn){clearTimeout(timer);timer=setTimeout(fn,ms)}
+  function walkTo(t,then){
+    var dx=t.x-x,dy=t.y-y,d=Math.hypot(dx,dy),sec=Math.max(.8,d/speed);
+    face(dx<0?-1:1);setPose('walk');place(t.x,t.y,sec);
+    after(sec*1000+60,function(){setPose('stand');after(350+Math.random()*1200,then||step)});
+  }
+  function hold(p,ms){setPose(p);after(ms,function(){setPose('stand');after(500+Math.random()*900,step)})}
+  function step(){
+    if(document.hidden){after(2500,step);return}
+    var r=Math.random(),ps=sleepy?.3:.16;
+    if(r<ps)hold('loaf',6000+Math.random()*7000);
+    else if(r<ps+.12)hold('wash',3200+Math.random()*2000);
+    else if(r<ps+.26)hold('stand',1800+Math.random()*2500);
+    else walkTo(target());
+  }
+  function say(t){
+    bubble.textContent=t;bubble.classList.add('show');clearTimeout(sayT);
+    sayT=setTimeout(function(){bubble.classList.remove('show')},1600);
+  }
+  el.addEventListener('click',function(){
+    var r=el.getBoundingClientRect();
+    clearTimeout(timer);place(r.left+window.pageXOffset,r.top+window.pageYOffset,0,true);setPose('stand');
+    say(LINES[Math.floor(Math.random()*LINES.length)]);
+    var h=document.createElement('span');h.className='heart';h.textContent='♥';el.appendChild(h);
     setTimeout(function(){if(h.parentNode)h.parentNode.removeChild(h)},1200);
-    if(found.size===5)say('All five found. I stand corrected about who is in charge.',7000);
-    else say('Found '+c.name+', the '+c.kind+' cat. '+found.size+' of 5.');
+    if(!reduce)after(3000,step);
   });
-});
+  function come(){
+    var b=B(),host=$('.obwrap')||document.body,r=host.getBoundingClientRect();
+    var tx=Math.min(b.x1,Math.max(b.x0,r.left+window.pageXOffset+r.width*(kind==='cheese'?.62:.22)-48));
+    var ty=Math.min(b.y1,Math.max(b.y0,r.bottom+window.pageYOffset-24));
+    clearTimeout(timer);
+    if(reduce){place(tx,ty,0,true);return}
+    walkTo({x:tx,y:ty},function(){hold('loaf',9000)});
+  }
+  var b0=B();
+  if(reduce){
+    place(kind==='cheese'?b0.x0+130:b0.x0+10,b0.y0+60,0,true);setPose('loaf');
+  }else{
+    place(b0.x0+Math.random()*(b0.x1-b0.x0),b0.y0+Math.random()*Math.min(500,b0.y1-b0.y0),0,true);
+    after(startDelay||1500,function(){walkTo(target())});
+  }
+  window.addEventListener('resize',function(){var b=B();place(Math.min(b.x1,Math.max(b.x0,x)),Math.min(b.y1,Math.max(b.y0,y)),0,true)});
+  return {el:el,come:come};
+}
+window.__walkers={kimchi:Walker('Kimchi','kimchi',92,false,300),cheese:Walker('Cheese','cheese',64,true,1400)};
 
 /* ---------- library ---------- */
 var ob=$('#openbook'),current='research';
 var unlocked=store.get('wk-open')==='1';
 var nbr=function(i){var r=Math.floor(i/3),c=i%3,a=[i];if(r>0)a.push(i-3);if(r<2)a.push(i+3);if(c>0)a.push(i-1);if(c<2)a.push(i+1);return a};
 function fresh(){var s=[],i;for(i=0;i<9;i++)s.push(true);[0,5,7].forEach(function(k){nbr(k).forEach(function(j){s[j]=!s[j]})});return s}
-var state=fresh(),moves=0;
+var state=fresh(),moves=0,whyOpen=false;
 function bestSolution(){
   var best=null,m,i,cnt;
   for(m=0;m<512;m++){
@@ -846,11 +1125,264 @@ function lamp(i){
   return '<button class="lantern'+(state[i]?' on':'')+'" data-i="'+i+'" aria-label="Lantern row '+(Math.floor(i/3)+1)+', column '+(i%3+1)+', '+(state[i]?'lit':'dark')+'"><svg viewBox="0 0 40 52"><use href="#lantern"/></svg></button>';
 }
 function lockHTML(){
+  whyOpen=false;
   var h='<div class="lanterns" role="group" aria-label="Lantern lock, three by three">',i;
   for(i=0;i<9;i++)h+=lamp(i);
-  h+='</div><div class="lock-bar"><span class="moves">MOVES <span id="moves">'+moves+'</span></span><button class="btn ghost sm" data-act="hint">Hint</button><button class="btn ghost sm" data-act="reset">Reset</button></div><p class="lock-msg" id="lockMsg" role="status">Light all nine lanterns.</p><p class="rules">Pressing a lantern flips it and the lanterns directly above, below, left and right of it.</p>';
+  h+='</div><div class="lock-bar"><span class="moves">MOVES <span id="moves">'+moves+'</span></span><button class="btn ghost sm" data-act="hint">Hint</button><button class="btn ghost sm" data-act="why" aria-expanded="false">Why this hint?</button><button class="btn ghost sm" data-act="reset">Reset</button></div><p class="lock-msg" id="lockMsg" role="status">Light all nine lanterns.</p><div class="why-box" id="whyBox" hidden></div><p class="rules">Pressing a lantern flips it and the lanterns directly above, below, left and right of it.</p>';
   return h;
 }
+/* ---------- after hours: pages ---------- */
+function range(n){var a=[],i;for(i=0;i<n;i++)a.push(i);return a}
+function shuffle(a){var i,j,t;for(i=a.length-1;i>0;i--){j=Math.floor(Math.random()*(i+1));t=a[i];a[i]=a[j];a[j]=t}return a}
+
+/* sudoku */
+var SUD={n:9,b:3,sol:[],cur:[],given:[],sel:-1,done:false,t0:0,msg:'',bad:{},hints:0,pop:-1};
+function sudOk(g,n,b,i,v){
+  var r=Math.floor(i/n),c=i%n,k,br=Math.floor(r/b)*b,bc=Math.floor(c/b)*b,rr,cc;
+  for(k=0;k<n;k++){
+    if(g[r*n+k]===v&&r*n+k!==i)return false;
+    if(g[k*n+c]===v&&k*n+c!==i)return false;
+  }
+  for(rr=br;rr<br+b;rr++)for(cc=bc;cc<bc+b;cc++)if(g[rr*n+cc]===v&&rr*n+cc!==i)return false;
+  return true;
+}
+function sudCount(g,n,b,limit){
+  var best=-1,opts=null,i,v,o;
+  for(i=0;i<g.length;i++){
+    if(g[i])continue;
+    o=[];for(v=1;v<=n;v++)if(sudOk(g,n,b,i,v))o.push(v);
+    if(!o.length)return 0;
+    if(!opts||o.length<opts.length){best=i;opts=o;if(o.length===1)break}
+  }
+  if(best<0)return 1;
+  var cnt=0,k;
+  for(k=0;k<opts.length;k++){g[best]=opts[k];cnt+=sudCount(g,n,b,limit-cnt);if(cnt>=limit)break}
+  g[best]=0;return cnt;
+}
+function sudNew(n){
+  var b=n===4?2:3,N=n*n,digs=shuffle(range(n).map(function(x){return x+1}));
+  function perm(){var o=[];shuffle(range(b)).forEach(function(bd){shuffle(range(b)).forEach(function(k){o.push(bd*b+k)})});return o}
+  var rows=perm(),cols=perm(),sol=[],r,c;
+  for(r=0;r<n;r++)for(c=0;c<n;c++)sol.push(digs[(b*(rows[r]%b)+Math.floor(rows[r]/b)+cols[c])%n]);
+  var g=sol.slice(),clues=N,target=n===4?8:38;
+  shuffle(range(N)).forEach(function(i){
+    if(clues<=target)return;
+    var keep=g[i];g[i]=0;
+    if(sudCount(g.slice(),n,b,2)!==1)g[i]=keep;else clues--;
+  });
+  SUD={n:n,b:b,sol:sol,cur:g.slice(),given:g.map(function(v){return v>0}),sel:-1,done:false,t0:Date.now(),msg:'',bad:{},hints:0,pop:-1};
+}
+function sudBoardHTML(){
+  var n=SUD.n,b=SUD.b,h='',i,r,c,sel=SUD.sel,sr=sel>=0?Math.floor(sel/n):-1,sc=sel>=0?sel%n:-1,sv=sel>=0?SUD.cur[sel]:0;
+  for(i=0;i<n*n;i++){
+    r=Math.floor(i/n);c=i%n;
+    var cl='sc';
+    if(SUD.given[i])cl+=' given';
+    if(c%b===b-1&&c<n-1)cl+=' rb';
+    if(r%b===b-1&&r<n-1)cl+=' bb';
+    if(c===n-1)cl+=' lr';
+    if(r===n-1)cl+=' lb';
+    if(sel>=0){
+      if(i===sel)cl+=' sel';
+      else if(r===sr||c===sc||(Math.floor(r/b)===Math.floor(sr/b)&&Math.floor(c/b)===Math.floor(sc/b)))cl+=' hl';
+      if(sv&&SUD.cur[i]===sv&&i!==sel)cl+=' same';
+    }
+    if(SUD.cur[i]&&!SUD.given[i]&&!sudOk(SUD.cur,n,b,i,SUD.cur[i]))cl+=' clash';
+    if(SUD.bad[i])cl+=' bad';
+    if(SUD.pop===i)cl+=' pop';
+    h+='<button type="button" class="'+cl+'" data-i="'+i+'" style="--d:'+(r+c)+'" aria-label="Row '+(r+1)+', column '+(c+1)+', '+(SUD.cur[i]?SUD.cur[i]:'empty')+(SUD.given[i]?', given':'')+'">'+(SUD.cur[i]||'')+'</button>';
+  }
+  return h;
+}
+function sudPadHTML(){
+  var h='',v;
+  for(v=1;v<=SUD.n;v++)h+='<button type="button" class="pad-b" data-sud="num" data-v="'+v+'">'+v+'</button>';
+  return h+'<button type="button" class="pad-b" data-sud="erase" aria-label="Erase cell">&#9003;</button>';
+}
+function sudHTML(){
+  if(!SUD.sol.length)sudNew(9);
+  var n=SUD.n;
+  return '<div class="sud-bar"><div class="seg" role="group" aria-label="Board size"><button type="button" data-sud="s4" aria-pressed="'+(n===4)+'">Mini 4&times;4</button><button type="button" data-sud="s9" aria-pressed="'+(n===9)+'">Classic 9&times;9</button></div><button type="button" class="btn ghost sm" data-sud="new">New puzzle</button></div>'+
+    '<div class="sudoku'+(SUD.done?' win':'')+'" id="sudBoard" data-n="'+n+'" style="--n:'+n+'">'+sudBoardHTML()+'</div>'+
+    '<div class="sud-pad" role="group" aria-label="Number pad">'+sudPadHTML()+'</div>'+
+    '<div class="sud-bar end"><button type="button" class="btn ghost sm" data-sud="hint">Hint</button><button type="button" class="btn ghost sm" data-sud="check">Check</button><span class="sud-msg" id="sudMsg" role="status">'+SUD.msg+'</span></div>';
+}
+function sudRedraw(){
+  var bd=$('#sudBoard',ob);if(!bd)return;
+  bd.innerHTML=sudBoardHTML();bd.className='sudoku'+(SUD.done?' win':'');
+  var m=$('#sudMsg',ob);if(m)m.textContent=SUD.msg;
+}
+function sudDoneCheck(){
+  if(!SUD.cur.every(function(x){return x>0}))return;
+  if(SUD.cur.every(function(x,i){return x===SUD.sol[i]})){
+    SUD.done=true;
+    var sec=Math.round((Date.now()-SUD.t0)/1000);
+    SUD.msg='Solved in '+Math.floor(sec/60)+':'+('0'+sec%60).slice(-2)+(SUD.hints?' with '+SUD.hints+(SUD.hints===1?' hint':' hints'):'')+'. Lovely.';
+    sudRedraw();say('Sudoku solved. Show-off.');
+  }else{SUD.msg='Every cell is filled, but something is off. Try Check.';sudRedraw()}
+}
+function sudSet(v){
+  if(SUD.sel<0||SUD.done||SUD.given[SUD.sel])return;
+  SUD.cur[SUD.sel]=v;SUD.msg='';SUD.bad={};SUD.pop=v?SUD.sel:-1;
+  sudRedraw();if(v)sudDoneCheck();
+}
+function sudHint(){
+  if(SUD.done)return;
+  var i=-1;
+  if(SUD.sel>=0&&!SUD.given[SUD.sel]&&SUD.cur[SUD.sel]!==SUD.sol[SUD.sel])i=SUD.sel;
+  else{var c=[];SUD.cur.forEach(function(v,k){if(v!==SUD.sol[k])c.push(k)});if(!c.length)return;i=c[Math.floor(Math.random()*c.length)]}
+  SUD.sel=i;SUD.cur[i]=SUD.sol[i];SUD.given[i]=false;SUD.hints++;SUD.pop=i;SUD.msg='Hint placed.';SUD.bad={};
+  sudRedraw();sudDoneCheck();
+}
+function sudCheck(){
+  var bad={},cnt=0;
+  SUD.cur.forEach(function(v,i){if(v&&v!==SUD.sol[i]){bad[i]=1;cnt++}});
+  SUD.bad=bad;SUD.msg=cnt?cnt+(cnt===1?' cell needs':' cells need')+' a second look.':'Everything placed so far is right.';
+  sudRedraw();
+}
+function sudSwitch(n){sudNew(n);var host=$('.page-right',ob);if(host)host.innerHTML=sudHTML()}
+
+/* escape room */
+var ESC={d:[0,0,0],open:false,tries:0,msg:'Set the wheels, then try the lock.',last:-1,dirn:''},ESC_CODE='924';
+var TRUNK='<svg viewBox="0 0 220 150" aria-hidden="true">'+
+  '<ellipse cx="110" cy="138" rx="88" ry="7" fill="rgba(0,0,0,.3)"/>'+
+  '<g class="glow"><ellipse cx="110" cy="70" rx="74" ry="30" fill="rgba(255,214,120,.22)"/><ellipse cx="110" cy="72" rx="48" ry="16" fill="rgba(255,226,150,.4)"/></g>'+
+  '<rect x="30" y="72" width="160" height="58" rx="7" fill="#7a4a2b" stroke="#3b2414" stroke-width="2"/>'+
+  '<rect x="62" y="72" width="9" height="58" fill="#c9a24b"/><rect x="149" y="72" width="9" height="58" fill="#c9a24b"/>'+
+  '<rect x="34" y="72" width="152" height="9" fill="#1b1006"/>'+
+  '<g class="note"><rect x="82" y="70" width="56" height="34" rx="2" fill="#f6edd0" stroke="#bda77a"/><text x="110" y="92" text-anchor="middle" font-size="13" font-family="IM Fell English,serif" fill="#3b2a12">You escaped</text></g>'+
+  '<g class="lid"><path d="M30 72Q30 40 110 40Q190 40 190 72Z" fill="#8d5a34" stroke="#3b2414" stroke-width="2"/><rect x="62" y="46" width="9" height="26" fill="#c9a24b"/><rect x="149" y="46" width="9" height="26" fill="#c9a24b"/></g>'+
+  '<g class="lockg"><rect x="98" y="66" width="24" height="20" rx="3" fill="#d9b44f" stroke="#6b5420" stroke-width="1.5"/><path d="M103 66v-6a7 7 0 0 1 14 0v6" fill="none" stroke="#6b5420" stroke-width="3"/><circle cx="110" cy="76" r="2.6" fill="#3b2a12"/></g>'+
+  '</svg>';
+function escHTML(){
+  var h='<div class="esc-wrap"><div class="trunk'+(ESC.open?' open':'')+'" id="trunk">'+TRUNK+'</div><div class="wheels" role="group" aria-label="Combination wheels">',i;
+  for(i=0;i<3;i++)h+='<div class="wheel"><button type="button" data-esc="up" data-w="'+i+'" aria-label="Wheel '+(i+1)+' up">&#9650;</button><div class="dig" aria-live="polite" aria-label="Wheel '+(i+1)+'"><span>'+ESC.d[i]+'</span></div><button type="button" data-esc="down" data-w="'+i+'" aria-label="Wheel '+(i+1)+' down">&#9660;</button></div>';
+  return h+'</div><div class="sud-bar"><button type="button" class="btn sm" data-esc="try">Try the lock</button><button type="button" class="btn ghost sm" data-esc="reset">Reset</button></div><p class="sud-msg" id="escMsg" role="status">'+ESC.msg+'</p></div>';
+}
+function drawEsc(){
+  var tr=$('#trunk',ob);if(!tr)return;
+  tr.classList.toggle('open',ESC.open);
+  $$('.dig',ob).forEach(function(d,i){
+    d.firstChild.textContent=ESC.d[i];d.classList.remove('up','down');
+    if(i===ESC.last){void d.offsetWidth;d.classList.add(ESC.dirn)}
+  });
+  var m=$('#escMsg',ob);if(m)m.textContent=ESC.msg;
+}
+function confetti(host){
+  if(reduce||!host)return;
+  var cols=['#f2b556','#9be06f','#6fc3ff','#ff8fa3','#f4f1ea'],i,e;
+  for(i=0;i<24;i++){
+    e=document.createElement('i');e.className='cft';
+    e.style.setProperty('--c',cols[i%5]);e.style.setProperty('--dx',(Math.random()*260-130)+'px');
+    e.style.setProperty('--dy',(70+Math.random()*190)+'px');e.style.setProperty('--r',(Math.random()*720-360)+'deg');
+    e.style.left=(42+Math.random()*16)+'%';host.appendChild(e);
+  }
+  setTimeout(function(){$$('.cft',host).forEach(function(x){if(x.parentNode)x.parentNode.removeChild(x)})},1800);
+}
+
+/* riddles */
+var RIDS=[
+  {q:'What has keys but cannot open a single lock?',a:'A piano.',w:'Or a keyboard. Plenty of keys, no doors.'},
+  {q:'The more of me you take, the more you leave behind. What am I?',a:'Footsteps.',w:'Every step you take is one you leave behind.'},
+  {q:'I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?',a:'An echo.',w:'Sound comes back to you from a far wall.'},
+  {q:'A farmer has 17 sheep. All but 9 run away. How many are left?',a:'Nine.',w:'All but 9 means every sheep except nine ran off.'},
+  {q:'A man pushes his car to a hotel and tells the owner he is bankrupt. Why?',a:'He is playing Monopoly.',w:'The car is a game token and the hotel is on the board.'},
+  {q:'Which weighs more: a kilogram of feathers or a kilogram of steel?',a:'Neither. They weigh the same.',w:'A kilogram is a kilogram. The feathers just take up more room.'}
+];
+var RID={order:shuffle(range(RIDS.length)),i:0,flip:false};
+function ridHTML(){
+  var r=RIDS[RID.order[RID.i]];
+  return '<div class="rid'+(RID.flip?' flip':'')+'" id="rid"><div class="rid-in"><div class="rid-face rid-front"><p class="rid-n">Riddle '+(RID.i+1)+' of '+RIDS.length+'</p><p class="rid-q">'+r.q+'</p><div class="think" aria-hidden="true"><i></i></div></div><div class="rid-face rid-back"><p class="rid-n">Answer</p><p class="rid-a">'+r.a+'</p><p class="rid-w">'+r.w+'</p></div></div></div>'+
+    '<div class="sud-bar end"><button type="button" class="btn sm" data-rid="flip">'+(RID.flip?'Hide answer':'Reveal answer')+'</button><button type="button" class="btn ghost sm" data-rid="next">Next riddle</button></div>';
+}
+
+/* cats */
+function catCard(name,kind,pose,blurb){
+  return '<div class="catcard"><div class="cc-art" data-kind="'+kind+'" data-pose0="'+pose+'">'+catSVG(kind,pose)+'</div><div><h4>'+name+'</h4><p>'+blurb+'</p><p class="cc-row"><button type="button" class="btn ghost sm" data-pet="'+kind+'">Pet '+name+'</button><span class="purr-note" aria-live="polite"></span></p></div></div>';
+}
+
+/* tv */
+var BOARD='<svg viewBox="0 0 320 190" aria-hidden="true">'+
+  '<rect x="2" y="2" width="316" height="186" rx="6" fill="#6b4a2e" stroke="#3b2414" stroke-width="3"/><rect x="10" y="10" width="300" height="170" fill="#b98b58"/>'+
+  '<g fill="#f4f1e6" stroke="#8a7a58"><rect x="30" y="26" width="62" height="74" transform="rotate(-4 61 63)"/><rect x="130" y="54" width="62" height="74" transform="rotate(3 161 91)"/><rect x="232" y="24" width="62" height="74" transform="rotate(-2 263 61)"/></g>'+
+  '<g fill="#3a3f48"><rect x="37" y="33" width="48" height="46" transform="rotate(-4 61 56)"/><rect x="137" y="61" width="48" height="46" transform="rotate(3 161 84)"/><rect x="239" y="31" width="48" height="46" transform="rotate(-2 263 54)"/></g>'+
+  '<g fill="#e8dfc8" font-family="IM Fell English,serif" font-size="30" text-anchor="middle"><text x="61" y="67">?</text><text x="161" y="95">?</text><text x="263" y="65">?</text></g>'+
+  '<path class="strg" pathLength="100" d="M60 30L162 58L264 28"/><path class="strg" pathLength="100" style="animation-delay:.8s" d="M162 58L150 150"/><path class="strg" pathLength="100" style="animation-delay:1.6s" d="M264 28L270 140L150 150"/>'+
+  '<g fill="#c0392b"><circle cx="60" cy="30" r="4"/><circle cx="162" cy="58" r="4"/><circle cx="264" cy="28" r="4"/><circle cx="150" cy="150" r="4"/><circle cx="270" cy="140" r="4"/></g>'+
+  '<rect x="120" y="150" width="60" height="24" fill="#f6edd0" stroke="#bda77a" transform="rotate(-2 150 162)"/><text x="150" y="167" font-size="12" text-anchor="middle" fill="#3b2a12" font-family="IM Fell English,serif">who?</text>'+
+  '<g class="mag"><circle cx="0" cy="0" r="14" fill="rgba(255,255,255,.2)" stroke="#2b2b2b" stroke-width="3"/><path d="M10 10L24 24" stroke="#2b2b2b" stroke-width="4.5" stroke-linecap="round"/></g>'+
+  '</svg>';
+var TEA='<svg viewBox="0 0 64 64" aria-hidden="true"><path class="steam" d="M22 24c-5-5 5-8 0-13"/><path class="steam s2" d="M32 24c-5-5 5-8 0-13"/><path class="steam s3" d="M42 24c-5-5 5-8 0-13"/>'+
+  '<path d="M12 29h36v9a14 14 0 0 1-14 14h-8a14 14 0 0 1-14-14z" fill="#f1ede4" stroke="#8a8478" stroke-width="1.5"/><path d="M48 33h3a6 6 0 0 1 0 12h-5" fill="none" stroke="#8a8478" stroke-width="2.2"/><ellipse cx="30" cy="56" rx="22" ry="4" fill="#d9d3c4" stroke="#8a8478" stroke-width="1.2"/><ellipse cx="30" cy="30" rx="18" ry="2.6" fill="#b5651d"/></svg>';
+var WATCH='<svg viewBox="0 0 64 90" aria-hidden="true"><g class="pend"><path d="M32 2V40" stroke="#c9a24b" stroke-width="2" stroke-dasharray="3 2"/><circle cx="32" cy="40" r="4" fill="none" stroke="#c9a24b" stroke-width="2"/><circle cx="32" cy="58" r="19" fill="#d9b44f" stroke="#6b5420" stroke-width="2"/><circle cx="32" cy="58" r="15" fill="#f6edd0"/><g stroke="#3b2a12" stroke-width="1.6"><path d="M32 45v3M32 68v3M19 58h3M42 58h3"/></g><path class="hand" d="M32 58V48" stroke="#3b2a12" stroke-width="2" stroke-linecap="round"/><path class="hand m" d="M32 58V52" stroke="#3b2a12" stroke-width="2.4" stroke-linecap="round"/></g></svg>';
+
+/* anime */
+function wallScene(){
+  var fig=reduce?'<g transform="translate(176 92) rotate(-18)"><path d="M-6 0L6 -3L6 3Z" fill="#14161c"/></g>':
+    '<g><path d="M-6 0L6 -3L6 3Z" fill="#14161c"/><animateMotion dur="6s" repeatCount="indefinite" rotate="auto" path="M104 36Q150 150 214 70T330 44"/></g>';
+  var brick='',i;
+  for(i=1;i<10;i++)brick+='<path d="M0 '+(i*20)+'H100" stroke="#4d5058" stroke-width="1.5"/>';
+  for(i=0;i<10;i++)for(var k=0;k<3;k++)brick+='<path d="M'+(k*34+(i%2?17:0))+' '+(i*20)+'v20" stroke="#4d5058" stroke-width="1.5"/>';
+  return '<svg viewBox="0 0 320 200" aria-hidden="true"><defs><linearGradient id="skyA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3d63"/><stop offset=".7" stop-color="#d98c64"/><stop offset="1" stop-color="#f1c27a"/></linearGradient></defs>'+
+    '<rect width="320" height="200" fill="url(#skyA)"/>'+
+    '<g class="drift"><ellipse cx="60" cy="48" rx="34" ry="8" fill="rgba(255,255,255,.35)"/><ellipse cx="86" cy="42" rx="22" ry="7" fill="rgba(255,255,255,.35)"/></g>'+
+    '<g class="drift b"><ellipse cx="10" cy="86" rx="40" ry="9" fill="rgba(255,255,255,.28)"/></g>'+
+    '<path d="M0 150L50 112L96 140L150 100L210 142L262 108L320 138V200H0Z" fill="#3a3550" opacity=".85"/>'+
+    '<rect x="0" y="0" width="100" height="200" fill="#6b6f78"/>'+brick+'<rect x="0" y="0" width="100" height="10" fill="#51545c"/><rect x="92" y="0" width="8" height="200" fill="rgba(0,0,0,.28)"/>'+
+    '<path d="M100 40Q150 150 214 74T330 48" fill="none" stroke="rgba(20,22,28,.35)" stroke-width="1.2" stroke-dasharray="3 4"/>'+
+    '<rect x="0" y="176" width="320" height="24" fill="#1b1d26"/>'+fig+'</svg>';
+}
+var WALLS={maria:'Wall Maria, the outermost wall.',rose:'Wall Rose, the middle wall.',sina:'Wall Sina, the innermost wall.'};
+var WALLSVG='<svg viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Three nested rings: Wall Maria outermost, Wall Rose in the middle, Wall Sina innermost"><circle class="ring" data-wall="maria" cx="120" cy="120" r="108"/><circle class="ring" data-wall="rose" cx="120" cy="120" r="74"/><circle class="ring" data-wall="sina" cx="120" cy="120" r="40"/>'+
+  '<text class="wall-lbl" x="120" y="18">MARIA</text><text class="wall-lbl" x="120" y="52">ROSE</text><text class="wall-lbl" x="120" y="86">SINA</text>'+
+  (reduce?'':'<g class="patrol"><circle cx="120" cy="12" r="4" fill="#f5c46a"/></g>')+'</svg>';
+
+/* books */
+function candles(){
+  var out='',xs=[34,92,150,214,276],hs=[34,52,26,44,30],i;
+  for(i=0;i<5;i++)out+='<g class="cand" style="animation-delay:-'+(i*.9)+'s;animation-duration:'+(3.6+i*.5)+'s"><rect x="'+(xs[i]-6)+'" y="'+hs[i]+'" width="12" height="34" rx="2" fill="#f1e7cc"/><path d="M'+(xs[i]-6)+' '+(hs[i]+4)+'q3 8 6 2q3 10 6 -2" fill="#f7f0dc"/><path class="flame" d="M'+xs[i]+' '+(hs[i]-14)+'q-6 8 0 13q6 -5 0 -13z" fill="#f7b24a"/><path class="flame" d="M'+xs[i]+' '+(hs[i]-9)+'q-3 5 0 8q3 -3 0 -8z" fill="#ffe08a"/></g>';
+  return out;
+}
+function owl(){
+  return '<g transform="translate(0 70)"><g class="owl"><g class="owl-b"><path class="wing" d="M14 -2q-8 -18 -2 -26q12 8 14 22z" fill="#6f523a"/><ellipse cx="20" cy="4" rx="17" ry="11" fill="#8b6b4a"/><ellipse cx="22" cy="8" rx="10" ry="6" fill="#d8c3a0"/><circle cx="34" cy="-4" r="10" fill="#8b6b4a"/><circle cx="31" cy="-6" r="4" fill="#f6edd0"/><circle cx="38" cy="-6" r="4" fill="#f6edd0"/><circle cx="31.6" cy="-6" r="1.8" fill="#18120a"/><circle cx="38.6" cy="-6" r="1.8" fill="#18120a"/><path d="M34 -2l3 3 -3 1.6z" fill="#e0902e"/><path d="M26 -12l-2 -7 6 4zM40 -12l2 -7 -6 4z" fill="#8b6b4a"/><rect x="40" y="3" width="11" height="8" rx="1" fill="#f6edd0" stroke="#bda77a" transform="rotate(10 45 7)"/><path d="M-4 4l-14 -2 12 6z" fill="#6f523a"/></g></g></g>';
+}
+var HPBOOKS=[['Philosopher’s Stone','#7a2a2a',112],['Chamber of Secrets','#2f5d50',98],['Prisoner of Azkaban','#3a3f6b',118],['Goblet of Fire','#8a5a1e',124],['Order of the Phoenix','#5a2d6b',130],['Half-Blood Prince','#3d4a55',108],['Deathly Hallows','#2a2a2e',116]];
+
+function afterSpreads(){
+  return [
+    {tab:'Sudoku',kicker:'Puzzle one',title:'Sudoku',
+     lede:'My favourite way to lose an hour. Every row, column and box gets each number exactly once.',
+     left:'<ul class="pts tips"><li>Tap a cell, then a number, or type it.</li><li>Clashes shake so you can see them.</li><li>Stuck? A hint places one correct cell.</li><li>Every puzzle has exactly one answer, checked as it is made.</li></ul>',
+     right:sudHTML()},
+    {tab:'Escape room',kicker:'Puzzle two',title:'Escape room',
+     lede:'I love the click of a lock giving way. Here is a trunk, three clues and three wheels.',
+     left:'<ol class="clues"><li><strong>First wheel.</strong> How many lanterns hang on the lock of this very book?<details><summary>Hint</summary>Three rows of three.</details></li><li><strong>Second wheel.</strong> How many cats wander this page?<details><summary>Hint</summary>One tuxedo, one calico.</details></li><li><strong>Third wheel.</strong> How many research interests get a page of their own?<details><summary>Hint</summary>HCI, XAI, trust and human-centred AI.</details></li></ol>',
+     right:escHTML()},
+    {tab:'Mind ticklers',kicker:'Puzzle three',title:'Mind ticklers',
+     lede:'Riddles, logic and lateral puzzles. Think first, then flip the card.',
+     left:'<p class="small tips">You get about twenty seconds before the little bar runs out. Nothing happens when it does. It only judges you quietly.</p>',
+     right:ridHTML()},
+    {tab:'Cats',kicker:'The housemates',title:'Cats',
+     lede:'Two of them: Kimchi, a tuxedo cat, and Cheese, a calico. Both are wandering this page right now.',
+     left:'<p class="cc-row"><button type="button" class="btn ghost sm" data-call="kimchi">Call Kimchi</button><button type="button" class="btn ghost sm" data-call="cheese">Call Cheese</button></p>',
+     right:catCard('Kimchi','kimchi','stand','Tuxedo cat, mostly white with a little black.')+catCard('Cheese','cheese','loaf','Calico cat, with patches of orange, black and white.')},
+    {tab:'TV',kicker:'On the screen',title:'Mystery and thrillers',
+     lede:'A case that does not solve itself, and a plot that stays two moves ahead.',
+     left:'<div class="art">'+BOARD+'</div>',
+     right:'<p class="group">Now watching</p><div class="show"><div class="show-art">'+TEA+WATCH+'</div><div><h4>The Mentalist</h4><p>A crime drama about a consultant who solves cases by reading people.</p><p><span class="tag">Mystery</span><span class="tag">Crime</span><span class="tag">Thriller</span></p></div></div>'+
+       '<p class="group">Always on the list</p><p class="lede2">Mysteries and thrillers with an answer worth waiting for. Got one I should watch next? <a href="#contact" style="color:var(--ember)">Write to me.</a></p>'},
+    {tab:'Anime',kicker:'Anime',title:'Attack on Titan',
+     lede:'My favourite anime.',
+     left:'<div class="art">'+wallScene()+'</div>',
+     right:'<p class="group">The three walls</p><div class="wall-art" style="display:grid;justify-items:center">'+WALLSVG+'</div><p class="wall-cap" id="wallCap" role="status">Hover or tap a ring.</p>'},
+    {tab:'Books',kicker:'Books',title:'Harry Potter',
+     lede:'My favourite book series.',
+     left:'<div class="art"><svg viewBox="0 0 320 170" aria-hidden="true"><rect width="320" height="170" fill="#0e1424"/><circle cx="268" cy="34" r="15" fill="#f1e7cc" opacity=".9"/><path d="M200 150V120h8V108l5-8 5 8v12h10V96l6-10 6 10v24h8v-16l5-8 5 8v46Z" fill="#0a0f1d"/><path d="M0 170V150Q40 120 80 150T160 148T240 150T320 140V170Z" fill="#151c33"/>'+candles()+owl()+'</svg></div>',
+     right:'<p class="group">Seven books</p><div class="hp-books" role="group" aria-label="The seven books">'+HPBOOKS.map(function(b,i){return '<button type="button" class="hp-b" data-title="'+(i+1)+'. '+b[0]+'" style="--c:'+b[1]+';--h:'+b[2]+'px" aria-label="Book '+(i+1)+', '+b[0]+'"></button>'}).join('')+'</div><p class="hp-cap" id="hpCap">Hover a spine.</p>'+
+       '<p class="group">A letter for you</p><button type="button" class="env" data-env aria-expanded="false" aria-label="Open the letter"><span class="env-back"></span><span class="env-letter"><b>Dear reader,</b> the next book on my shelf is yours to pick. Write to me.</span><span class="env-front"></span><span class="env-flap"></span></button>'}
+  ];
+}
+
 var pages={
   research:function(){
     function proj(title,tag,when,pts,desc){
@@ -894,7 +1426,7 @@ var pages={
       '<div class="course"><span class="code">CSC3132</span><div><strong>Digital Image Processing</strong></div></div>'}},
   education:function(){return {kicker:'2021 to 2025',title:'Education',
     lede:'B.Sc. (Hons) in Computer Science at the University of Peradeniya, with a minor in Chemistry and Biology.',
-    right:'<dl class="facts"><div><dt>First Class Honours</dt><dd>Top of the batch in Computer Science.</dd></div><div><dt>Minor in Chemistry and Biology</dt><dd>Studied alongside the degree.</dd></div></dl>'+cvLink}},
+    right:'<dl class="facts"><div><dt>First Class Honours</dt><dd>Top of the batch in Computer Science.</dd></div><div><dt>Minor in Chemistry and Biology</dt><dd>Studied alongside the degree.</dd></div></dl>'}},
   pubs:function(){
     function pub(title,authors,venue,status,link,extra){
       return '<div class="entry"><h4>'+title+'</h4>'+(authors?'<p class="by">'+authors+'</p>':'')+
@@ -949,18 +1481,14 @@ var pages={
   },
   after:function(){
     if(!unlocked)return {kicker:'Locked',title:'After hours',lede:'This book does not open for just anyone. Light every lantern and it will.',right:lockHTML()};
-    return {kicker:'Unlocked',title:'After hours',lede:'The lock is open. Here is the rest of me.',
-      right:'<dl class="facts"><div><dt>Puzzles</dt><dd>I like the moment a stubborn problem gives way. The lock you just solved was built for that feeling.</dd></div>'+
-      '<div><dt>Cats</dt><dd>Five of them hide on this page, and no two look alike. The one in the corner of your screen is on duty.</dd></div>'+
-      '<div><dt>Forests</dt><dd>A good place to think. Nothing in them is waiting for a reply.</dd></div>'+
-      '<div><dt>Books</dt><dd>Always a few open at once. Tell me what to read next.</dd></div></dl>'};
+    return afterSpreads();
   }
 };
 var bookMsgs={pubs:'Publications. Turn the pages to sort them by status.',beyond:'Beyond the lab. Two pages: leadership and volunteering.',research:'Research. Four interests, one page each.',teaching:'Teaching. Five courses, a lot of lab sheets.',education:'Education. First Class Honours, top of the batch.',after:null};
 var pageIdx=0,turning=false;
 var reduceMq=window.matchMedia('(prefers-reduced-motion: reduce)'),wideMq=window.matchMedia('(min-width:761px)');
 function spreads(id){return [].concat(pages[id]())}
-function leftHTML(p){return '<p class="kicker">'+p.kicker+'</p><h3>'+p.title+'</h3><p class="lede2">'+p.lede+'</p>'}
+function leftHTML(p){return '<p class="kicker">'+p.kicker+'</p><h3>'+p.title+'</h3><p class="lede2">'+p.lede+'</p>'+(p.left||'')}
 function spreadHTML(l,r){return '<section class="page page-left">'+l+'</section><section class="page page-right">'+r+'</section>'}
 function paintSpread(p){ob.innerHTML=spreadHTML(leftHTML(p),p.right)}
 var pager=$('#pager');
@@ -1088,6 +1616,7 @@ pager.addEventListener('click',function(e){
 });
 $('.bookwrap').addEventListener('keydown',function(e){
   if(e.altKey||e.ctrlKey||e.metaKey)return;
+  if(e.target.closest&&e.target.closest('.sudoku'))return;
   if(e.key==='ArrowRight')goPage(pageIdx+1);else if(e.key==='ArrowLeft')goPage(pageIdx-1);
 });
 var tx=0,ty=0;
@@ -1104,7 +1633,111 @@ function refreshLock(){
     b.setAttribute('aria-label','Lantern row '+(Math.floor(i/3)+1)+', column '+(i%3+1)+', '+(state[i]?'lit':'dark'));
   });
   var m=$('#moves');if(m)m.textContent=moves;
+  renderWhy();
 }
+function renderWhy(){
+  var box=$('#whyBox',ob),btn=$('[data-act="why"]',ob);
+  if(!box)return;
+  if(btn)btn.setAttribute('aria-expanded',String(whyOpen));
+  if(!whyOpen){box.hidden=true;box.innerHTML='';return}
+  var best=bestSolution(),i,h;
+  box.hidden=false;
+  if(!best){box.innerHTML='<p>No set of presses lights this board. Press Reset.</p>';return}
+  if(best.cnt===0){box.innerHTML='<p>Every lantern is already lit. Nothing needs to change.</p>';return}
+  var where=[];
+  h='<p class="why-h">Counterfactual: the smallest change that lights every lantern</p><div class="mini" aria-hidden="true">';
+  for(i=0;i<9;i++){
+    var pr=(best.m>>i)&1;
+    if(pr)where.push('row '+(Math.floor(i/3)+1)+', column '+(i%3+1));
+    h+='<span class="mc'+(state[i]?' on':'')+(pr?' press':'')+'"></span>';
+  }
+  h+='</div><p>Press the ringed '+(best.cnt===1?'lantern':best.cnt+' lanterns')+' ('+where.join('; ')+') and the whole board ends up lit. The order does not matter, and pressing one twice cancels itself out.</p>'+
+     '<p>I checked all 512 possible sets of presses. None that lights the board is smaller than this, and every press is allowed, so the change is both correct and feasible.</p>';
+  box.innerHTML=h;
+}
+/* ---------- after hours: interaction ---------- */
+ob.addEventListener('click',function(e){
+  if(current!=='after'||!unlocked)return;
+  var t=e.target;if(!t.closest)return;
+  var cell=t.closest('.sc');
+  if(cell){SUD.sel=+cell.dataset.i;SUD.pop=-1;sudRedraw();return}
+  var a=t.closest('[data-sud],[data-esc],[data-rid],[data-call],[data-pet],[data-env],[data-wall]');
+  if(!a)return;
+  if(a.dataset.sud!==undefined){
+    var k=a.dataset.sud;
+    if(k==='s4')sudSwitch(4);
+    else if(k==='s9')sudSwitch(9);
+    else if(k==='new')sudSwitch(SUD.n);
+    else if(k==='num')sudSet(+a.dataset.v);
+    else if(k==='erase')sudSet(0);
+    else if(k==='hint')sudHint();
+    else if(k==='check')sudCheck();
+  }else if(a.dataset.esc!==undefined){
+    var q=a.dataset.esc,w=+a.dataset.w;
+    if(q==='up'||q==='down'){
+      if(ESC.open)return;
+      ESC.d[w]=(ESC.d[w]+(q==='up'?1:9))%10;ESC.last=w;ESC.dirn=q;drawEsc();
+    }else if(q==='try'){
+      if(ESC.open)return;
+      if(ESC.d.join('')===ESC_CODE){
+        ESC.open=true;ESC.msg='Click. The lid swings open. You escaped.';ESC.last=-1;drawEsc();
+        confetti($('.esc-wrap',ob));say('Escaped. Faster than me.');
+      }else{
+        ESC.tries++;
+        ESC.msg=ESC.tries>=3?'Still locked. Read the three clues on the left page again.':'Not quite. The wheels click, the lid stays shut.';
+        var tr=$('#trunk',ob);if(tr){tr.classList.remove('shake');void tr.offsetWidth;tr.classList.add('shake')}
+        drawEsc();
+      }
+    }else if(q==='reset'){ESC.d=[0,0,0];ESC.open=false;ESC.tries=0;ESC.msg='Set the wheels, then try the lock.';ESC.last=-1;drawEsc()}
+  }else if(a.dataset.rid!==undefined){
+    if(a.dataset.rid==='flip'){
+      RID.flip=!RID.flip;var rd=$('#rid',ob);if(rd)rd.classList.toggle('flip',RID.flip);a.textContent=RID.flip?'Hide answer':'Reveal answer';
+    }else{
+      RID.i++;if(RID.i>=RIDS.length){RID.i=0;RID.order=shuffle(range(RIDS.length))}
+      RID.flip=false;var host=$('.page-right',ob);
+      if(host){host.innerHTML=ridHTML();var nr=$('#rid',ob);if(nr&&!reduce){nr.classList.add('enter')}}
+    }
+  }else if(a.dataset.call!==undefined){
+    var wk=window.__walkers&&window.__walkers[a.dataset.call];
+    if(wk){wk.come();say(a.dataset.call==='kimchi'?'Kimchi is on his way. He may stop to wash.':'Cheese will arrive when she feels like it.')}
+  }else if(a.dataset.pet!==undefined){
+    var card=a.closest('.catcard'),art=$('.cc-art',card),sv=$('svg',art),note=$('.purr-note',card);
+    sv.classList.add('purr');sv.setAttribute('data-pose','stand');note.textContent='prrrrr';
+    var hh=document.createElement('span');hh.className='heart';hh.textContent='♥';art.appendChild(hh);
+    clearTimeout(card._t);
+    card._t=setTimeout(function(){sv.classList.remove('purr');sv.setAttribute('data-pose',art.dataset.pose0);note.textContent='';if(hh.parentNode)hh.parentNode.removeChild(hh)},2600);
+  }else if(a.dataset.env!==undefined){
+    var open=!a.classList.contains('open');a.classList.toggle('open',open);a.setAttribute('aria-expanded',String(open));
+  }else if(a.dataset.wall!==undefined){
+    var cap=$('#wallCap',ob);if(cap)cap.textContent=WALLS[a.dataset.wall];
+    $$('.ring',ob).forEach(function(r){r.classList.toggle('on',r===a)});
+  }
+});
+ob.addEventListener('mouseover',function(e){
+  if(current!=='after'||!unlocked||!e.target.closest)return;
+  var rg=e.target.closest('[data-wall]');
+  if(rg){var cap=$('#wallCap',ob);if(cap)cap.textContent=WALLS[rg.dataset.wall];return}
+  var bk=e.target.closest('.hp-b');
+  if(bk){var c2=$('#hpCap',ob);if(c2)c2.textContent=bk.dataset.title}
+});
+ob.addEventListener('focusin',function(e){
+  if(current!=='after'||!unlocked||!e.target.closest)return;
+  var bk=e.target.closest('.hp-b');
+  if(bk){var c2=$('#hpCap',ob);if(c2)c2.textContent=bk.dataset.title}
+});
+ob.addEventListener('keydown',function(e){
+  if(current!=='after'||!unlocked||!e.target.closest)return;
+  var c=e.target.closest('.sc');if(!c)return;
+  var n=SUD.n,i=+c.dataset.i,ni=-1;
+  if(e.key>='1'&&e.key<='9'&&+e.key<=n){SUD.sel=i;sudSet(+e.key);focusCell(i);e.preventDefault()}
+  else if(e.key==='Backspace'||e.key==='Delete'||e.key==='0'){SUD.sel=i;sudSet(0);focusCell(i);e.preventDefault()}
+  else if(e.key==='ArrowRight'&&i%n<n-1)ni=i+1;
+  else if(e.key==='ArrowLeft'&&i%n>0)ni=i-1;
+  else if(e.key==='ArrowDown'&&i+n<n*n)ni=i+n;
+  else if(e.key==='ArrowUp'&&i-n>=0)ni=i-n;
+  if(ni>=0){e.preventDefault();SUD.sel=ni;sudRedraw();focusCell(ni)}
+});
+function focusCell(i){var el=$('.sc[data-i="'+i+'"]',ob);if(el)el.focus()}
 ob.addEventListener('click',function(e){
   if(current!=='after'||unlocked)return;
   var l=e.target.closest('.lantern'),a=e.target.closest('[data-act]'),msg=$('#lockMsg');
@@ -1125,6 +1758,8 @@ ob.addEventListener('click',function(e){
       if(el){el.classList.remove('hint');void el.offsetWidth;el.classList.add('hint')}
       if(msg)msg.textContent='Press the lantern that is flashing. '+best.cnt+(best.cnt===1?' press':' presses')+' will do it from here.';
     }
+  }else if(a&&a.dataset.act==='why'){
+    whyOpen=!whyOpen;renderWhy();
   }else if(a&&a.dataset.act==='reset'){
     state=fresh();moves=0;refreshLock();
     if(msg)msg.textContent='Reset. Light all nine lanterns.';
@@ -1132,6 +1767,300 @@ ob.addEventListener('click',function(e){
 });
 $$('.book').forEach(function(b){b.addEventListener('click',function(){showBook(b.dataset.book)})});
 paintSpine();showBook('research',true);
+
+/* ---------- the Clearing: a small model, explained ---------- */
+(function(){
+  var KEYS=['rain','day','lamp','cats'];
+  var LABEL={rain:'Rain chance',day:'Daylight left',lamp:'Lantern',cats:'Cats along'};
+  function f(x){
+    var t1=x.rain>60?(x.lamp?.45:.1):(x.day>3?.9:(x.lamp?.7:.3));
+    var t2=x.cats>=1?(x.rain>80?.35:.85):(x.day>6?.6:.25);
+    var t3=x.day<2?(x.lamp?.5:.1):(x.rain<30?.95:.5);
+    return (t1+t2+t3)/3;
+  }
+  var r=rng(3),bg=[],i;
+  for(i=0;i<24;i++)bg.push({rain:Math.round(r()*20)*5,day:Math.round(r()*12),lamp:r()<.4?1:0,cats:Math.floor(r()*3)});
+  var base=bg.reduce(function(a,b){return a+f(b)},0)/bg.length;
+  function pop(m){var c=0;while(m){c+=m&1;m>>=1}return c}
+  function vmask(x,mask){
+    var sum=0;
+    bg.forEach(function(b){var z={};KEYS.forEach(function(k,j){z[k]=((mask>>j)&1)?x[k]:b[k]});sum+=f(z)});
+    return sum/bg.length;
+  }
+  function shap(x){
+    var v=[],m,j,fact=[1,1,2,6,24],phi=[0,0,0,0];
+    for(m=0;m<16;m++)v[m]=vmask(x,m);
+    for(m=0;m<16;m++)for(j=0;j<4;j++){
+      if((m>>j)&1)continue;
+      var sz=pop(m);
+      phi[j]+=fact[sz]*fact[3-sz]/fact[4]*(v[m|(1<<j)]-v[m]);
+    }
+    return phi;
+  }
+  function search(x,mineOnly){
+    var worth=f(x)>=.5,best=null,rain,day,lamp,cats;
+    for(rain=0;rain<=100;rain+=5){
+      if(mineOnly&&rain!==x.rain)continue;
+      for(day=0;day<=12;day++){
+        if(mineOnly&&day!==x.day)continue;
+        for(lamp=0;lamp<2;lamp++)for(cats=0;cats<3;cats++){
+          var z={rain:rain,day:day,lamp:lamp,cats:cats},p=f(z);
+          if((p>=.5)===worth)continue;
+          var cost=Math.abs(rain-x.rain)/100+Math.abs(day-x.day)/12+Math.abs(lamp-x.lamp)+Math.abs(cats-x.cats)/2;
+          if(!best||cost<best.cost)best={z:z,p:p,cost:cost};
+        }
+      }
+    }
+    return best;
+  }
+  function diff(x,z){
+    var o=[];
+    if(z.rain!==x.rain)o.push('rain chance '+x.rain+'% to '+z.rain+'%');
+    if(z.day!==x.day)o.push('daylight '+x.day+' h to '+z.day+' h');
+    if(z.lamp!==x.lamp)o.push(z.lamp?'carry a lantern':'leave the lantern at home');
+    if(z.cats!==x.cats)o.push((z.cats===0?'no cats':z.cats===1?'one cat':'two cats')+' along');
+    return o.join(', ');
+  }
+  function word(p){return p>=.5?'worth the walk':'better stay in'}
+  var fRain=$('#fRain'),fDay=$('#fDay'),fLamp=$('#fLamp'),fCats=$('#fCats');
+  var CATWORD=['none','one','two'];
+  function render(){
+    var x={rain:+fRain.value,day:+fDay.value,lamp:fLamp.checked?1:0,cats:+fCats.value};
+    $('#oRain').textContent=x.rain+'%';$('#oDay').textContent=x.day+' h';$('#oCats').textContent=CATWORD[x.cats];
+    var p=f(x),pct=Math.round(p*100);
+    $('#vPct').textContent=pct+'%';$('#vTxt').textContent=word(p);$('#vMeter').style.width=pct+'%';
+    var phi=shap(x),order=[0,1,2,3].sort(function(a,b){return Math.abs(phi[b])-Math.abs(phi[a])}),h='';
+    var show={rain:x.rain+'%',day:x.day+' h',lamp:x.lamp?'yes':'no',cats:CATWORD[x.cats]};
+    order.forEach(function(j){
+      var k=KEYS[j],pts=Math.round(phi[j]*100),w=Math.min(50,Math.abs(pts)/40*50);
+      h+='<div class="attr"><span class="nm">'+LABEL[k]+'<small>'+show[k]+'</small></span><span class="track" aria-hidden="true"><i class="fill '+(pts<0?'neg':'pos')+'" style="width:'+w+'%"></i></span><span class="val">'+(pts>0?'+':pts<0?'−':'')+Math.abs(pts)+' pts</span></div>';
+    });
+    $('#attrs').innerHTML=h;
+    $('#baseNote').textContent='A typical night scores '+Math.round(base*100)+'%. Each bar is how far one fact pushed tonight away from that.';
+    var mine=search(x,true),any=search(x,false),goal=p>=.5?'better stay in':'worth the walk',c='<h3>To make it '+goal+'</h3>';
+    c+=mine?'<p><strong>What you could do:</strong> '+diff(x,mine.z)+' &rarr; '+Math.round(mine.p*100)+'%.</p>':'<p><strong>What you could do:</strong> nothing. No change that is yours to make flips this verdict.</p>';
+    var same=mine&&any&&Math.abs(any.cost-mine.cost)<1e-9;
+    if(any&&!same)c+='<p><strong>Smallest change at all:</strong> '+diff(x,any.z)+' &rarr; '+Math.round(any.p*100)+'%. <span class="tag">not yours to make</span></p>';
+    if(!same)c+='<p class="small">A counterfactual has to be correct and feasible. The weather is the cheapest thing to change on paper and the one thing you cannot.</p>';
+    $('#cf').innerHTML=c;
+  }
+  [fRain,fDay,fLamp,fCats].forEach(function(el){el.addEventListener('input',render)});
+  render();
+})();
+
+/* ---------- show me why ---------- */
+var whyOn=false,whyOpenIdx=-1;
+var WHY=[
+  {sel:'.hero h1',t:'Name first',pr:'Visibility of purpose',x:'Your name and one plain sentence come before anything else, so you know where you are before you have to decide anything.'},
+  {sel:'.portrait',p:[.2,.1],t:'Light that matches',pr:'Consistency',x:'One illustration, soft leaves and toadstools, that sits in the scene day or night instead of being pasted on top of it.'},
+  {at:function(){var o=orb();return {left:o.x-o.r,top:o.y-o.r,width:o.r*2,height:o.r*2}},t:'Two routes to one action',pr:'Flexibility',x:'The moon and sun are a real control. You can click them, or use the link at the bottom left. Your choice is remembered, so you do not repeat it.'},
+  {sel:'.shelf',t:'Books, not a menu',pr:'Recognition over recall',x:'A shelf is a navigation pattern people already know. One book is locked, so there is a puzzle to find as well as information.'},
+  {sel:'.obwrap',t:'Many ways to turn a page',pr:'Flexibility and efficiency',x:'Click the page edge, use the arrows or tabs, press the arrow keys, or swipe. If your system asks for reduced motion, the page turns instantly.'},
+  {sel:'.walker',t:'Company, not clutter',pr:'Aesthetic and minimalist design',x:'Kimchi and Cheese wander on their own and never block the page for long. Click one to say hello. With reduced motion switched on, they sit still.'},
+  {sel:'.guide',t:'Never silent',pr:'Visibility of system status',x:'The guide cat says what just happened after a click or a scroll, so you are never left wondering whether something worked.'},
+  {sel:'#lab',t:'Showing the working',pr:'Explainability',x:'The model gives its answer, what pushed it there, and the smallest change that would flip it. It separates changes you could make from changes you could not.'},
+  {sel:'.mail-row',t:'Two ways to say hello',pr:'Error prevention',x:'Open your mail app, or copy the address. Not everyone has a mail app set up, and a dead mailto link is a dead end.'},
+  {sel:'.tally',oy:-34,t:'What this page remembers',pr:'Privacy and transparency',x:'Two things, kept in your browser: day or night, and whether the lock is open. No accounts, and no analytics code of its own.'}
+];
+var whyLayer=$('#whyLayer'),whyBtn=$('#whyBtn'),whyDots=[],whyCard=document.createElement('div');
+whyCard.className='why-card';whyCard.hidden=true;whyCard.setAttribute('role','dialog');whyLayer.appendChild(whyCard);
+WHY.forEach(function(a,i){
+  var b=document.createElement('button');
+  b.type='button';b.className='why-dot';b.textContent=String(i+1);b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Why: '+a.t);
+  b.addEventListener('click',function(e){e.stopPropagation();whyOpenIdx=whyOpenIdx===i?-1:i;whyPaint()});
+  whyLayer.appendChild(b);whyDots.push(b);
+});
+function whyRect(a){
+  if(a.at)return a.at();
+  var el=$(a.sel);if(!el)return null;
+  var r=el.getBoundingClientRect();
+  if(r.width<2||r.height<2)return null;
+  return r;
+}
+function whyPaint(){
+  whyDots.forEach(function(b,i){b.setAttribute('aria-expanded',String(i===whyOpenIdx))});
+  var a=WHY[whyOpenIdx];
+  whyCard.hidden=!a;
+  if(a)whyCard.innerHTML='<h4>'+a.t+'</h4><span class="pr">'+a.pr+'</span><p>'+a.x+'</p>';
+}
+function whyLayout(){
+  var vw=window.innerWidth,vh=window.innerHeight;
+  WHY.forEach(function(a,i){
+    var b=whyDots[i],r=whyRect(a);
+    if(!r||r.bottom<30||r.top>vh-30||r.right<10||r.left>vw-10){b.style.display='none';if(i===whyOpenIdx)whyCard.style.display='none';return}
+    b.style.display='';
+    var fx=a.p?a.p[0]:0,fy=a.p?a.p[1]:0,x=Math.min(Math.max(r.left+r.width*fx+4-(fx?14:0),8),vw-36),y=Math.min(Math.max(r.top+r.height*fy+4-(fy?14:0)+(a.oy||0),8),vh-36);
+    b.style.left=x+'px';b.style.top=y+'px';
+    if(i===whyOpenIdx){
+      whyCard.style.display='';
+      var cw=Math.min(300,vw-24),cx=Math.min(Math.max(x-6,12),vw-cw-12),cy=y+36;
+      if(cy+whyCard.offsetHeight>vh-12)cy=Math.max(12,y-whyCard.offsetHeight-8);
+      whyCard.style.left=cx+'px';whyCard.style.top=cy+'px';
+    }
+  });
+}
+function whyTick(){if(!whyOn)return;whyLayout();requestAnimationFrame(whyTick)}
+function setWhy(on,quiet){
+  whyOn=!!on;whyOpenIdx=-1;whyPaint();
+  whyLayer.hidden=!whyOn;
+  whyBtn.setAttribute('aria-pressed',String(whyOn));whyBtn.textContent=whyOn?'Hide the why':'Show me why';
+  if(whyOn){whyLayout();requestAnimationFrame(whyTick);if(!quiet)say('Numbered dots explain why this page works the way it does. Tap one.',7000)}
+}
+whyBtn.addEventListener('click',function(){setWhy(!whyOn)});
+document.addEventListener('click',function(e){
+  if(!whyOn||whyOpenIdx<0)return;
+  if(e.target.closest&&e.target.closest('.why-card,.why-dot'))return;
+  whyOpenIdx=-1;whyPaint();
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&whyOn&&whyOpenIdx>=0){whyOpenIdx=-1;whyPaint()}});
+
+/* ---------- terminal ---------- */
+var term=$('#term'),termOut=$('#termOut'),termIn=$('#termIn'),termOpener=null,hist=[],hi=0;
+var TREE={
+  research:{id:'research',kids:{hci:0,xai:1,trust:2,'human-centred-ai':3}},
+  publications:{id:'pubs',kids:{published:0,accepted:1,'under-review':2,'abstracts-and-talks':3}},
+  teaching:{id:'teaching',kids:{}},
+  education:{id:'education',kids:{}},
+  beyond:{id:'beyond',kids:{leadership:0,volunteering:1}},
+  'after-hours':{id:'after',kids:{sudoku:0,'escape-room':1,'mind-ticklers':2,cats:3,tv:4,anime:5,books:6}}
+};
+var LEAVES={
+  'research/hci':['EEG, creativity, personality and vocational interest   (ongoing)','An interactive interface for counterfactual explanations   (final-year project)'],
+  'research/xai':['Counterfactual explanations for tree ensembles   (final-year project)','Combined XAI techniques for regression   (under review)','White, grey and black box models on ikman.lk prices'],
+  'research/trust':['Emotional fairness across ethnic identities in LLMs   (accepted)','An LLM agent for emotional fairness   (ongoing)','Governance against coordinated online harassment   (ongoing)'],
+  'research/human-centred-ai':['Guidance written for different audiences   (prototype)','Fluent is not the same as faithful   (finding)','Teaching explainability   (workshop)'],
+  'publications/published':['ICICT 2026   Framework for Existing Counterfactual Methods with Feasibility and LLM Explanation Support','ETECOM 2025   Towards Counterfactual Verification for Tree Ensembles'],
+  'publications/accepted':['ISBM 2026   Shades of Sentiment: Evaluating Emotional Fairness Across Ethnic Identities in LLMs'],
+  'publications/under-review':['ICAC 2026   Is More Explanation Better? A Multi-Dimensional Study of Combined XAI Techniques for Regression'],
+  'publications/abstracts-and-talks':['SLJCR 2025   A Unified Framework for Evaluating Existing Counterfactual Methods (abstract)','Four talks, all virtual, one poster at Research Cafe'],
+  'teaching':['CSC1051   Programming Laboratory II (Java)','CSC2052   Computer Architecture','CSC2321   Computing for Science (Python)','CSC3081   Computer Graphics Programming (C++ / OpenGL)','CSC3132   Digital Image Processing'],
+  'education':['B.Sc. (Hons) Computer Science, University of Peradeniya, 2021-2025','Minor in Chemistry and Biology','GPA 3.80 / 4.00, First-Class Honours, top of the batch'],
+  'after-hours/sudoku':['Mini 4x4 and classic 9x9, one answer each'],
+  'after-hours/escape-room':['A trunk, three clues, three wheels'],
+  'after-hours/mind-ticklers':['Six riddles, shuffled'],
+  'after-hours/cats':['Kimchi (tuxedo)','Cheese (calico)'],
+  'after-hours/tv':['The Mentalist (now watching)','Mystery and thrillers'],
+  'after-hours/anime':['Attack on Titan'],
+  'after-hours/books':['Harry Potter'],
+  'beyond/leadership':['Editor, Astronomical Society','Program Team Member, IEEE Computer Society','Junior Treasurer, Drama Society','President Guide, Sri Lanka Girl Guides Association'],
+  'beyond/volunteering':['RESCON','Huddle Workshop','Project for Special Needs Children, Blue Rose School','Save the Next Generation - Knuckles']
+};
+var ROOT_LS=['research/','publications/','teaching/','education/','beyond/','after-hours/','cv.pdf','contact.txt','README.md'];
+var CMDS=['help','ls','cat','cd','open','pwd','whoami','theme','why','copy','sudo','clear','exit','history','fortune','echo','rm','kimchi','cheese'];
+var PATHS=ROOT_LS.concat(Object.keys(LEAVES).filter(function(k){return k.indexOf('/')>0}));
+var FORTUNES=['A closed book is just a lantern waiting to be lit.','The best explanation is the one that tells you what to change.','Every cat is the guide cat if it sits on your keyboard.','Fluent is not the same as faithful.','Press every lantern once. Then think.','Somewhere in these woods a cat is sleeping on a pull request.'];
+function tprint(text,cls){
+  String(text).split('\n').forEach(function(line){
+    var d=document.createElement('div');d.className='tl'+(cls?' '+cls:'');d.textContent=line;termOut.appendChild(d);
+  });
+  termOut.scrollTop=termOut.scrollHeight;
+}
+function norm(p){return (p||'').replace(/^~\/forest\/?/,'').replace(/^\.\//,'').replace(/\/+$/,'')}
+function openAt(id,idx){
+  showBook(id,true);
+  if(idx){pageIdx=idx;paintSpread(spreads(id)[idx]);renderPager()}
+  var bw=$('.bookwrap');if(bw)bw.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+}
+function cmdCd(arg){
+  var p=norm(arg);
+  if(!p||p==='.'||p==='..'||p==='~'){tprint('/home/waruni/forest','dim');return}
+  var parts=p.split('/'),node=TREE[parts[0]];
+  if(!node){tprint('cd: '+arg+': no such directory','err');return}
+  if(node.id==='after'&&!unlocked){openAt('after',0);tprint('locked: light every lantern first','err');return}
+  if(parts[1]!==undefined){
+    if(!(parts[1] in node.kids)){tprint('cd: '+arg+': no such directory','err');return}
+    openAt(node.id,node.kids[parts[1]]);
+  }else openAt(node.id,0);
+  tprint('opened '+p,'ok');
+}
+function cmdLs(args){
+  var all=args.indexOf('-a')>=0||args.indexOf('-la')>=0||args.indexOf('-al')>=0;
+  var path=norm(args.filter(function(a){return a.charAt(0)!=='-'})[0]);
+  if(!path){tprint(ROOT_LS.concat(all?['.lantern']:[]).join('   '));return}
+  if(LEAVES[path]){tprint(LEAVES[path].join('\n'));return}
+  if(TREE[path]){var k=Object.keys(TREE[path].kids);tprint(k.length?k.map(function(n){return n+'/'}).join('   '):'(one page, try: ls '+path+')');return}
+  tprint('ls: cannot access '+path+': no such file or directory','err');
+}
+function cmdCat(args){
+  var f=norm(args[0]);
+  if(!f){tprint('cat: missing file. Try: cat README.md','err');return}
+  if(f==='cv.pdf'){tprint('%PDF-1.5 ... binary file, about 90 KB. Opening it properly instead.','dim');window.open('cv.pdf','_blank','noopener');return}
+  if(f==='contact.txt'){tprint(addr+'\nTip: type "copy" to copy it.');return}
+  if(f==='README.md'){tprint('Waruni Kekulandara. Demonstrator, Faculty of Science, University of Peradeniya.\nResearch: HCI, explainable AI, trust in intelligent systems, human-centred AI.\nType "help" for what this terminal can do.');return}
+  if(f==='guide'||f==='cat'){tprint('  /\\_/\\\n ( o.o )   mrrp.\n  > ^ <','ok');return}
+  if(f==='.lantern'){tprint('Lights Out is linear algebra over GF(2). Each press is a vector, order does not matter, and pressing twice cancels out.\nSo the board is solvable exactly when its state lies in the span of the presses. The lock book will show you the smallest set.');return}
+  if(TREE[f]||LEAVES[f]){tprint('cat: '+f+': is a directory. Try: ls '+f,'err');return}
+  tprint('cat: '+f+': no such file or directory','err');
+}
+var COMMANDS={
+  help:function(){tprint('help       this list\nls [path]  look around (try: ls research, ls -a)\ncat <file> read a file (cv.pdf, contact.txt, README.md)\ncd <path>  open a book page (cd research/xai, cd beyond/leadership)\ntheme [night|day]\nwhy        toggle "show me why"\ncopy       copy my email address\nwhoami, pwd, fortune, history, clear, exit')},
+  ls:cmdLs,cat:cmdCat,cd:function(a){cmdCd(a[0])},open:function(a){if(norm(a[0])==='cv.pdf'){tprint('opening cv.pdf','ok');window.open('cv.pdf','_blank','noopener')}else cmdCd(a[0])},
+  pwd:function(){tprint('/home/waruni/forest')},
+  whoami:function(){tprint('waruni: demonstrator, researcher, tolerated by several cats')},
+  theme:function(a){
+    var w=(a[0]||'').toLowerCase();
+    if(w==='day'){if(!mode)setMode(true);tprint('day','ok')}
+    else if(w==='night'){if(mode)setMode(false);tprint('night','ok')}
+    else{setMode(mode===0);tprint(mode?'day':'night','ok')}
+  },
+  kimchi:function(){if(window.__walkers&&window.__walkers.kimchi){window.__walkers.kimchi.come();tprint('Kimchi is on the way. He may stop to wash.','ok')}else tprint('Kimchi is asleep.','dim')},
+  cheese:function(){if(window.__walkers&&window.__walkers.cheese){window.__walkers.cheese.come();tprint('Cheese will arrive when she feels like it.','ok')}else tprint('Cheese is asleep.','dim')},
+  why:function(){setWhy(!whyOn);tprint(whyOn?'numbered dots are on':'numbered dots are off','ok')},
+  copy:function(){$('#copyMail').click();tprint('copied (or selected) '+addr,'ok')},
+  sudo:function(){tprint('waruni is not in the sudoers file. This incident will be reported to the cats.','err')},
+  rm:function(){tprint('rm: the forest is read-only. Nice try.','err')},
+  clear:function(){termOut.textContent=''},
+  exit:function(){closeTerm()},
+  history:function(){tprint(hist.map(function(h,i){return (i+1)+'  '+h}).join('\n')||'(empty)','dim')},
+  fortune:function(){tprint(FORTUNES[Math.floor(Math.random()*FORTUNES.length)],'ok')},
+  echo:function(a){tprint(a.join(' '))}
+};
+function runCmd(line){
+  var t=line.trim();
+  if(!t)return;
+  hist.push(t);hi=hist.length;
+  var d=document.createElement('div');d.className='tl cmd';d.textContent='~/forest $ '+t;termOut.appendChild(d);
+  var parts=t.split(/\s+/),c=parts.shift().toLowerCase();
+  if(COMMANDS[c])COMMANDS[c](parts);
+  else tprint('bash: '+c+': command not found. Try "help".','err');
+  termOut.scrollTop=termOut.scrollHeight;
+}
+function openTerm(){
+  if(!term.hidden)return;
+  termOpener=document.activeElement;
+  term.hidden=false;
+  if(!termOut.childNodes.length)tprint('Welcome to the trailhead. Type "help" if you are lost. Tab completes.','dim');
+  termIn.focus();
+}
+function closeTerm(){
+  if(term.hidden)return;
+  term.hidden=true;
+  if(termOpener&&termOpener.focus)termOpener.focus();
+}
+$('#termForm').addEventListener('submit',function(e){e.preventDefault();var v=termIn.value;termIn.value='';runCmd(v)});
+termIn.addEventListener('keydown',function(e){
+  if(e.key==='ArrowUp'){e.preventDefault();if(hi>0){hi--;termIn.value=hist[hi]}}
+  else if(e.key==='ArrowDown'){e.preventDefault();if(hi<hist.length-1){hi++;termIn.value=hist[hi]}else{hi=hist.length;termIn.value=''}}
+  else if(e.key==='Tab'){
+    e.preventDefault();
+    var v=termIn.value,sp=v.lastIndexOf(' '),head=v.slice(0,sp+1),word=v.slice(sp+1);
+    var pool=sp<0?CMDS:PATHS.concat(['guide']);
+    var m=pool.filter(function(c){return c.indexOf(word)===0});
+    if(m.length===1)termIn.value=head+m[0];
+    else if(m.length>1)tprint(m.join('   '),'dim');
+  }
+});
+$('#termX').addEventListener('click',closeTerm);
+$('#termOpen').addEventListener('click',openTerm);
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&!term.hidden){closeTerm();return}
+  if(e.key==='`'&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
+    var t=e.target,tag=t&&t.tagName;
+    if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT'||(t&&t.isContentEditable))return;
+    e.preventDefault();term.hidden?openTerm():closeTerm();
+  }
+});
+
 })();
 </script>
 
